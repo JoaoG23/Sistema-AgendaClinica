@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model usuarios {
+  id        String    @id @default(uuid())
+  login     String    @unique @db.VarChar(255)
+  senha     String    @unique @db.Text
+  telefone  String    @unique @db.VarChar(25)
+  email     String?   @unique @db.VarChar(25)
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model clientes {
+  id            String         @id @default(uuid())
+  nome_completo String         @db.VarChar(250)
+  isAtivado     Boolean?       @default(true) @db.Boolean
+  createdAt     DateTime?      @default(now())
+  updatedAt     DateTime?      @updatedAt
+  agendamentos  agendamentos[]
+}
+
+model colaboradores {
+  id                          String                     @id @default(uuid())
+  nome_completo               String                     @db.VarChar(250)
+  isAtivado                   Boolean                    @default(true) @db.Boolean
+  createdAt                   DateTime?                  @default(now())
+  updatedAt                   DateTime?                  @updatedAt
+  especialidade_colaborador   especialidade_colaborador? @relation(fields: [especialidade_colaboradorId], references: [id])
+  especialidade_colaboradorId String?
+  agendamentos                agendamentos[]
+}
+
+model especialidade_colaborador {
+  id          String          @id @default(uuid())
+  nome        String          @db.VarChar(70)
+  createdAt   DateTime?       @default(now())
+  updatedAt   DateTime?       @updatedAt
+  colaborador colaboradores[]
+}
+
+model agendamentos {
+  id                 String         @id @default(uuid())
+  dataHoraInicio     DateTime       @default(now()) @db.Timestamp
+  dataHoraFim        DateTime       @default(now()) @db.Timestamp
+  valor              Decimal?       @db.Money
+  isServicoConcluido Boolean?       @default(true) @db.Boolean
+  observacao         String?        @db.VarChar(255)
+  createdAt          DateTime?      @default(now())
+  updatedAt          DateTime?      @updatedAt
+  clientes           clientes?      @relation(fields: [clientesId], references: [id])
+  clientesId         String?
+  colaboradorId      String?
+  colaboradores      colaboradores? @relation(fields: [colaboradoresId], references: [id])
+  colaboradoresId    String?
+}
+
+model periodo_agendamentos {
+  id             String   @id @default(uuid())
+  dia_da_semana  String   @db.VarChar(250)
+  dataHoraInicio DateTime @default(now()) @db.Timestamp
+  dataHoraFim    DateTime @default(now()) @db.Timestamp
+  isAtivado      Boolean  @default(true) @db.Boolean
+  observacao     String?  @db.VarChar(255)
+}
