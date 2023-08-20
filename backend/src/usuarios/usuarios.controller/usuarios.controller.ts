@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { UsuariosService } from '../usuarios.service/usuarios.service';
 
-import { CriarUsuariosBodyDto } from '../usuarios.dto/CriarUsuarioBodyDto';
+import { CriarUsuariosDto } from '../usuarios.dto/CriarUsuarioDto';
 import { Public } from 'src/auth/constants/SetMetadata';
 
 @Controller('usuarios')
@@ -18,7 +18,7 @@ export class UsuariosController {
 
   @Public()
   @Post()
-  async criarUm(@Body() usuario: CriarUsuariosBodyDto) {
+  async criarUm(@Body() usuario: CriarUsuariosDto) {
     return await this.usuariosService.criarUm(usuario);
   }
 

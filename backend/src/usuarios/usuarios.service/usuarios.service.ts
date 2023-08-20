@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
-import { CriarUsuariosBodyDto } from '../usuarios.dto/CriarUsuarioBodyDto';
+import { CriarUsuariosDto } from '../usuarios.dto/CriarUsuarioDto';
 
 import { UsuariosRepositoriesInterface } from '../interfaces/UsuariosRepositoriesInterface';
 
@@ -27,7 +27,7 @@ export class UsuariosService {
     }
   }
 
-  async criarUm(usuario: CriarUsuariosBodyDto) {
+  async criarUm(usuario: CriarUsuariosDto) {
     const { login } = usuario;
     await this.validarSeExisteLogin(login);
     return await this.usuariosRepositories.salvar(usuario);

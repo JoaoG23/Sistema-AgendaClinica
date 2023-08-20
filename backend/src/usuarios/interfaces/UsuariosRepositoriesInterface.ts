@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CriarUsuariosBodyDto } from '../usuarios.dto/CriarUsuarioBodyDto';
+import { CriarUsuariosDto } from '../usuarios.dto/CriarUsuarioDto';
 
 @Injectable()
 export abstract class UsuariosRepositoriesInterface {
-  abstract salvar(usuario: CriarUsuariosBodyDto);
+  abstract salvar(usuario: CriarUsuariosDto);
   abstract buscarUmPorLogin(login: string);
   abstract buscarTodosPorPagina(
     numeroPagina: number,

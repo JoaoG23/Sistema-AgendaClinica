@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
 
-import { CriarUsuariosBodyDto } from '../usuarios.dto/CriarUsuarioBodyDto';
+import { CriarUsuariosDto } from '../usuarios.dto/CriarUsuarioDto';
 
 import { UsuariosRepositoriesInterface } from '../interfaces/UsuariosRepositoriesInterface';
 
@@ -57,7 +57,7 @@ export class UsuariosRepositories implements UsuariosRepositoriesInterface {
     });
   }
 
-  async salvar(usuario: CriarUsuariosBodyDto) {
+  async salvar(usuario: CriarUsuariosDto) {
     const usuarioComSenhaCriptografada = {
       ...usuario,
       senha: await this.criptografia.criptografarSenha(usuario.senha),
