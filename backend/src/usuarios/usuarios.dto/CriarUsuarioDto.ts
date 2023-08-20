@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class CriarUsuariosDto {
   @IsNotEmpty({
@@ -15,21 +15,8 @@ export class CriarUsuariosDto {
     message: 'O Campo telefone não existe',
   })
   telefone: string;
-
   email?: string;
-
-  @IsString({
-    message: 'clientesId deve ser string',
-  })
   clientesId?: string;
-
-  @IsString({
-    message: 'colaboradoresId deve ser string',
-  })
   colaboradoresId?: string;
-
-  @IsString({
-    message: 'perfil_usuariosId deve ser string',
-  })
   perfil_usuariosId?: string;
 }
