@@ -11,13 +11,29 @@ datasource db {
 }
 
 model usuarios {
-  id        String    @id @default(uuid())
-  login     String    @unique @db.VarChar(255)
-  senha     String    @unique @db.Text
-  telefone  String    @unique @db.VarChar(25)
-  email     String?   @unique @db.VarChar(25)
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
+  id                String           @id @default(uuid())
+  login             String           @unique @db.VarChar(255)
+  senha             String           @unique @db.Text
+  telefone          String           @unique @db.VarChar(25)
+  email             String?          @unique @db.VarChar(25)
+  clientes          clientes?        @relation(fields: [clientesId], references: [id])
+  clientesId        String?          @default("")
+  colaboradores     colaboradores?   @relation(fields: [colaboradoresId], references: [id])
+  colaboradoresId   String?          @default("")
+  perfil_usuarios   perfil_usuarios? @relation(fields: [perfil_usuariosId], references: [id])
+  perfil_usuariosId String?
+  createdAt         DateTime?        @default(now())
+  updatedAt         DateTime?        @updatedAt
+}
+
+model perfil_usuarios {
+  id          String @id @default(uuid())
+  nome_perfil String @db.VarChar(60)
+
+  visualizar_clientes      Boolean @default(false) @db.Boolean
+  visualizar_colaboradores Boolean @default(false) @db.Boolean
+
+  usuarios usuarios[]
 }
 
 model clientes {
@@ -27,6 +43,7 @@ model clientes {
   createdAt     DateTime?      @default(now())
   updatedAt     DateTime?      @updatedAt
   agendamentos  agendamentos[]
+  usuarios      usuarios[]
 }
 
 model colaboradores {
@@ -38,6 +55,7 @@ model colaboradores {
   especialidade_colaborador   especialidade_colaborador? @relation(fields: [especialidade_colaboradorId], references: [id])
   especialidade_colaboradorId String?
   agendamentos                agendamentos[]
+  usuarios                    usuarios[]
 }
 
 model especialidade_colaborador {
@@ -62,6 +80,25 @@ model agendamentos {
   colaboradorId      String?
   colaboradores      colaboradores? @relation(fields: [colaboradoresId], references: [id])
   colaboradoresId    String?
+
+  servicos_estabelecimento_agendamentos servicos_estabelecimento_agendamentos[]
+}
+
+model servicos_estabelecimento_agendamentos {
+  id                         String                    @id @default(uuid())
+  agendamentos               agendamentos?             @relation(fields: [agendamentosId], references: [id])
+  agendamentosId             String?
+  servicos_estabelecimento   servicos_estabelecimento? @relation(fields: [servicos_estabelecimentoId], references: [id])
+  servicos_estabelecimentoId String?
+}
+
+model servicos_estabelecimento {
+  id                                    String                                  @id @default(uuid())
+  nome                                  String                                  @db.VarChar(60)
+  descricao                             String?                                 @db.VarChar(170)
+  createdAt                             DateTime?                               @default(now())
+  updatedAt                             DateTime?                               @updatedAt
+  servicos_estabelecimento_agendamentos servicos_estabelecimento_agendamentos[]
 }
 
 model periodo_agendamentos {

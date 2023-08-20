@@ -5,22 +5,15 @@ import {
   Get,
   Param,
   Post,
+  Put,
   Query,
 } from '@nestjs/common';
-import { ClientesService } from '../clientes.service/Clientes.service';
+import { ClientesService } from '../clientes.service/clientes.service';
+import { CriarClienteDto } from '../clientes.dto/CriarClienteDto';
 
-import { CriarClientesBodyDto } from '../Clientes.dto/CriarUsuarioBodyDto';
-import { Public } from 'src/auth/constants/SetMetadata';
-
-@Controller('Clientes')
+@Controller('clientes')
 export class ClientesController {
-  constructor(private readonly clientesService: clientesService) {}
-
-  @Public()
-  @Post()
-  async criarUm(@Body() usuario: CriarclientesBodyDto) {
-    return await this.clientesService.criarUm(usuario);
-  }
+  constructor(private readonly clientesService: ClientesService) {}
 
   @Get()
   async buscarTodosPorPagina(
@@ -35,6 +28,19 @@ export class ClientesController {
   @Get(':id')
   async buscarUmPorId(@Param('id') id: string) {
     return await this.clientesService.buscarUmPorId(id);
+  }
+
+  @Put(':id')
+  async editarUmPorId(
+    @Param('id') id: string,
+    @Body() cliente: CriarClienteDto,
+  ) {
+    return await this.clientesService.editarUmPorId(id, cliente);
+  }
+
+  @Post()
+  async criarUm(@Body() cliente: CriarClienteDto) {
+    return await this.clientesService.criarUm(cliente);
   }
 
   @Delete(':id')

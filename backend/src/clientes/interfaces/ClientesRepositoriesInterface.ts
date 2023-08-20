@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { CriarUsuariosBodyDto } from '../usuarios.dto/CriarUsuarioBodyDto';
+import { CriarClienteDto } from '../clientes.dto/CriarClienteDto';
 
 @Injectable()
-export abstract class UsuariosRepositoriesInterface {
-  abstract salvar(usuario: CriarUsuariosBodyDto);
-  abstract buscarUmPorLogin(login: string);
+export abstract class ClientesRepositoriesInterface {
+  abstract salvar(cliente: CriarClienteDto);
   abstract buscarTodosPorPagina(
     numeroPagina: number,
     quantidadeItemsPagina: number,
   );
   abstract contarTodosPorCriterio();
   abstract buscarUmPorId(id: string);
+  abstract editarUmPorId(id: string, cliente: CriarClienteDto);
   abstract deletarUmPorId(id: string);
 }

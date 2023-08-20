@@ -1,30 +1,22 @@
 import { Module } from '@nestjs/common';
-import { UsuariosController } from './clientes.controller/usuarios.controller';
+import { ClientesController } from './clientes.controller/clientes.controller';
 
-import { UsuariosService } from './clientes.service/usuarios.service';
+import { ClientesService } from './clientes.service/clientes.service';
 
 import { PrismaService } from 'src/database/prisma.service';
 
-import { UsuariosRepositories } from './clientes.repositories/usuarios.repositories';
-import { UsuariosRepositoriesInterface } from './interfaces/UsuariosRepositoriesInterface';
-import { CriptografiaBcrypt } from 'src/utils/criptografias/CriptografiaBcrypt/CriptografiaBcrypt';
-import { CriptografiaBcryptInterface } from 'src/utils/criptografias/CriptografiaBcrypt/interfaces/CriptografiaBcryptInterface';
+import { ClientesRepositories } from './clientes.repositories/clientes.repositories';
+import { ClientesRepositoriesInterface } from './interfaces/ClientesRepositoriesInterface';
 
 @Module({
-  imports: [],
-  controllers: [UsuariosController],
+  controllers: [ClientesController],
   providers: [
     PrismaService,
-    UsuariosService,
+    ClientesService,
     {
-      provide: UsuariosRepositoriesInterface,
-      useClass: UsuariosRepositories,
-    },
-    {
-      provide: CriptografiaBcryptInterface,
-      useClass: CriptografiaBcrypt,
+      provide: ClientesRepositoriesInterface,
+      useClass: ClientesRepositories,
     },
   ],
-  exports: [UsuariosService],
 })
-export class UsuariosModule {}
+export class ClientesModule {}
