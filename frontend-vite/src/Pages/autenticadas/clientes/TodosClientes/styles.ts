@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.main`
-  display: block;
-
+  display: grid;
+  gap: 1em;
   color: #424651;
   @media screen and (max-width: 769px) {
     justify-content: center;

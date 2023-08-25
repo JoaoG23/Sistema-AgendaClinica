@@ -4,6 +4,11 @@ export const Container = styled.main`
   display: flex;
   justify-content: space-between;
 `;
+export const ContainerCard = styled.div`
+  display: flex;
+  gap: 1em;
+  align-items: center;
+`;
 export const ListaItems = styled.ul`
   list-style-type: none;
 

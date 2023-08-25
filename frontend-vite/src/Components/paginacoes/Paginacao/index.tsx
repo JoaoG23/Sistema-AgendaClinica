@@ -16,17 +16,17 @@ export const PaginacaoComum: React.FC<Props> = ({
   arrayElementos,
   quantidadeTotalItems = 0,
 }) => {
-  // const criarTodosBotaoPaginar = (totalPaginas: number) => {
-  //   let arrayBotoes: any = [];
-  //   for (let i = 0; i < totalPaginas; i++) {
-  //     arrayBotoes.push(
-  //       <Paginacao.Button key={i} onClick={() => setPagina(() => i + 1)}>
-  //         {i + 1}
-  //       </Paginacao.Button>
-  //     );
-  //   }
-  //   return arrayBotoes;
-  // };
+  const criarTodosBotaoPaginar = (totalPaginas: number) => {
+    let arrayBotoes: any = [];
+    for (let i = 0; i < totalPaginas; i++) {
+      arrayBotoes.push(
+        <Paginacao.Button key={i} onClick={() => setPagina(() => i + 1)}>
+          {i + 1}
+        </Paginacao.Button>
+      );
+    }
+    return arrayBotoes;
+  };
 
   return (
     <Paginacao.Container>
@@ -42,9 +42,9 @@ export const PaginacaoComum: React.FC<Props> = ({
         Páginas : {pagina} até {totalPaginas} Qtd de items:{" "}
         <strong>{quantidadeTotalItems}</strong>
       </div>
-      {/* <Paginacao.NumeroPaginas>
+      <Paginacao.NumeroPaginas>
         {criarTodosBotaoPaginar(totalPaginas)}
-      </Paginacao.NumeroPaginas> */}
+      </Paginacao.NumeroPaginas>
       <Paginacao.Button
         onClick={() => setPagina((paginaAntiga: any) => paginaAntiga + 1)}
         disabled={pagina >= totalPaginas}

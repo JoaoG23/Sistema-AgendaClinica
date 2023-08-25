@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const Button = styled.button`
   display: flex;
   align-items: center;
-  border: 0.6px solid #fbfbfb;
-  background-color: #fff;
-  border-radius: 0.7em;
-  color: #717f95;
-  padding: 0.5em;
+  border: none;
+  background-color: #7e62f3;
+  border-radius: 0.4em;
+  color: #fff;
+  padding: 0.6em;
 
   box-shadow: 0 0 2px gray;
 
@@ -21,7 +21,10 @@ export const Button = styled.button`
     }
 
     to {
-      transform: translateY(-4px);
+      border: 0.6px solid #7e62f3;
+      background-color: #ffff;
+      color: #7e62f3;
+      transform: translateY(-5px);
     }
   }
 
@@ -36,7 +39,6 @@ export const Container = styled.div`
   align-items: center;
   gap: 0.5em;
   border: 0.6px solid #fbfbfb;
-  background-color: #fff;
   border-radius: 0.7em;
   color: #717f95;
 `;
