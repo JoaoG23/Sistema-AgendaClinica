@@ -5,6 +5,8 @@ import { CriarUsuariosDto } from '../usuarios.dto/CriarUsuarioDto';
 export abstract class UsuariosRepositoriesInterface {
   abstract salvar(usuario: CriarUsuariosDto);
   abstract buscarUmPorLogin(login: string);
+  abstract buscarUmPorTelefone(telefone: string);
+  abstract buscarUmPorEmail(email: string);
   abstract buscarTodosPorPagina(
     numeroPagina: number,
     quantidadeItemsPagina: number,

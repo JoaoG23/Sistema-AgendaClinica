@@ -5,7 +5,7 @@ import {
   BsFillGrid3X2GapFill,
   BsFillPersonVcardFill,
 } from "react-icons/bs";
-import { IoLogOut, IoPeopleSharp } from "react-icons/io5";
+import { MdOutlineEmojiPeople } from "react-icons/md";
 
 import {
   Container,
@@ -28,9 +28,9 @@ export const Sidebar: React.FC = () => {
       </CabecalhoUsuario>
       <Menu>
         <ItemMenu>
-          <BsFillPersonVcardFill size={tamanhoIcons} />
-          <Link to={"/contas"}>
-            <p>Agenda</p>
+          <MdOutlineEmojiPeople size={tamanhoIcons} />
+          <Link to={"/clientes"}>
+            <p>Clientes</p>
           </Link>
         </ItemMenu>
         <ItemMenu>

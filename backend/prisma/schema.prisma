@@ -16,14 +16,12 @@ model usuarios {
   senha             String           @unique @db.Text
   telefone          String           @unique @db.VarChar(25)
   email             String?          @unique @db.VarChar(25)
-  clientes          clientes?        @relation(fields: [clientesId], references: [id])
-  clientesId        String?          @default("")
-  colaboradores     colaboradores?   @relation(fields: [colaboradoresId], references: [id])
-  colaboradoresId   String?          @default("")
   perfil_usuarios   perfil_usuarios? @relation(fields: [perfil_usuariosId], references: [id])
   perfil_usuariosId String?
   createdAt         DateTime?        @default(now())
   updatedAt         DateTime?        @updatedAt
+  colaboradores     colaboradores[]
+  clientes          clientes[]
 }
 
 model perfil_usuarios {
@@ -43,7 +41,8 @@ model clientes {
   createdAt     DateTime?      @default(now())
   updatedAt     DateTime?      @updatedAt
   agendamentos  agendamentos[]
-  usuarios      usuarios[]
+  usuarios      usuarios?      @relation(fields: [usuariosId], references: [id])
+  usuariosId    String?
 }
 
 model colaboradores {
@@ -55,7 +54,8 @@ model colaboradores {
   especialidade_colaborador   especialidade_colaborador? @relation(fields: [especialidade_colaboradorId], references: [id])
   especialidade_colaboradorId String?
   agendamentos                agendamentos[]
-  usuarios                    usuarios[]
+  usuarios                    usuarios?                  @relation(fields: [usuariosId], references: [id])
+  usuariosId                  String?
 }
 
 model especialidade_colaborador {

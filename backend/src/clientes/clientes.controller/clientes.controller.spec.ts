@@ -4,13 +4,17 @@ import { ClientesController } from './clientes.controller';
 
 import { ClientesService } from '../clientes.service/clientes.service';
 import { VisualizarClientesDto } from '../clientes.dto/VisualizarClienteDto';
-import { CriarClienteDto } from '../clientes.dto/CriarClienteDto';
+import { CriarClienteDto } from '../clientes.dto/ClienteCriadoDto';
 
-const clientes: VisualizarClientesDto[] = [
-  { id: 1, nome_completo: 'Riveira Santos', isAtivado: true },
-  { id: 2, nome_completo: 'Riveira Santos', isAtivado: true },
+const clientes = [
+  { totalQuantidadePaginas: 1, quantidadeTotalRegistros: 2 },
+  [
+    { id: 1, nome_completo: 'Riveira Santos', isAtivado: true },
+    { id: 2, nome_completo: 'Riveira Santos', isAtivado: true },
+  ],
 ];
 
+const umCliente = clientes[1][0];
 const newClienteEntity: VisualizarClientesDto = {
   id: 2,
   nome_completo: 'Novo cliente',
@@ -34,11 +38,10 @@ describe('ClientesController', () => {
         {
           provide: ClientesService,
           useValue: {
-            validarNaoExisteId: jest.fn(),
             criarUm: jest.fn().mockResolvedValue(newClienteEntity),
             deletarUmPorId: jest.fn().mockResolvedValue(newClienteEntity),
             editarUmPorId: jest.fn().mockResolvedValue(updateClienteEntity),
-            buscarUmPorId: jest.fn().mockResolvedValue(clientes[0]),
+            buscarUmPorId: jest.fn().mockResolvedValue(umCliente),
             buscarTodosPorPagina: jest.fn().mockResolvedValue(clientes),
           },
         },
@@ -79,7 +82,8 @@ describe('ClientesController', () => {
     it('should show one cliente for your id', async () => {
       const resultado = await controller.buscarUmPorId('1111');
 
-      expect(resultado).toEqual(clientes[0]);
+      const clienteExpect = clientes[1][0];
+      expect(resultado).toEqual(clienteExpect);
       expect(services.buscarUmPorId).toHaveBeenCalledTimes(1);
     });
 

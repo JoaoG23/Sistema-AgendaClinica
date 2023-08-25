@@ -1,10 +1,11 @@
- 
+import { ClientesRotas } from "./ClientesRotas";
 import { UsuariosRotas } from "./UsuariosRotas";
 
 const AutenticadasRotas = () => {
   return (
     <>
-      <UsuariosRotas/>
+      <UsuariosRotas />
+      <ClientesRotas />
     </>
   );
 };

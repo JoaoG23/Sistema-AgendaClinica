@@ -5,7 +5,8 @@ import { ClientesRepositoriesInterface } from '../interfaces/ClientesRepositorie
 
 import { calcularQuantidadePaginas } from 'src/utils/paginacao/calcularQuantidadePaginas/calcularQuantidadePaginas';
 
-import { CriarClienteDto } from '../clientes.dto/CriarClienteDto';
+import { ClienteCriadoDto } from '../clientes.dto/ClienteCriadoDto';
+import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
 
 @Injectable()
 export class ClientesRepositories implements ClientesRepositoriesInterface {
@@ -30,6 +31,54 @@ export class ClientesRepositories implements ClientesRepositoriesInterface {
     const pularPagina = (numeroPagina - 1) * itemsPorPagina;
 
     const itemsPagina = await this.prismaService.clientes.findMany({
+      select: {
+        nome_completo: true,
+        isAtivado: true,
+        usuarios: {
+          select: { login: true, telefone: true, email: true },
+        },
+      },
+      skip: pularPagina,
+      take: itemsPorPagina,
+    });
+
+    return [{ totalQuantidadePaginas, quantidadeTotalRegistros }, itemsPagina];
+  }
+
+  async pesquisarTodosPorCriteriosEPagincao(criterios: ClientePesquisadoDto) {
+    const { quantidadeItemsPagina, numeroPagina, ...criteriosPesquisa } =
+      criterios;
+
+    const { nome_completo, email } = criteriosPesquisa;
+
+    const itemsPesquisados = {
+      nome_completo: { contains: nome_completo },
+      usuarios: {
+        email: {
+          contains: email,
+        },
+      },
+    };
+
+    const quantidadeTotalRegistros = await this.prismaService.clientes.count({
+      where: itemsPesquisados,
+    });
+    const itemsPorPagina = Number(quantidadeItemsPagina);
+    const totalQuantidadePaginas = await calcularQuantidadePaginas(
+      itemsPorPagina,
+      quantidadeTotalRegistros,
+    );
+    const pularPagina = (numeroPagina - 1) * itemsPorPagina;
+
+    const itemsPagina = await this.prismaService.clientes.findMany({
+      where: itemsPesquisados,
+      select: {
+        nome_completo: true,
+        isAtivado: true,
+        usuarios: {
+          select: { login: true, telefone: true, email: true },
+        },
+      },
       skip: pularPagina,
       take: itemsPorPagina,
     });
@@ -43,7 +92,7 @@ export class ClientesRepositories implements ClientesRepositoriesInterface {
     });
   }
 
-  async editarUmPorId(id: string, cliente: CriarClienteDto) {
+  async editarUmPorId(id: string, cliente: ClienteCriadoDto) {
     return await this.prismaService.clientes.update({
       where: { id },
       data: cliente,
@@ -56,7 +105,7 @@ export class ClientesRepositories implements ClientesRepositoriesInterface {
     });
   }
 
-  async salvar(cliente: CriarClienteDto) {
+  async salvar(cliente: ClienteCriadoDto) {
     return await this.prismaService.clientes.create({
       data: cliente,
     });

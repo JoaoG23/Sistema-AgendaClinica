@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { ClientesRepositoriesInterface } from '../interfaces/ClientesRepositoriesInterface';
-import { CriarClienteDto } from '../clientes.dto/CriarClienteDto';
+import { ClienteCriadoDto } from '../clientes.dto/ClienteCriadoDto';
+import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
 
 @Injectable()
 export class ClientesService {
@@ -16,7 +17,7 @@ export class ClientesService {
     }
   }
 
-  async criarUm(cliente: CriarClienteDto) {
+  async criarUm(cliente: ClienteCriadoDto) {
     return await this.clientesRepositories.salvar(cliente);
   }
 
@@ -25,7 +26,7 @@ export class ClientesService {
     return await this.clientesRepositories.deletarUmPorId(id);
   }
 
-  async editarUmPorId(id: string, cliente: CriarClienteDto) {
+  async editarUmPorId(id: string, cliente: ClienteCriadoDto) {
     await this.validarNaoExisteId(id);
     return await this.clientesRepositories.editarUmPorId(id, cliente);
   }
@@ -33,6 +34,7 @@ export class ClientesService {
   async buscarUmPorId(id: string) {
     return await this.clientesRepositories.buscarUmPorId(id);
   }
+
   async buscarTodosPorPagina(
     numeroPagina: number,
     quantidadeItemsPagina: number,
@@ -40,6 +42,12 @@ export class ClientesService {
     return await this.clientesRepositories.buscarTodosPorPagina(
       numeroPagina,
       quantidadeItemsPagina,
+    );
+  }
+
+  async pesquisarTodosPorCriteriosEPagina(criterios: ClientePesquisadoDto) {
+    return await this.clientesRepositories.pesquisarTodosPorCriteriosEPagincao(
+      criterios,
     );
   }
 }

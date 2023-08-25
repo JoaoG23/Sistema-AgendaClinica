@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CardContainer = styled.div`
-  border-radius: 3px;
+  border-radius: 5px;
   font-size: small;
   padding: 20px;
 
@@ -9,7 +9,7 @@ export const CardContainer = styled.div`
 
   box-shadow: 1px 1px 5px #717f953a;
 
-  background-color: rgb(255, 255, 255, 0.7);
+  background-color: #fff;
   color: #717f95;
   animation: entradaSuave 0.6s ease-out;
 

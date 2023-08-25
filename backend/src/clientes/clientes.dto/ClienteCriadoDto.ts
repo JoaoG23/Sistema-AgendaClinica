@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class CriarClienteDto {
+export class ClienteCriadoDto {
   @IsNotEmpty({
     message: 'O Campo nome_completo não existe',
   })

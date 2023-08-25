@@ -13,6 +13,16 @@ export class UsuariosRepositories implements UsuariosRepositoriesInterface {
     private readonly prismaService: PrismaService,
     private readonly criptografia: CriptografiaBcryptInterface,
   ) {}
+  async buscarUmPorTelefone(telefone: string) {
+    return await this.prismaService.usuarios.findFirst({
+      where: { telefone },
+    });
+  }
+  async buscarUmPorEmail(email: string) {
+    return await this.prismaService.usuarios.findFirst({
+      where: { email },
+    });
+  }
   async contarTodosPorCriterio() {
     return await this.prismaService.usuarios.count({});
   }

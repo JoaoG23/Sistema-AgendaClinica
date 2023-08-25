@@ -17,7 +17,21 @@ export class UsuariosService {
   async validarSeExisteLogin(login: string) {
     const existeLogin = await this.usuariosRepositories.buscarUmPorLogin(login);
     if (existeLogin) {
-      throw new ConflictException('Esse login já existe no sistema');
+      throw new ConflictException('Esse login já existe');
+    }
+  }
+  async validarSeExisteTelefone(telefone: string) {
+    const existeTelefone = await this.usuariosRepositories.buscarUmPorTelefone(
+      telefone,
+    );
+    if (existeTelefone) {
+      throw new ConflictException('Esse telefone já existe');
+    }
+  }
+  async validarSeExisteEmail(email: string) {
+    const existeEmail = await this.usuariosRepositories.buscarUmPorEmail(email);
+    if (existeEmail) {
+      throw new ConflictException('Esse email já existe');
     }
   }
   async validarNaoExisteId(id: string) {
@@ -28,8 +42,11 @@ export class UsuariosService {
   }
 
   async criarUm(usuario: CriarUsuariosDto) {
-    const { login } = usuario;
+    const { login, email, telefone } = usuario;
+
     await this.validarSeExisteLogin(login);
+    await this.validarSeExisteEmail(email);
+    await this.validarSeExisteTelefone(telefone);
     return await this.usuariosRepositories.salvar(usuario);
   }
 

@@ -57,12 +57,15 @@ export const ItemMenu = styled.li`
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #7E62F3;
+  color: #7e62f3;
   border-radius: 4px;
 
   padding: 0.5em;
   padding-left: 0.8em;
   padding-right: 0.8em;
+  a {
+    color: #7e62f3;
+  }
   :hover {
     animation: aparecer 0.5s ease-in-out forwards;
     a {
@@ -76,7 +79,7 @@ export const ItemMenu = styled.li`
     }
     100% {
       opacity: 1;
-      background-color: #7E62F3;
+      background-color: #7e62f3;
       color: #fff;
     }
   }
@@ -86,7 +89,7 @@ export const ColecaoElementos = styled.summary`
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #7E62F3;
+  color: #7e62f3;
   border-radius: 4px;
 
   padding: 0.5em;
@@ -103,7 +106,7 @@ export const ColecaoElementos = styled.summary`
     }
     100% {
       opacity: 1;
-      background-color: #7E62F3;
+      background-color: #7e62f3;
       color: #fff;
     }
   }
@@ -114,6 +117,6 @@ export const CabecalhoUsuario = styled.div`
   align-items: center;
   gap: 1em;
   padding: 12px;
-  background-color: #7E62F3;
+  background-color: #7e62f3;
   color: #fff;
 `;

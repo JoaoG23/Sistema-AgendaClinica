@@ -6,26 +6,24 @@ import { IoMdAddCircle } from "react-icons/io";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
-import { listarTodosUsuarioPorPagina } from "./api";
+import { listarTodosClientePorPagina } from "./api";
 
-import { SpinnerCarregamento } from "../../../Components/spinners/SpinnerCarregamento";
-import { PaginacaoComum } from "../../../Components/paginacoes/Paginacao";
-import { ListaUsuario } from "../ComponentesParaTodos/tabela/Linha/Linha";
-import ButtonDefault from "../../../Components/Buttons/ButtonDefault/ButtonDark";
-import { FormularioPesquisa } from "../ComponentesParaTodos/campos/FormularioPesquisa";
-import { CardList } from "../../../Components/cards/CardList";
+import { ErrorResposta } from "../../../../types/Respostas/ErrorResposta/ErroResposta";
+import { SpinnerCarregamento } from "../../../../Components/spinners/SpinnerCarregamento";
+import ButtonDefault from "../../../../Components/Buttons/ButtonDefault/ButtonDark";
+import { CardList } from "../../../../Components/cards/CardList";
+import { ClienteVisualizado } from "../../../../types/cliente/ClienteVisualizado";
+import { PaginacaoComum } from "../../../../Components/paginacoes/Paginacao";
+import { ListaClientes } from "../ComponentesParaTodos/tabela/Linha/Linha";
 
-import { ErrorResposta } from "../../../types/Respostas/ErrorResposta/ErroResposta";
-import { UsuarioVisualizado } from "../../../types/usuario/Usuario";
-
-export const TodosUsuarios: React.FC = () => {
+export const TodosClientes: React.FC = () => {
   const navigate = useNavigate();
   const [pagina, setPagina] = useState<number>(1);
   const comecarPelaPrimeiraPagina = () => setPagina(1);
 
   const { data, isLoading } = useQuery(
-    ["pagina-usuario-pagina", pagina],
-    () => listarTodosUsuarioPorPagina(pagina),
+    ["pagina-cliente-pagina", pagina],
+    () => listarTodosClientePorPagina(pagina),
     {
       onError: (error: ErrorResposta) => {
         toast.error(`Ops!: ${error.response?.data?.message}`);
@@ -35,16 +33,16 @@ export const TodosUsuarios: React.FC = () => {
 
   useEffect(() => {}, [pagina]);
 
-  const usuarios = data?.data[1];
+  const clientes = data?.data[1];
   const totalQuantidadePaginas = data?.data[0].totalQuantidadePaginas;
   const quantidadeTotalRegistros = data?.data[0].quantidadeTotalRegistros;
 
   return (
     <Fluxo.Container>
       {isLoading && <SpinnerCarregamento />}
-   
+
       <Fluxo.Header>
-        <h2>Seus Usuários</h2>
+        <h2>Seus Clientes</h2>
         <Fluxo.ContainerButtons>
           <ButtonDefault onClick={() => navigate("adicionar")}>
             <p>Adicionar</p>
@@ -54,8 +52,8 @@ export const TodosUsuarios: React.FC = () => {
       </Fluxo.Header>
 
       <CardList>
-        {usuarios?.map((usuario: UsuarioVisualizado) => (
-          <ListaUsuarios key={usuario.id} usuario={usuario} />
+        {clientes?.map((cliente: ClienteVisualizado) => (
+          <ListaClientes key={cliente.id} cliente={cliente} />
         ))}
       </CardList>
 
@@ -63,7 +61,7 @@ export const TodosUsuarios: React.FC = () => {
         setPagina={setPagina}
         pagina={pagina}
         totalPaginas={totalQuantidadePaginas}
-        arrayElementos={usuarios}
+        arrayElementos={clientes}
         quantidadeTotalItems={quantidadeTotalRegistros}
       />
     </Fluxo.Container>

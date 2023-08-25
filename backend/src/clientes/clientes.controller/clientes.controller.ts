@@ -9,7 +9,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { ClientesService } from '../clientes.service/clientes.service';
-import { CriarClienteDto } from '../clientes.dto/CriarClienteDto';
+import { ClienteCriadoDto } from '../clientes.dto/ClienteCriadoDto';
+import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
 
 @Controller('clientes')
 export class ClientesController {
@@ -25,6 +26,17 @@ export class ClientesController {
       quantidade_items,
     );
   }
+  @Get('pesquisar')
+  async pesquisarTodosPorCriteriosEPagina(@Query() criterios) {
+    const criteriosComPaginacao: ClientePesquisadoDto = {
+      ...criterios,
+      numeroPagina: criterios.numero_pagina,
+      quantidadeItemsPagina: criterios.quantidade_items,
+    };
+    return await this.clientesService.pesquisarTodosPorCriteriosEPagina(
+      criteriosComPaginacao,
+    );
+  }
   @Get(':id')
   async buscarUmPorId(@Param('id') id: string) {
     return await this.clientesService.buscarUmPorId(id);
@@ -33,13 +45,13 @@ export class ClientesController {
   @Put(':id')
   async editarUmPorId(
     @Param('id') id: string,
-    @Body() cliente: CriarClienteDto,
+    @Body() cliente: ClienteCriadoDto,
   ) {
     return await this.clientesService.editarUmPorId(id, cliente);
   }
 
   @Post()
-  async criarUm(@Body() cliente: CriarClienteDto) {
+  async criarUm(@Body() cliente: ClienteCriadoDto) {
     return await this.clientesService.criarUm(cliente);
   }
 
