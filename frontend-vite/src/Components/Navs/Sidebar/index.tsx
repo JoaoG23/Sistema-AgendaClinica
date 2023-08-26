@@ -6,57 +6,46 @@ import {
   BsFillPersonVcardFill,
 } from "react-icons/bs";
 import { MdOutlineEmojiPeople } from "react-icons/md";
+import { AiFillPlusCircle } from "react-icons/ai";
 
-import {
-  Container,
-  CabecalhoUsuario,
-  Menu,
-  ItemMenu,
-  ColecaoElementos,
-  Elementos,
-} from "./styles";
+import { Container, CabecalhoUsuario, Menu, DropDown } from "./styles";
 
 import { limparSessaoUsuario } from "../../../utils/limparSessaoUsuario";
+import { Button } from "../../Buttons/Button";
 
 export const Sidebar: React.FC = () => {
-  const tamanhoIcons: number = 26;
+  const tamanhoIcons: number = 24;
   return (
     <Container>
-      <CabecalhoUsuario>
-        <BsFillCalendarEventFill size={40} />
-        <p>Clinica</p>
-      </CabecalhoUsuario>
       <Menu>
-        <ItemMenu>
+        <CabecalhoUsuario>
+          <BsFillCalendarEventFill size={10} />
+          <p>Nome do Usuário</p>
+        </CabecalhoUsuario>
+        <li>
+          <Button primary={true}>
+            <p>Agende aqui</p>
+            <AiFillPlusCircle size={15} />
+          </Button>
+        </li>
+        <li>
           <MdOutlineEmojiPeople size={tamanhoIcons} />
           <Link to={"/clientes"}>
             <p>Clientes</p>
           </Link>
-        </ItemMenu>
-        <ItemMenu>
-          <BsFillPersonVcardFill size={tamanhoIcons} />
-          <Link to={"/contas"}>
-            <p>Dashboard</p>
-          </Link>
-        </ItemMenu>
-        <ItemMenu>
-          <BsFillPersonVcardFill size={tamanhoIcons} />
-          <Link to={"/contas"}>
-            <p>Dashboard</p>
-          </Link>
-        </ItemMenu>
-        <ItemMenu>
+        </li>
+        <li>
           <BsFillPersonVcardFill size={tamanhoIcons} />
           <Link to={"/contas"}>
             <p>Usuário</p>
           </Link>
-        </ItemMenu>
-        <details>
-          <ColecaoElementos>
-            <BsFillGrid3X2GapFill />
+        </li>
+        <DropDown>
+          <summary>
+            <BsFillGrid3X2GapFill size={tamanhoIcons} />
             <p>Agenda</p>
-          </ColecaoElementos>
-          <Elementos>
+          </summary>
+          <ul>
             {[
               {
                 id: "w",
@@ -69,8 +58,8 @@ export const Sidebar: React.FC = () => {
                 </li>
               );
             })}
-          </Elementos>
-        </details>
+          </ul>
+        </DropDown>
         {/* <SideBar.Item>
         <IoPeopleSharp color="#fff" size={40} />
         <Link to={"/usuarios"}>

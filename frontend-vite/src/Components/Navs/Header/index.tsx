@@ -1,21 +1,13 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-import { FaUser } from "react-icons/fa";
 import {
-  BsEnvelope,
-  BsFillArrowRightCircleFill,
   BsFillCaretDownFill,
+  BsFillChatLeftTextFill,
   BsJustify,
 } from "react-icons/bs";
 
-import {
-  Container,
-  Item,
-  VoltarText,
-  TextLimited,
-  ItemsLadoDireito,
-} from "./styles";
+import { Container } from "./styles";
 import { buscaDadoUsuarioNaSessao } from "../../../utils/buscaDadoUsuarioNaSessao";
 
 export const Header: React.FC = () => {
@@ -27,12 +19,12 @@ export const Header: React.FC = () => {
   }
   return (
     <Container>
-      <p>Gcontas</p>
-      <ItemsLadoDireito>
-        <Item>
-          <BsEnvelope size={17} />
-        </Item>
-        <Item
+      <p>Agendamento</p>
+      <div>
+        <button>
+          <BsFillChatLeftTextFill size={17} />
+        </button>
+        <button
           onClick={() => {
             voltarPaginaAnterior();
           }}
@@ -40,11 +32,11 @@ export const Header: React.FC = () => {
           <img src=""></img>
           <p>Nome Usuário</p>
           <BsFillCaretDownFill size={17} />
-        </Item>
-        <Item>
+        </button>
+        <button>
           <BsJustify size={30} />
-        </Item>
-      </ItemsLadoDireito>
+        </button>
+      </div>
     </Container>
   );
 };

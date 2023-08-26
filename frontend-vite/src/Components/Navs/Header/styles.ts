@@ -1,80 +1,80 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  width: 84vw;
+const corPadrao: string = "#31D0D4";
+const corTerceira: string = "#fff";
+const sombra: string = "#8d8d8d2d";
+const corQuarternaria: string = "#5A89E5";
+
+export const Container = styled.header`
+  width: 86vw;
   height: 60px;
 
   display: flex;
   align-items: center;
 
-  font-weight: 300;
+  font-weight: 500;
   position: absolute;
   top: 0em;
   right: 0em;
 
-  padding: 1em;
+  padding: 0.8em;
 
   justify-content: space-between;
+  background-image: linear-gradient(
+    to right,
+    ${corPadrao} 0%,
+    ${corQuarternaria} 100%
+  );
+  background-size: 200% 200%;
 
-  background-color: #fff;
-  box-shadow: 2px 2px 4px #00000027;
-  color: gray;
-  a {
-    color: #c6c0c7;
+  animation: changeColor 7s ease infinite alternate forwards;
+
+  box-shadow: 2px 2px 4px ${sombra};
+  color: ${corTerceira};
+
+  div {
+    display: flex;
+    gap: 0.8em;
+  }
+
+  button {
+    display: flex;
+    align-content: center;
+
+    height: 10vh;
+    border: none;
+    background-color: transparent;
+
+    color: ${corTerceira};
+
+    align-items: center;
+    :hover {
+      animation: abaixar 0.2s forwards ease-in;
+    }
+
+    @keyframes abaixar {
+      0% {
+        transform: translateY(0vw);
+      }
+      100% {
+        transform: translateY(0.1vw);
+      }
+    }
   }
   @media only screen and (max-width: 768px) {
     height: 40px;
     height: 10vh;
   }
-`;
 
-export const TextLimited = styled.p`
-  width: 90px;
-  
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-
-  @media only screen and (max-width: 768px) {
-    width: 50px;
-  }
-`;
-
-export const Item = styled.button`
-  display: flex;
-  gap:.5em;
-  padding: 10px;
-  align-content: center;
-
-  height: 10vh;
-  border: none;
-  background-color: transparent;
-
-
-  color:gray;
-
-  align-items: center;
-  :hover {
-    animation: abaixar 0.2s forwards ease-in;
-  }
-
-  @keyframes abaixar {
-    0% {
-      transform: translateY(0vw);
+  @keyframes changeColor {
+    from {
+      transform: translateY(0vh);
+      background-position: 200 0;
     }
-    100% {
-      transform: translateY(0.1vw);
+
+    to {
+      transform: translateY(-4px);
+      background-position: 100% 200%;
     }
-  }
-`;
-
-
-export const ItemsLadoDireito = styled.div`
-  display: flex;
-`;
-
-export const VoltarText = styled.p`
-  @media only screen and (max-width: 768px) {
-    display: none;
   }
 `;

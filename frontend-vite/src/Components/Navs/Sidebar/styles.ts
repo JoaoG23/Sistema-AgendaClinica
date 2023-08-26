@@ -1,7 +1,13 @@
 import styled from "styled-components";
 
+const corPadrao: string = "#43B4DC";
+const corSegundaria: string = "gray";
+const corTerceira: string = "#fff";
+const sombra: string = "#9c9c9c25";
+
 export const Container = styled.div`
-  width: 16vw;
+  color: ${corSegundaria};
+  width: 14vw;
   height: 100vh;
 
   position: fixed;
@@ -12,9 +18,8 @@ export const Container = styled.div`
 
   gap: 1em;
 
-  background-color: #fff;
-
-  box-shadow: 1px 1px 3px #00000027;
+  background-color: ${corTerceira};
+  box-shadow: 1px 1px 3px ${sombra};
 
   @media only screen and (max-width: 768px) {
     display: none;
@@ -28,48 +33,24 @@ export const Image = styled.img`
   }
 `;
 
-export const Menu = styled.ul``;
+export const Menu = styled.ul`
+  padding: 1em;
+  display: grid;
+  gap: 0.2em;
 
-export const Elementos = styled.ul`
-  /* border-radius: 8px;
-
+  justify-content: center;
   li {
-    padding: 3px;
-    display: flex;
-    gap: 1em;
-    border-radius: 0.7em;
-  }
-  a {
     text-decoration: none;
-    color: #fff;
-  }
+    display: flex;
+    align-items: center;
+    gap: 1em;
 
-  li:hover {
-    transition: 0.3s;
-    animation: balancar 2s linear infinite;
-
-    background-color: #0000003f;
-  } */
-`;
-
-export const ItemMenu = styled.li`
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #7e62f3;
-  border-radius: 4px;
-
-  padding: 0.5em;
-  padding-left: 0.8em;
-  padding-right: 0.8em;
-  a {
-    color: #7e62f3;
-  }
-  :hover {
-    animation: aparecer 0.5s ease-in-out forwards;
-    a {
+    padding: 0.3em;
+    :hover {
       animation: aparecer 0.5s ease-in-out forwards;
+      a {
+        animation: aparecer 0.5s ease-in-out forwards;
+      }
     }
   }
 
@@ -79,35 +60,25 @@ export const ItemMenu = styled.li`
     }
     100% {
       opacity: 1;
-      background-color: #7e62f3;
-      color: #fff;
+      color: ${corPadrao};
     }
   }
 `;
-export const ColecaoElementos = styled.summary`
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #7e62f3;
-  border-radius: 4px;
 
-  padding: 0.5em;
-  :hover {
-    animation: aparecer 0.5s ease-in-out forwards;
-    a {
+export const DropDown = styled.details`
+  summary {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+
+    padding: 0.5em;
+    :hover {
       animation: aparecer 0.5s ease-in-out forwards;
-    }
-  }
-
-  @keyframes aparecer {
-    0% {
-      opacity: 0.2;
-    }
-    100% {
-      opacity: 1;
-      background-color: #7e62f3;
-      color: #fff;
+      a {
+        animation: aparecer 0.5s ease-in-out forwards;
+      }
     }
   }
 `;
@@ -117,6 +88,5 @@ export const CabecalhoUsuario = styled.div`
   align-items: center;
   gap: 1em;
   padding: 12px;
-  background-color: #7e62f3;
-  color: #fff;
+  color: ${corSegundaria};
 `;

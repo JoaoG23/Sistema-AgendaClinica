@@ -15,6 +15,7 @@ import { CardList } from "../../../../Components/cards/CardList";
 import { ClienteVisualizado } from "../../../../types/cliente/ClienteVisualizado";
 import { PaginacaoComum } from "../../../../Components/paginacoes/Paginacao";
 import { ListaClientes } from "../ComponentesParaTodos/tabela/Linha/Linha";
+import { Button } from "../../../../Components/Buttons/Button";
 
 export const TodosClientes: React.FC = () => {
   const navigate = useNavigate();
@@ -44,10 +45,10 @@ export const TodosClientes: React.FC = () => {
       <Fluxo.Header>
         <h2>Seus Clientes</h2>
         <Fluxo.ContainerButtons>
-          <ButtonDefault onClick={() => navigate("adicionar")}>
+          <Button padrao onClick={() => navigate("adicionar")}>
             <p>Adicionar</p>
             <IoMdAddCircle size={20} />
-          </ButtonDefault>
+          </Button>
         </Fluxo.ContainerButtons>
       </Fluxo.Header>
 

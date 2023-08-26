@@ -1,12 +1,11 @@
-import { BsFillPersonFill, BsFillTrashFill } from "react-icons/bs";
+import { BsEyeFill, BsFillPersonFill, BsFillTrashFill, BsPencilFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 import * as Clientes from "./styles";
 
 import { ClienteVisualizado } from "../../../../../../types/cliente/ClienteVisualizado";
 import { Card } from "../../../../../../Components/cards/Card";
-import { SecondaryButton } from "../../../../../../Components/Buttons/SecondaryButton/ButtonDark";
-import { RedFont } from "../../../../../../Components/FontColor/RedFont";
+import { Button } from "../../../../../../Components/Buttons/Button";
 
 type Props = {
   cliente: ClienteVisualizado;
@@ -18,7 +17,7 @@ export const ListaClientes: React.FC<Props> = ({ cliente }) => {
     <Card>
       <Clientes.Container>
         <Clientes.ContainerCard>
-          <BsFillPersonFill size={80} color="#7e62f3"/>
+          <BsFillPersonFill size={75} color="#5592E3" />
           <Clientes.ListaItems>
             <li>
               <strong>Nome: </strong> {cliente.nome_completo}
@@ -40,9 +39,15 @@ export const ListaClientes: React.FC<Props> = ({ cliente }) => {
           </Clientes.ListaItems>
         </Clientes.ContainerCard>
         <Clientes.ContainerButton>
-          <SecondaryButton onClick={() => navigate(`deletar/${cliente.id!}`)}>
+          <Button padrao onClick={() => navigate(`deletar/${cliente.id!}`)}>
+            <BsEyeFill size={18} />
+          </Button>
+          <Button secondary onClick={() => navigate(`editar/${cliente.id!}`)}>
+            <BsPencilFill size={18} />
+          </Button>
+          <Button tertiary onClick={() => navigate(`deletar/${cliente.id!}`)}>
             <BsFillTrashFill size={18} />
-          </SecondaryButton>
+          </Button>
         </Clientes.ContainerButton>
       </Clientes.Container>
     </Card>

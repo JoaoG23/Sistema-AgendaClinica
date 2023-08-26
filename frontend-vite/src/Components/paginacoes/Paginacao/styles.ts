@@ -4,7 +4,7 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   border: none;
-  background-color: #7e62f3;
+  background-color: #578FE4;
   border-radius: 0.4em;
   color: #fff;
   padding: 0.6em;
@@ -12,18 +12,18 @@ export const Button = styled.button`
   box-shadow: 0 0 2px gray;
 
   :hover {
-    animation: changeColor 0.5s ease alternate both;
+    animation: mudarCorBotaoPaginacao 0.5s ease alternate both;
   }
 
-  @keyframes changeColor {
+  @keyframes mudarCorBotaoPaginacao {
     from {
       transform: translateY(0vh);
     }
 
     to {
-      border: 0.6px solid #7e62f3;
+      border: 0.6px solid #578FE4;
       background-color: #ffff;
-      color: #7e62f3;
+      color: #578FE4;
       transform: translateY(-5px);
     }
   }

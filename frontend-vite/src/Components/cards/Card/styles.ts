@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const CardContainer = styled.div`
-  border-radius: 5px;
+  border-radius: 7px;
   font-size: small;
   padding: 20px;
 
   gap: 0.2em;
 
-  box-shadow: 1px 1px 5px #717f953a;
+  box-shadow: 1px 1px 3px #717f953a;
 
   background-color: #fff;
   color: #717f95;
