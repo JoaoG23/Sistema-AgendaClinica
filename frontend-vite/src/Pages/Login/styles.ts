@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
-
-import imageLogin from "../../assets/login-image.png";
+const corPadrao: string = "#31D0D4";
+const corTerceira: string = "#fff";
+const sombra: string = "#8d8d8d2d";
+const corQuarternaria: string = "#5A89E5";
 
 export const Formulario = styled.main`
   padding: 3em;
@@ -16,7 +18,7 @@ export const Formulario = styled.main`
   /* background-color: #f8f8f9; */
 
   animation: entradaSuave 1s ease alternate both;
-  box-shadow: 2px 2px 10px #1ed49d33;
+  box-shadow: 2px 2px 10px ${sombra};
 
   @media only screen and (max-width: 768px) {
     justify-items:stretch;
@@ -59,7 +61,15 @@ export const ContainerMain = styled.main`
   justify-content: end;
   flex-wrap: wrap;
 
-  background-color:#7E62F3;
+
+  background-image: linear-gradient(
+    to right,
+    ${corPadrao} 0%,
+    ${corPadrao} 50%,
+    ${corQuarternaria} 100%
+  );
+  background-size: 200% 200%;
+  animation: changeColor 5s ease infinite alternate forwards;
   
   position: fixed;
   top: 0;

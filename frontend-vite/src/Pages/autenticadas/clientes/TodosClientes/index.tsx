@@ -1,38 +1,58 @@
 import { useForm } from "react-hook-form";
-import * as Fluxo from "./styles";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
-import { listarTodosClientePorPagina } from "./api";
+import { listarTodosClientePorPagina, pesquisarClientesPorCriteriosEPaginacao } from "./api";
+
+import { SpinnerCarregamento } from "../../../../Components/spinners/SpinnerCarregamento";
 
 import { ErrorResposta } from "../../../../types/Respostas/ErrorResposta/ErroResposta";
-import { SpinnerCarregamento } from "../../../../Components/spinners/SpinnerCarregamento";
-import ButtonDefault from "../../../../Components/Buttons/ButtonDefault/ButtonDark";
-import { CardList } from "../../../../Components/cards/CardList";
 import { ClienteVisualizado } from "../../../../types/cliente/ClienteVisualizado";
+import { ClientePesquisado } from "../../../../types/cliente/ClientePesquisado";
+
 import { PaginacaoComum } from "../../../../Components/paginacoes/Paginacao";
 import { ListaClientes } from "../ComponentesParaTodos/tabela/Linha/Linha";
 import { Button } from "../../../../Components/Buttons/Button";
+import { FormularioPesquisa } from "../ComponentesParaTodos/campos/FormularioPesquisa";
+import { CardList } from "../../../../Components/cards/CardList";
+import { Card } from "../../../../Components/cards/Card";
+import * as Fluxo from "./styles";
 
 export const TodosClientes: React.FC = () => {
   const navigate = useNavigate();
   const [pagina, setPagina] = useState<number>(1);
+  const [criteriosBusca, setCriteriosBusca] = useState<ClientePesquisado>({});
   const comecarPelaPrimeiraPagina = () => setPagina(1);
 
-  const { data, isLoading } = useQuery(
-    ["pagina-cliente-pagina", pagina],
-    () => listarTodosClientePorPagina(pagina),
+
+
+  const {
+    data,
+    mutate: mutatePesquisar,
+    isLoading,
+  } = useMutation(
+    async () =>
+      await pesquisarClientesPorCriteriosEPaginacao(pagina, criteriosBusca),
     {
-      onError: (error: ErrorResposta) => {
-        toast.error(`Ops!: ${error.response?.data?.message}`);
+      onError: (error: any) => {
+        toast.error(`Ops! Houve um error: ${error.response.data}`);
       },
     }
   );
 
-  useEffect(() => {}, [pagina]);
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+
+  useEffect(() => {
+    mutatePesquisar();
+  }, [pagina, criteriosBusca]);
 
   const clientes = data?.data[1];
   const totalQuantidadePaginas = data?.data[0].totalQuantidadePaginas;
@@ -42,15 +62,32 @@ export const TodosClientes: React.FC = () => {
     <Fluxo.Container>
       {isLoading && <SpinnerCarregamento />}
 
-      <Fluxo.Header>
+      <Fluxo.Pesquisa>
+        <Card>
+          <FormularioPesquisa
+          
+            onSubmit={handleSubmit(
+              (criterios: ClientePesquisado) => {
+                setCriteriosBusca(criterios);
+                mutatePesquisar();
+                comecarPelaPrimeiraPagina();
+              }
+            )}
+            register={register}
+            control={control}
+            errors={errors}
+          />
+        </Card>
+      </Fluxo.Pesquisa>
+      <header>
         <h2>Seus Clientes</h2>
-        <Fluxo.ContainerButtons>
+        <div>
           <Button padrao onClick={() => navigate("adicionar")}>
             <p>Adicionar</p>
             <IoMdAddCircle size={20} />
           </Button>
-        </Fluxo.ContainerButtons>
-      </Fluxo.Header>
+        </div>
+      </header>
 
       <CardList>
         {clientes?.map((cliente: ClienteVisualizado) => (

@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
     
+      color: #667387;
     background-color:#F2F9FB;
     padding: 0;
     margin: 0;

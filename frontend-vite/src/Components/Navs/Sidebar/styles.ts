@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const corPadrao: string = "#43B4DC";
 const corSegundaria: string = "gray";
+const corPrimarias: string = "#3a3a3a";
 const corTerceira: string = "#fff";
 const sombra: string = "#9c9c9c25";
 
@@ -16,12 +17,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  gap: 1em;
+  /* gap: 1em; */
 
   background-color: ${corTerceira};
   box-shadow: 1px 1px 3px ${sombra};
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 858px) {
     display: none;
     flex-direction: row;
   }
@@ -34,16 +35,14 @@ export const Image = styled.img`
 `;
 
 export const Menu = styled.ul`
-  padding: 1em;
   display: grid;
-  gap: 0.2em;
+  padding: 10%;
 
-  justify-content: center;
   li {
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 1em;
+    gap: 2em;
 
     padding: 0.3em;
     :hover {
@@ -70,10 +69,8 @@ export const DropDown = styled.details`
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 10px;
-    border-radius: 4px;
+    gap: 2em;
 
-    padding: 0.5em;
     :hover {
       animation: aparecer 0.5s ease-in-out forwards;
       a {
@@ -88,5 +85,5 @@ export const CabecalhoUsuario = styled.div`
   align-items: center;
   gap: 1em;
   padding: 12px;
-  color: ${corSegundaria};
+  color: ${corPadrao};
 `;

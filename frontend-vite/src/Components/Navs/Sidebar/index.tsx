@@ -19,7 +19,7 @@ export const Sidebar: React.FC = () => {
     <Container>
       <Menu>
         <CabecalhoUsuario>
-          <BsFillCalendarEventFill size={10} />
+          <BsFillCalendarEventFill size={30} />
           <p>Nome do Usuário</p>
         </CabecalhoUsuario>
         <li>

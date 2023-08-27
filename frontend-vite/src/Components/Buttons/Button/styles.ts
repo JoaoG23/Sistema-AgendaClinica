@@ -8,14 +8,16 @@ export type TipoBotao = {
 };
 
 export const Button = styled.button<TipoBotao>`
-  padding: 10px 20px;
+  padding: 8px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 2em;
   display: flex;
   gap: 0.7em;
   font-weight: 500;
   align-items: center;
   justify-content: center;
+
+  box-shadow: 1px 1px 3px #717f953a;
 
   ${(props) =>
     props.primary
@@ -44,9 +46,9 @@ export const Button = styled.button<TipoBotao>`
       `}
 
   :hover {
-    animation: mudarCorEReduzTamanho 0.5s ease alternate both;
+    animation: mudarCorEReduzTamanhoButton 0.5s ease alternate both;
   }
-  @keyframes mudarCorEReduzTamanho {
+  @keyframes mudarCorEReduzTamanhoButton {
     from {
       transform: scale(1);
       box-shadow: 1px 1px 9px #9c9c9c25;

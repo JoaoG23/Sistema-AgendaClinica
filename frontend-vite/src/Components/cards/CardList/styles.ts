@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-
+  display: grid;
+  grid-template-columns: auto auto;
   gap: 0.5em;
 
   @media screen and (max-width: 769px) {
+    display: flex;
+    flex-direction: column;
 
+    gap: 0.5em;
 
     height: 300px;
-    overflow-y:scroll;
+    overflow-y: scroll;
   }
 `;

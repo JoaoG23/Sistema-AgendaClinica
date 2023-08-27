@@ -10,6 +10,7 @@ import { SecondaryButton } from "../../../../Components/Buttons/SecondaryButton/
 import { AlertCampoVazio } from "../../../../Components/alerts/AlertCampoVazio";
 import ButtonDefault from "../../../../Components/Buttons/ButtonDefault/ButtonDark";
 import { BsFillPersonPlusFill } from "react-icons/bs";
+import { Button } from "../../../../Components/Buttons/Button";
 
 type Props = {
   funcaoSubmit: any;
@@ -28,6 +29,7 @@ export const CamposFormulario: React.FC<Props> = ({ funcaoSubmit }) => {
         name={"login"}
         register={register}
         placeholder={"Usuário"}
+        label="Usuário"
       />
       {errors.login?.type === "required" && (
         <AlertCampoVazio mensagem={"Usuário vazio"} />
@@ -38,19 +40,20 @@ export const CamposFormulario: React.FC<Props> = ({ funcaoSubmit }) => {
         type="password"
         register={register}
         placeholder={"Senha"}
+        label="Senha"
       />
       {errors.senha?.type === "required" && (
         <AlertCampoVazio mensagem={"Senha vazia"} />
       )}
 
-      <SecondaryButton>
+      <Button primary>
         <p>Logar</p>
         <FiLogIn />
-      </SecondaryButton>
-      <ButtonDefault>
+      </Button>
+      <Button padrao>
         <p>Registrar</p>
         <BsFillPersonPlusFill />
-      </ButtonDefault>
+      </Button>
     </CamposStyle>
   );
 };

@@ -9,6 +9,7 @@ import {
 
 import { Container } from "./styles";
 import { buscaDadoUsuarioNaSessao } from "../../../utils/buscaDadoUsuarioNaSessao";
+import { AiFillCalendar } from "react-icons/ai";
 
 export const Header: React.FC = () => {
   const { nomeUsuario } = buscaDadoUsuarioNaSessao();
@@ -19,7 +20,10 @@ export const Header: React.FC = () => {
   }
   return (
     <Container>
-      <p>Agendamento</p>
+      <div>
+        <AiFillCalendar/>
+        <p>Agendamento</p>
+      </div>
       <div>
         <button>
           <BsFillChatLeftTextFill size={17} />

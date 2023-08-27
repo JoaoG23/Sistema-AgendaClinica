@@ -7,22 +7,24 @@ export const Container = styled.main`
   @media screen and (max-width: 769px) {
     justify-content: center;
   }
-`;
-export const Formulario = styled.div`
-  margin-bottom: 1px;
-`;
-export const Header = styled.header`
-  display: flex;
-  justify-content: space-between;
-  margin: 0.3em;
 
-  @media screen and (max-width: 600px) {
-    flex-direction: column;
-    gap: 1em;
+  header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.1em;
+
+    div {
+      display: flex;
+      gap: 6px;
+    }
+
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+      gap: 1em;
+    }
   }
 `;
-
-export const ContainerButtons = styled.header`
-  display: flex;
-  gap: 6px;
+export const Pesquisa = styled.div`
+  margin-bottom: 1px;
 `;
+

@@ -23,11 +23,12 @@ export const Container = styled.header`
   background-image: linear-gradient(
     to right,
     ${corPadrao} 0%,
+    ${corPadrao} 50%,
     ${corQuarternaria} 100%
   );
   background-size: 200% 200%;
 
-  animation: changeColor 7s ease infinite alternate forwards;
+  animation: changeColor 5s ease infinite alternate forwards;
 
   box-shadow: 2px 2px 4px ${sombra};
   color: ${corTerceira};
@@ -35,6 +36,7 @@ export const Container = styled.header`
   div {
     display: flex;
     gap: 0.8em;
+    align-items: center;
   }
 
   button {

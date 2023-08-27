@@ -6,7 +6,7 @@ export const Container = styled.main`
 `;
 export const ContainerCard = styled.div`
   display: flex;
-  gap: 1em;
+  gap: 2em;
   align-items: center;
 `;
 export const ListaItems = styled.ul`

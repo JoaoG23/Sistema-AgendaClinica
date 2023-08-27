@@ -8,7 +8,7 @@ import { Card } from "../../../../../../Components/cards/Card";
 import { Button } from "../../../../../../Components/Buttons/Button";
 
 type Props = {
-  cliente: ClienteVisualizado;
+  cliente?: ClienteVisualizado;
 };
 
 export const ListaClientes: React.FC<Props> = ({ cliente }) => {
@@ -17,35 +17,35 @@ export const ListaClientes: React.FC<Props> = ({ cliente }) => {
     <Card>
       <Clientes.Container>
         <Clientes.ContainerCard>
-          <BsFillPersonFill size={75} color="#5592E3" />
+          <BsFillPersonFill size={75} color="#43B4DC" />
           <Clientes.ListaItems>
             <li>
-              <strong>Nome: </strong> {cliente.nome_completo}
+              <strong>Nome: </strong> {cliente?.nome_completo}
             </li>
             <li>
-              <strong>Ativo: </strong> {cliente.isAtivado}
+              <strong>Ativo: </strong> {cliente?.isAtivado}
             </li>
             <li>
-              <strong>Login: </strong> {cliente.usuarios?.login}
+              <strong>Login: </strong> {cliente?.usuarios?.login}
             </li>
             <li>
               <strong>Telefone: </strong>
-              {cliente.usuarios?.telefone}
+              {cliente?.usuarios?.telefone}
             </li>
             <li>
               <strong>E-mail: </strong>
-              {cliente.usuarios?.email}
+              {cliente?.usuarios?.email}
             </li>
           </Clientes.ListaItems>
         </Clientes.ContainerCard>
         <Clientes.ContainerButton>
-          <Button padrao onClick={() => navigate(`deletar/${cliente.id!}`)}>
+          <Button padrao onClick={() => navigate(`deletar/${cliente?.id!}`)}>
             <BsEyeFill size={18} />
           </Button>
-          <Button secondary onClick={() => navigate(`editar/${cliente.id!}`)}>
+          <Button secondary onClick={() => navigate(`editar/${cliente?.id!}`)}>
             <BsPencilFill size={18} />
           </Button>
-          <Button tertiary onClick={() => navigate(`deletar/${cliente.id!}`)}>
+          <Button tertiary onClick={() => navigate(`deletar/${cliente?.id!}`)}>
             <BsFillTrashFill size={18} />
           </Button>
         </Clientes.ContainerButton>

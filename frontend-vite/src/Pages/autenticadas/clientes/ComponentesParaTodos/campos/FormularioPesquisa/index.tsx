@@ -3,9 +3,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { ImSearch } from "react-icons/im";
 
 import * as Form from "./styles";
-
-import { InputDefault } from "../../../../../Components/Inputs/InputDefault";
-import { SecondaryButton } from "../../../../../Components/Buttons/SecondaryButton/ButtonDark";
+import { InputDefault } from "../../../../../../Components/Inputs/InputDefault";
+import { Button } from "../../../../../../Components/Buttons/Button";
 
 type Props = {
   onSubmit?: React.FormEventHandler | any;
@@ -27,28 +26,22 @@ export const FormularioPesquisa: React.FC<Props> = ({
         <InputDefault
           requirido={false}
           register={register}
-          placeholder="Digite a Instituição"
-          name="instituacao"
-          label="Instituição"
+          placeholder="Digite as iniciais do nome"
+          name="nome_completo"
+          label="Nome"
         />
         <InputDefault
           requirido={false}
           register={register}
-          placeholder="Digite a Login"
-          name="login"
-          label="Login"
+          placeholder="Digite as iniciais do e-mail"
+          name="email"
+          label="E-mail"
         />
-        <InputDefault
-          requirido={false}
-          register={register}
-          placeholder="Digite a Título"
-          name="titulo"
-          label="Titulo"
-        />
-        <SecondaryButton>
+
+        <Button primary>
           <p>Pesquisar</p>
           <ImSearch color="#fff" size={20} />
-        </SecondaryButton>
+        </Button>
       </Form.ContainerPesquisa>
     </Form.Container>
   );

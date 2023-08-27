@@ -5,7 +5,7 @@ export const NoBorders = styled.input`
 
   border: 1px solid rgb(239, 239, 239);
   color: gray;
-  border-radius: 3px;
+  border-radius: 1.5em;
 
   :focus {
     animation-name: toRight;
@@ -37,6 +37,10 @@ export const NoBorders = styled.input`
 export const ContainerInput = styled.div`
   display: grid;
   gap: 2px;
+  strong{
+    padding: 5px;
+  }
+
 `;
 
 export const SecondaryInputStyle = styled(NoBorders);

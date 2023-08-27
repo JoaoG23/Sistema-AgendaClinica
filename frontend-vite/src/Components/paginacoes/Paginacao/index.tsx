@@ -20,9 +20,9 @@ export const PaginacaoComum: React.FC<Props> = ({
     let arrayBotoes: any = [];
     for (let i = 0; i < totalPaginas; i++) {
       arrayBotoes.push(
-        <Paginacao.Button key={i} onClick={() => setPagina(() => i + 1)}>
+        <button key={i} onClick={() => setPagina(() => i + 1)}>
           {i + 1}
-        </Paginacao.Button>
+        </button>
       );
     }
     return arrayBotoes;
@@ -30,27 +30,27 @@ export const PaginacaoComum: React.FC<Props> = ({
 
   return (
     <Paginacao.Container>
-      <Paginacao.Button
+      <button
         onClick={() =>
           setPagina((paginaAntiga: any) => Math.max(paginaAntiga - 1, 1))
         }
         disabled={pagina === 1}
       >
         <IoIosArrowBack size={20} />
-      </Paginacao.Button>
-      <div>
-        Páginas : {pagina} até {totalPaginas} Qtd de items:{" "}
-        <strong>{quantidadeTotalItems}</strong>
-      </div>
+      </button>
       <Paginacao.NumeroPaginas>
         {criarTodosBotaoPaginar(totalPaginas)}
       </Paginacao.NumeroPaginas>
-      <Paginacao.Button
+      <div>
+        {pagina} até {totalPaginas} Qtd de items:{" "}
+        <strong>{quantidadeTotalItems}</strong>
+      </div>
+      <button
         onClick={() => setPagina((paginaAntiga: any) => paginaAntiga + 1)}
         disabled={pagina >= totalPaginas}
       >
         <IoIosArrowForward size={20} />
-      </Paginacao.Button>
+      </button>
     </Paginacao.Container>
   );
 };

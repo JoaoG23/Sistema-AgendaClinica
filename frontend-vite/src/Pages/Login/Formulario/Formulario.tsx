@@ -1,5 +1,4 @@
 import { AxiosResponse } from "axios";
-import { BsPersonFillAdd } from "react-icons/bs";
 import React from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";

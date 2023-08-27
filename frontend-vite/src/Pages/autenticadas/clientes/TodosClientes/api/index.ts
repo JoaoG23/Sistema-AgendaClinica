@@ -1,12 +1,17 @@
 import { endpoint } from "../../../../../services/endpoint";
+import { ClientePesquisado } from "../../../../../types/cliente/ClientePesquisado";
 
-export async function listarTodosClientePorPagina(
+export async function pesquisarClientesPorCriteriosEPaginacao(
   numero_pagina: number,
+  criteriosBusca: ClientePesquisado
 ) {
-  const resposta = await endpoint.get(`/clientes`, {
+  const { nome_completo, email } = criteriosBusca;
+  const resposta = await endpoint.get(`/clientes/pesquisar`, {
     params: {
       numero_pagina,
-      quantidade_items: 10,
+      quantidade_items: 4,
+      nome_completo,
+      email,
     },
   });
   return resposta;
