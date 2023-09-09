@@ -20,9 +20,16 @@ export class ColaboradoresService {
       throw new NotFoundException('Esse id não existe no sistema');
     }
   }
+  async validarNaoExisteUsuariosIdEmUsuario(usuariosId: string) {
+    const existeId = await this.usuariosRepositories.buscarUmPorId(usuariosId);
+    if (!existeId) {
+      throw new NotFoundException('Esse id usuario não existe no sistema');
+    }
+  }
 
-  async criarUm(Colaborador: ColaboradorCriadoDto) {
-    return await this.colaboradoresRepositories.salvar(Colaborador);
+  async criarUm(colaborador: ColaboradorCriadoDto) {
+    await this.validarNaoExisteUsuariosIdEmUsuario(colaborador?.usuariosId);
+    return await this.colaboradoresRepositories.salvar(colaborador);
   }
 
   async deletarUmPorId(id: string) {

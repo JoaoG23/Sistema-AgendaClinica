@@ -8,8 +8,10 @@ import { ColaboradoresRepositories } from './colaboradores.repositories/colabora
 
 import { UsuariosRepositoriesInterface } from 'src/usuarios/interfaces/UsuariosRepositoriesInterface';
 import { UsuariosRepositories } from 'src/usuarios/usuarios.repositories/usuarios.repositories';
+
 import { CriptografiaBcrypt } from 'src/utils/criptografias/CriptografiaBcrypt/CriptografiaBcrypt';
 import { CriptografiaBcryptInterface } from 'src/utils/criptografias/CriptografiaBcrypt/interfaces/CriptografiaBcryptInterface';
+
 import { ColaboradoresService } from './colaboradores.service/colaboradores.service';
 
 @Module({

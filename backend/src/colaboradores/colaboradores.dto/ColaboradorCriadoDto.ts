@@ -6,5 +6,6 @@ export class ColaboradorCriadoDto {
   })
   nome_completo: string;
   isAtivado?: boolean;
+  usuariosId?: string;
   especialidade_colaboradorId?: string;
 }
