@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import React from "react";
 
 import PrivateRoute from "../../Auth/PrivateRouter";
+
 import { TodosClientes } from "../../../Pages/autenticadas/clientes/TodosClientes";
 import { EditarCliente } from "../../../Pages/autenticadas/clientes/EditarCliente";
 import { VisualizarCliente } from "../../../Pages/autenticadas/clientes/VisualizarCliente";
