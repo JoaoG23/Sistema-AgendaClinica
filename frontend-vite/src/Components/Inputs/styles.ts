@@ -4,8 +4,7 @@ export const NoBorders = styled.input`
   border: none;
   border-bottom: 2px solid rgb(239, 239, 239);
   color: gray;
-  padding-bottom: 0.5em;
-  padding-bottom: 0.5em;
+  padding: 3px;
 
   :focus {
     animation-name: abaixarInputNoBody;

@@ -24,7 +24,7 @@ export const Sidebar: React.FC = () => {
           <p>Nome do Usuário</p>
         </CabecalhoUsuario>
         <li>
-          <Button primary={true}>
+          <Button primary>
             <p>Agende aqui</p>
             <AiFillPlusCircle size={15} />
           </Button>
@@ -62,24 +62,12 @@ export const Sidebar: React.FC = () => {
             })}
           </ul>
         </DropDown>
-        <li onClick={limparSessaoUsuario}>
+        <li onClick={() => limparSessaoUsuario()}>
           <ImExit size={tamanhoIcons} />
-          <Link to={"/"}>
+          <Link to={""}>
             <p>Sair</p>
           </Link>
         </li>
-        {/* <SideBar.Item>
-        <IoPeopleSharp color="#fff" size={40} />
-        <Link to={"/usuarios"}>
-        <p>Usuários</p>
-        </Link>
-        </SideBar.Item>
-        <SideBar.Item onClick={limparSessaoUsuario}>
-        <IoLogOut color="#fff" size={40} />
-        <Link to={"/"}>
-        <p>Sair</p>
-        </Link>
-      </SideBar.Item> */}
       </Menu>
     </Container>
   );

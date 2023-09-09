@@ -55,10 +55,10 @@ export const ListaClientes: React.FC<Props> = ({ cliente }) => {
           <Button padrao onClick={() => navigate(`visualizar/${cliente?.id!}`)}>
             <BsEyeFill size={18} />
           </Button>
-          <Button secondary onClick={() => navigate(`editar/${cliente?.id!}`)}>
+          <Button padrao onClick={() => navigate(`editar/${cliente?.id!}`)}>
             <BsPencilFill size={18} />
           </Button>
-          <Button tertiary onClick={() => navigate(`deletar/${cliente?.id!}`)}>
+          <Button padrao onClick={() => navigate(`deletar/${cliente?.id!}`)}>
             <BsFillTrashFill size={18} />
           </Button>
         </Clientes.ContainerButton>

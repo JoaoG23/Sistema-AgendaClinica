@@ -68,7 +68,7 @@ export const CamposFormulario: React.FC<Props> = ({
         />
       </Form.FlexColuna>
       <footer>
-        <Button secondary onClick={() => navigate(-1)}>
+        <Button padrao onClick={() => navigate('/clientes')}>
           <BsArrowLeftCircleFill size={20} />
           <p>Voltar</p>
         </Button>

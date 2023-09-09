@@ -14,7 +14,6 @@ import { ClientePesquisado } from "../../../../types/cliente/ClientePesquisado";
 
 import { PaginacaoComum } from "../../../../Components/paginacoes/Paginacao";
 import { ListaClientes } from "../ComponentesParaTodos/tabela/Linha/Linha";
-import { Button } from "../../../../Components/Buttons/Button";
 import { FormularioPesquisa } from "../ComponentesParaTodos/campos/FormularioPesquisa";
 import { CardList } from "../../../../Components/cards/CardList";
 import { Card } from "../../../../Components/cards/Card";
