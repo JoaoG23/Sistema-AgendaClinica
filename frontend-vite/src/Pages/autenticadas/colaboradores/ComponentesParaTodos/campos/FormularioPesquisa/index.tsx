@@ -14,7 +14,7 @@ type Props = {
 export const FormularioPesquisa: React.FC<Props> = ({ onSubmit, register }) => {
   return (
     <Form.Container role="form" onSubmit={onSubmit}>
-      <h2>Pesquisar um Cliente</h2>
+      <h2>Pesquisar um Colaborador</h2>
       <Form.ContainerPesquisa>
         <InputDefault
           requirido={false}
