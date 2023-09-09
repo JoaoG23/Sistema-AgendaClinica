@@ -13,6 +13,7 @@ import { Container, CabecalhoUsuario, Menu, DropDown } from "./styles";
 import { limparSessaoUsuario } from "../../../utils/limparSessaoUsuario";
 import { Button } from "../../Buttons/Button";
 import { ImExit } from "react-icons/im";
+import { FaPeopleCarry } from "react-icons/fa";
 
 export const Sidebar: React.FC = () => {
   const tamanhoIcons: number = 24;
@@ -36,9 +37,9 @@ export const Sidebar: React.FC = () => {
           </Link>
         </li>
         <li>
-          <BsFillPersonVcardFill size={tamanhoIcons} />
-          <Link to={"/contas"}>
-            <p>Usuário</p>
+          <FaPeopleCarry size={tamanhoIcons} />
+          <Link to={"/colaboradores"}>
+            <p>Colaboradores</p>
           </Link>
         </li>
 

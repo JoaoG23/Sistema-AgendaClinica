@@ -1,13 +1,14 @@
 import { ClientesRotas } from "./ClientesRotas";
+import { ColaboradoresRotas } from "./ColaboradoresRotas";
 import { UsuariosRotas } from "./UsuariosRotas";
 
-const AutenticadasRotas = () => {
+export const AutenticadasRotas = () => {
   return (
     <>
       <UsuariosRotas />
       <ClientesRotas />
+      <ColaboradoresRotas />
     </>
   );
 };
 
-export default AutenticadasRotas;

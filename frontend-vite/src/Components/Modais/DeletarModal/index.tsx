@@ -21,9 +21,9 @@ export const DeletarModal: React.FC<Props> = ({
       <p>Você deseja deletar este elemento</p>
       <div className="d-flex gap-1">
         <Button primary onClick={confirmar}>
-          Sim{carregamento && ((<SpinnerCarregamento />) as any)}
+          Sim {carregamento && ((<SpinnerCarregamento />) as any)}
         </Button>
-        <Button secondary onClick={negar}>
+        <Button padrao onClick={negar}>
           Não
         </Button>
       </div>

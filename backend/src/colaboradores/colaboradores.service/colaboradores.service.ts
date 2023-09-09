@@ -71,8 +71,6 @@ export class ColaboradoresService {
       email,
     };
 
-    // await this.validarNaoExisteId(idColaborador);
-
     await this.usuariosRepositories.editarUmPorId(usuariosId!, usuario);
     return await this.colaboradoresRepositories.editarUmPorId(
       idColaborador,

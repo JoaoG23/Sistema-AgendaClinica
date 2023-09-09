@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { useState } from "react";
 import { BsList } from "react-icons/bs";
 
-import AutenticadasRouters from "./Routers/AutenticadasRotas";
+import { AutenticadasRotas } from "./Routers/AutenticadasRotas";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -46,7 +46,7 @@ function App() {
               mostrarSidebar={mostrarSidebar}
             />
             <Body>
-              <AutenticadasRouters />
+              <AutenticadasRotas />
             </Body>
             <InicialRouters />
           </Router>

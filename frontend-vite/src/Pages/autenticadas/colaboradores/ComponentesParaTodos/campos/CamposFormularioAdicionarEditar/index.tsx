@@ -1,26 +1,31 @@
 import { useNavigate } from "react-router-dom";
-import { BsArrowLeftCircleFill } from "react-icons/bs";
+import { BsArrowLeftCircleFill, BsCheckCircleFill } from "react-icons/bs";
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 
 import * as Form from "./styles";
 
 import { InputDefault } from "../../../../../../Components/Inputs/InputDefault";
+import { AlertCampoVazio } from "../../../../../../Components/alerts/AlertCampoVazio";
 import { Button } from "../../../../../../Components/Buttons/Button";
 import { CelularInput } from "../../../../../../Components/Inputs/CelularInput";
 
 type Props = {
+  onSubmit?: React.FormEventHandler | any;
   register: any;
   control: any;
+  errors: any;
 };
 
-export const CamposFormularioVisualizar: React.FC<Props> = ({
+export const CamposFormulario: React.FC<Props> = ({
+  onSubmit,
   register,
   control,
+  errors,
 }) => {
   const navigate = useNavigate();
   return (
-    <Form.Container>
+    <Form.Container role="form" onSubmit={onSubmit}>
       <Form.UmaColuna>
         <InputDefault
           register={register}
@@ -28,6 +33,9 @@ export const CamposFormularioVisualizar: React.FC<Props> = ({
           label="Nome Completo"
           placeholder="Digite o nome"
         />
+        {errors?.nome_completo?.type === "required" && (
+          <AlertCampoVazio mensagem="Nome vazio! Por gentileza preencher-o!" />
+        )}
       </Form.UmaColuna>
       <Form.DuasColuna>
         <InputDefault
@@ -36,7 +44,9 @@ export const CamposFormularioVisualizar: React.FC<Props> = ({
           label="Login"
           placeholder="Digite o login"
         />
-
+        {errors?.login?.type === "required" && (
+          <AlertCampoVazio mensagem="Login vazio! Por gentileza preencher-o!" />
+        )}
         <CelularInput
           control={control}
           register={register}
@@ -44,6 +54,9 @@ export const CamposFormularioVisualizar: React.FC<Props> = ({
           label="Celular"
           placeholder="Digite o Celular"
         />
+        {errors?.telefone?.type === "required" && (
+          <AlertCampoVazio mensagem="Celular vazio! Por gentileza preencher-o!" />
+        )}
       </Form.DuasColuna>
       <Form.FlexColuna>
         <InputDefault
@@ -55,9 +68,13 @@ export const CamposFormularioVisualizar: React.FC<Props> = ({
         />
       </Form.FlexColuna>
       <footer>
-        <Button padrao onClick={() => navigate(-1)}>
+        <Button padrao onClick={() => navigate('/colaboradores')}>
           <BsArrowLeftCircleFill size={20} />
           <p>Voltar</p>
+        </Button>
+        <Button primary>
+          <p>Salvar</p>
+          <BsCheckCircleFill size={20} />
         </Button>
       </footer>
     </Form.Container>
