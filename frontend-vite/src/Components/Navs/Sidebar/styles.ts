@@ -39,6 +39,7 @@ export const Menu = styled.ul`
   padding: 10%;
 
   li {
+    font-weight: 500;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -66,6 +67,7 @@ export const Menu = styled.ul`
 
 export const DropDown = styled.details`
   summary {
+    font-weight: 500;
     text-decoration: none;
     display: flex;
     align-items: center;

@@ -3,6 +3,9 @@ import React from "react";
 
 import PrivateRoute from "../../Auth/PrivateRouter";
 import { TodosClientes } from "../../../Pages/autenticadas/clientes/TodosClientes";
+import { EditarCliente } from "../../../Pages/autenticadas/clientes/EditarCliente";
+import { VisualizarCliente } from "../../../Pages/autenticadas/clientes/VisualizarCliente";
+import { DeletarCliente } from "../../../Pages/autenticadas/clientes/DeletarCliente";
 
 export const ClientesRotas: React.FC = () => {
   return (
@@ -15,11 +18,19 @@ export const ClientesRotas: React.FC = () => {
           </PrivateRoute>
         }
       />
-      {/* <Route
-        path="clientes/adicionar"
+      <Route
+        path="clientes/editar/:id"
         element={
           <PrivateRoute redirectTo={"/"}>
-            <AdicionarUsuario />
+            <EditarCliente />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="clientes/visualizar/:id"
+        element={
+          <PrivateRoute redirectTo={"/"}>
+            <VisualizarCliente />
           </PrivateRoute>
         }
       />
@@ -27,10 +38,10 @@ export const ClientesRotas: React.FC = () => {
         path="clientes/deletar/:id"
         element={
           <PrivateRoute redirectTo={"/"}>
-            <DeletarUsuario />
+            <DeletarCliente />
           </PrivateRoute>
         }
-      /> */}
+      />
     </Routes>
   );
 };

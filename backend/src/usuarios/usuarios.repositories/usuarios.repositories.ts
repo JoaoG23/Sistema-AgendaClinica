@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
 
 import { CriarUsuariosDto } from '../usuarios.dto/CriarUsuarioDto';
+import { EditarUsuariosDto } from '../usuarios.dto/EditarUsuarioDto';
 
 import { UsuariosRepositoriesInterface } from '../interfaces/UsuariosRepositoriesInterface';
 
@@ -13,6 +14,7 @@ export class UsuariosRepositories implements UsuariosRepositoriesInterface {
     private readonly prismaService: PrismaService,
     private readonly criptografia: CriptografiaBcryptInterface,
   ) {}
+
   async buscarUmPorTelefone(telefone: string) {
     return await this.prismaService.usuarios.findFirst({
       where: { telefone },
@@ -75,6 +77,13 @@ export class UsuariosRepositories implements UsuariosRepositoriesInterface {
 
     return await this.prismaService.usuarios.create({
       data: usuarioComSenhaCriptografada,
+    });
+  }
+
+  async editarUmPorId(id: string, usuario: EditarUsuariosDto) {
+    return await this.prismaService.usuarios.update({
+      where: { id },
+      data: usuario,
     });
   }
 }

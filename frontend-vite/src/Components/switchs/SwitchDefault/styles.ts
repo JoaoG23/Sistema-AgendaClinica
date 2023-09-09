@@ -1,18 +1,26 @@
 import styled from "styled-components";
 
+export const Box = styled.div`
+
+  display: grid;
+  grid-template-columns: 1fr;
+
+  justify-items: center;
+`;
 export const SwitchContainer = styled.label`
   position: relative;
   display: inline-block;
   width: 60px;
   height: 30px;
   margin-right: 10px;
-  /* justify-content: space-between; */
 `;
+
 export const Container = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   gap: 0.5em;
   display: flex;
+  align-items: center;
   justify-content: center;
 
   p {
@@ -48,13 +56,12 @@ export const SwitchInput = styled.input`
   width: 0;
   height: 0;
 
-
   &:checked + ${SwitchSlider} {
-    background-color: #1caf82;
+    background-color: #1FCD6C;
   }
 
   &:focus + ${SwitchSlider} {
-    box-shadow: 0 0 1px #1caf82;
+    box-shadow: 0 0 1px #1FCD6C;
   }
 
   &:checked + ${SwitchSlider}:before {

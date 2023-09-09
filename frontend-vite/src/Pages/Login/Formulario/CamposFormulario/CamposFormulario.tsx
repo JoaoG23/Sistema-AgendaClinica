@@ -29,7 +29,6 @@ export const CamposFormulario: React.FC<Props> = ({ funcaoSubmit }) => {
         name={"login"}
         register={register}
         placeholder={"Usuário"}
-        label="Usuário"
       />
       {errors.login?.type === "required" && (
         <AlertCampoVazio mensagem={"Usuário vazio"} />
@@ -40,7 +39,6 @@ export const CamposFormulario: React.FC<Props> = ({ funcaoSubmit }) => {
         type="password"
         register={register}
         placeholder={"Senha"}
-        label="Senha"
       />
       {errors.senha?.type === "required" && (
         <AlertCampoVazio mensagem={"Senha vazia"} />

@@ -31,7 +31,7 @@ export const FlexColuna = styled.section`
   }
 `;
 
-export const Container = styled.form`
+export const Container = styled.div`
   display: grid;
   gap: 0.5em;
 

@@ -28,7 +28,7 @@ export const InputDefault: React.FC<Props> = ({
 }) => {
   return (
     <ContainerInput>
-      <strong>{label}</strong>
+      <label>{label}</label>
       <NoBorders
         readOnly={desativar}
         placeholder={placeholder}

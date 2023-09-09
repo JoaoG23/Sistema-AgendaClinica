@@ -33,7 +33,7 @@ export const CelularInput: React.FC<Props> = ({
       control={control}
       render={({ field: { onChange, value } }) => (
         <Input.ContainerInput>
-          <strong>{label}</strong>
+          <label>{label}</label>
           <Input.Campo
             mask="(99) 99999-9999"
             onChange={onChange}

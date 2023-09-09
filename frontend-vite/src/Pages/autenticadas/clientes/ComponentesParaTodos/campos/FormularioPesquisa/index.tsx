@@ -21,21 +21,19 @@ export const FormularioPesquisa: React.FC<Props> = ({
 }) => {
   return (
     <Form.Container role="form" onSubmit={onSubmit}>
-      <h2>Formulário pesquisa</h2>
+      <h2>Pesquisar um Cliente</h2>
       <Form.ContainerPesquisa>
         <InputDefault
           requirido={false}
           register={register}
-          placeholder="Digite as iniciais do nome"
+          placeholder="Nome pesquisar"
           name="nome_completo"
-          label="Nome"
         />
         <InputDefault
           requirido={false}
           register={register}
-          placeholder="Digite as iniciais do e-mail"
+          placeholder="E-mail pesquisar"
           name="email"
-          label="E-mail"
         />
 
         <Button primary>

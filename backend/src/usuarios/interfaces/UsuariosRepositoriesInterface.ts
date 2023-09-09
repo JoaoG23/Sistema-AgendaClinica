@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CriarUsuariosDto } from '../usuarios.dto/CriarUsuarioDto';
+import { EditarUsuariosDto } from '../usuarios.dto/EditarUsuarioDto';
 
 @Injectable()
 export abstract class UsuariosRepositoriesInterface {
@@ -14,4 +15,5 @@ export abstract class UsuariosRepositoriesInterface {
   abstract contarTodosPorCriterio();
   abstract buscarUmPorId(id: string);
   abstract deletarUmPorId(id: string);
+  abstract editarUmPorId(id: string, usuario: EditarUsuariosDto);
 }

@@ -1,5 +1,11 @@
 import React from "react";
-import { Container, SwitchContainer, SwitchInput, SwitchSlider } from "./styles";
+import {
+  Box,
+  Container,
+  SwitchContainer,
+  SwitchInput,
+  SwitchSlider,
+} from "./styles";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
 type Props = {
@@ -8,6 +14,7 @@ type Props = {
   valorPadrao?: string;
   desativar?: boolean;
   requirido?: boolean;
+  descricao?: string;
   descricaoLigado?: string;
   descricaoDesligado?: string;
 };
@@ -18,23 +25,23 @@ export const SwitchDefault: React.FC<Props> = ({
   register,
   desativar = false,
   requirido = true,
-  descricaoLigado,
-  descricaoDesligado,
+  descricao,
 }) => {
   return (
-    <Container>
-      <p>{descricaoDesligado}</p>
-      <SwitchContainer >
-        <SwitchInput
-        role="switch-default"
-          type="checkbox"
-          readOnly={desativar}
-          defaultValue={valorPadrao}
-          {...register(name, { required: requirido })}
-        />
-        <SwitchSlider />
-      </SwitchContainer>
-      <p>{descricaoLigado}</p>
-    </Container>
+    <Box>
+      <p>{descricao}</p>
+      <Container>
+        <SwitchContainer>
+          <SwitchInput
+            role="switch-default"
+            type="checkbox"
+            readOnly={desativar}
+            defaultValue={valorPadrao}
+            {...register(name, { required: requirido })}
+          />
+          <SwitchSlider />
+        </SwitchContainer>
+      </Container>
+    </Box>
   );
 };

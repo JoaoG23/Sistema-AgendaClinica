@@ -2,6 +2,7 @@ import React from "react";
 import { QuestionamentoModal } from "../ModalQuestiomento";
 import ButtonDefault from "../../Buttons/ButtonDefault/ButtonDark";
 import { SecondaryButton } from "../../Buttons/SecondaryButton/ButtonDark";
+import { Button } from "../../Buttons/Button";
 
 type Props = {
   confirmar?: () => Promise<any>;
@@ -18,10 +19,12 @@ export const DeletarModal: React.FC<Props> = ({
     <QuestionamentoModal>
       <p>Você deseja deletar este elemento</p>
       <div className="d-flex gap-1">
-        <ButtonDefault onClick={confirmar}>
-            Sim{carregamento && <p>Carregando ...</p> as any}
-        </ButtonDefault>
-        <SecondaryButton onClick={negar}>Não</SecondaryButton>
+        <Button primary onClick={confirmar}>
+          Sim{carregamento && ((<p>Carregando ...</p>) as any)}
+        </Button>
+        <Button secondary onClick={negar}>
+          Não
+        </Button>
       </div>
     </QuestionamentoModal>
   );

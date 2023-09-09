@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const NoBorders = styled.input`
-  padding: 8px;
-
-  border: 1px solid rgb(239, 239, 239);
+  border: none;
+  border-bottom: 2px solid rgb(239, 239, 239);
   color: gray;
-  border-radius: 1.5em;
+  padding-bottom: 0.5em;
+  padding-bottom: 0.5em;
 
   :focus {
-    animation-name: toRight;
+    animation-name: abaixarInputNoBody;
     animation-duration: 1s;
     animation-iteration-count: 1;
     animation-timing-function: ease;
@@ -20,27 +20,25 @@ export const NoBorders = styled.input`
     color: gray;
   }
 
-  @keyframes toRight {
+  @keyframes abaixarInputNoBody {
     0% {
-      transform: translateX(0vw);
+      transform: translateY(0vh);
     }
 
     100% {
-      transform: translateX(0.3vw);
+      border-bottom: 2px solid #31d0d4;
+      transform: translateY(0.4vh);
     }
   }
 
   @media screen and (max-width: 600px) {
-    padding: 1em;
+    padding: 0.5em;
   }
 `;
 export const ContainerInput = styled.div`
   display: grid;
-  gap: 2px;
-  strong{
-    padding: 5px;
-  }
 
+  gap: 0.3em;
 `;
 
 export const SecondaryInputStyle = styled(NoBorders);

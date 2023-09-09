@@ -11,6 +11,7 @@ import {
 import { ClientesService } from '../clientes.service/clientes.service';
 import { ClienteCriadoDto } from '../clientes.dto/ClienteCriadoDto';
 import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
+import { ClienteUsuarioDto } from '../clientes.dto/ClienteUsuarioDto';
 
 @Controller('clientes')
 export class ClientesController {
@@ -48,6 +49,16 @@ export class ClientesController {
     @Body() cliente: ClienteCriadoDto,
   ) {
     return await this.clientesService.editarUmPorId(id, cliente);
+  }
+  @Put('usuario/:id')
+  async editarUsuarioEClienteUmPorIdCliente(
+    @Param('id') id: string,
+    @Body() usuarioCliente: ClienteUsuarioDto,
+  ) {
+    return await this.clientesService.editarUsuarioEClienteUmPorIdCliente(
+      id,
+      usuarioCliente,
+    );
   }
 
   @Post()

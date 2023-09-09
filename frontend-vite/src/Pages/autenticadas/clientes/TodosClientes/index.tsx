@@ -5,11 +5,10 @@ import { IoMdAddCircle } from "react-icons/io";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 
-import { listarTodosClientePorPagina, pesquisarClientesPorCriteriosEPaginacao } from "./api";
+import { pesquisarClientesPorCriteriosEPaginacao } from "./api";
 
 import { SpinnerCarregamento } from "../../../../Components/spinners/SpinnerCarregamento";
 
-import { ErrorResposta } from "../../../../types/Respostas/ErrorResposta/ErroResposta";
 import { ClienteVisualizado } from "../../../../types/cliente/ClienteVisualizado";
 import { ClientePesquisado } from "../../../../types/cliente/ClientePesquisado";
 
@@ -19,15 +18,15 @@ import { Button } from "../../../../Components/Buttons/Button";
 import { FormularioPesquisa } from "../ComponentesParaTodos/campos/FormularioPesquisa";
 import { CardList } from "../../../../Components/cards/CardList";
 import { Card } from "../../../../Components/cards/Card";
+
 import * as Fluxo from "./styles";
 
 export const TodosClientes: React.FC = () => {
   const navigate = useNavigate();
+
   const [pagina, setPagina] = useState<number>(1);
   const [criteriosBusca, setCriteriosBusca] = useState<ClientePesquisado>({});
   const comecarPelaPrimeiraPagina = () => setPagina(1);
-
-
 
   const {
     data,
@@ -65,14 +64,11 @@ export const TodosClientes: React.FC = () => {
       <Fluxo.Pesquisa>
         <Card>
           <FormularioPesquisa
-          
-            onSubmit={handleSubmit(
-              (criterios: ClientePesquisado) => {
-                setCriteriosBusca(criterios);
-                mutatePesquisar();
-                comecarPelaPrimeiraPagina();
-              }
-            )}
+            onSubmit={handleSubmit((criterios: ClientePesquisado) => {
+              setCriteriosBusca(criterios);
+              mutatePesquisar();
+              comecarPelaPrimeiraPagina();
+            })}
             register={register}
             control={control}
             errors={errors}
@@ -81,12 +77,6 @@ export const TodosClientes: React.FC = () => {
       </Fluxo.Pesquisa>
       <header>
         <h2>Seus Clientes</h2>
-        <div>
-          <Button padrao onClick={() => navigate("adicionar")}>
-            <p>Adicionar</p>
-            <IoMdAddCircle size={20} />
-          </Button>
-        </div>
       </header>
 
       <CardList>

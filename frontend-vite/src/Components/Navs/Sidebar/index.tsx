@@ -12,6 +12,7 @@ import { Container, CabecalhoUsuario, Menu, DropDown } from "./styles";
 
 import { limparSessaoUsuario } from "../../../utils/limparSessaoUsuario";
 import { Button } from "../../Buttons/Button";
+import { ImExit } from "react-icons/im";
 
 export const Sidebar: React.FC = () => {
   const tamanhoIcons: number = 24;
@@ -40,6 +41,7 @@ export const Sidebar: React.FC = () => {
             <p>Usuário</p>
           </Link>
         </li>
+
         <DropDown>
           <summary>
             <BsFillGrid3X2GapFill size={tamanhoIcons} />
@@ -60,6 +62,12 @@ export const Sidebar: React.FC = () => {
             })}
           </ul>
         </DropDown>
+        <li onClick={limparSessaoUsuario}>
+          <ImExit size={tamanhoIcons} />
+          <Link to={"/"}>
+            <p>Sair</p>
+          </Link>
+        </li>
         {/* <SideBar.Item>
         <IoPeopleSharp color="#fff" size={40} />
         <Link to={"/usuarios"}>

@@ -1,4 +1,9 @@
-import { BsEyeFill, BsFillPersonFill, BsFillTrashFill, BsPencilFill } from "react-icons/bs";
+import {
+  BsEyeFill,
+  BsFillPersonFill,
+  BsFillTrashFill,
+  BsPencilFill,
+} from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 import * as Clientes from "./styles";
@@ -6,6 +11,9 @@ import * as Clientes from "./styles";
 import { ClienteVisualizado } from "../../../../../../types/cliente/ClienteVisualizado";
 import { Card } from "../../../../../../Components/cards/Card";
 import { Button } from "../../../../../../Components/Buttons/Button";
+import { GreenBadge } from "../../../../../../Components/Badges/GreenBadge";
+import { RedBadge } from "../../../../../../Components/Badges/RedBadge";
+import { Badge } from "../../../../../../Components/Badges/Badge";
 
 type Props = {
   cliente?: ClienteVisualizado;
@@ -23,7 +31,12 @@ export const ListaClientes: React.FC<Props> = ({ cliente }) => {
               <strong>Nome: </strong> {cliente?.nome_completo}
             </li>
             <li>
-              <strong>Ativo: </strong> {cliente?.isAtivado}
+              <strong>Ativo: </strong>
+              {cliente?.isAtivado ? (
+                <Badge descricao="Sim" />
+              ) : (
+                <Badge error descricao="Não" />
+              )}
             </li>
             <li>
               <strong>Login: </strong> {cliente?.usuarios?.login}
@@ -39,7 +52,7 @@ export const ListaClientes: React.FC<Props> = ({ cliente }) => {
           </Clientes.ListaItems>
         </Clientes.ContainerCard>
         <Clientes.ContainerButton>
-          <Button padrao onClick={() => navigate(`deletar/${cliente?.id!}`)}>
+          <Button padrao onClick={() => navigate(`visualizar/${cliente?.id!}`)}>
             <BsEyeFill size={18} />
           </Button>
           <Button secondary onClick={() => navigate(`editar/${cliente?.id!}`)}>

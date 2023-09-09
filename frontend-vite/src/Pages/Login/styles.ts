@@ -15,7 +15,6 @@ export const Formulario = styled.main`
   justify-items: center;
   align-items: center;
   height: auto;
-  /* background-color: #f8f8f9; */
 
   animation: entradaSuave 1s ease alternate both;
   box-shadow: 2px 2px 10px ${sombra};

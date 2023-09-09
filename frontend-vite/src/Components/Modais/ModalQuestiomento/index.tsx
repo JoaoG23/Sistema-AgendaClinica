@@ -10,7 +10,7 @@ export const QuestionamentoModal: React.FC<Props> = ({ children }) => {
   return (
     <Modal.BackGround>
       <Modal.Body>
-        <BsFillQuestionCircleFill size={100} color="#6879f7" />
+        <BsFillQuestionCircleFill size={100} color="#31D0D4" />
         <h3>Tem certeza que deseja realizar essa operação!</h3>
         {children}
       </Modal.Body>

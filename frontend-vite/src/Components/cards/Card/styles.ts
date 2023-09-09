@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const CardContainer = styled.div`
-  border-radius: 7px;
   font-size: small;
   padding: 1em;
-  border-radius: 2em;
+  border-radius: 1em;
+  border: #DFE2E6;
 
   gap: 0.2em;
 

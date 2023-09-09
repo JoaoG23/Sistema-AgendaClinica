@@ -32,6 +32,7 @@ export class ClientesRepositories implements ClientesRepositoriesInterface {
 
     const itemsPagina = await this.prismaService.clientes.findMany({
       select: {
+        id: true,
         nome_completo: true,
         isAtivado: true,
         usuarios: {
@@ -73,6 +74,7 @@ export class ClientesRepositories implements ClientesRepositoriesInterface {
     const itemsPagina = await this.prismaService.clientes.findMany({
       where: itemsPesquisados,
       select: {
+        id: true,
         nome_completo: true,
         isAtivado: true,
         usuarios: {
@@ -89,6 +91,19 @@ export class ClientesRepositories implements ClientesRepositoriesInterface {
   async buscarUmPorId(id: string) {
     return await this.prismaService.clientes.findFirst({
       where: { id },
+      select: {
+        id: true,
+        nome_completo: true,
+        isAtivado: true,
+        usuarios: {
+          select: {
+            id: true,
+            login: true,
+            telefone: true,
+            email: true,
+          },
+        },
+      },
     });
   }
 
