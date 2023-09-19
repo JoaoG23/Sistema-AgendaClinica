@@ -77,11 +77,17 @@ model agendamentos {
   updatedAt          DateTime?      @updatedAt
   clientes           clientes?      @relation(fields: [clientesId], references: [id])
   clientesId         String?
-  colaboradorId      String?
   colaboradores      colaboradores? @relation(fields: [colaboradoresId], references: [id])
   colaboradoresId    String?
 
-  servicos_estabelecimento_agendamentos servicos_estabelecimento_agendamentos[]
+  {
+	"dataHoraInicio": "",
+	"dataHoraFim": "",
+	"valor": 2,
+	"observacao": "",
+	"clientesId": null,
+	"colaboradoresId": null
+} servicos_estabelecimento_agendamentos[]
 }
 
 model servicos_estabelecimento_agendamentos {
