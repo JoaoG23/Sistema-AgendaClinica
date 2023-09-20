@@ -32,14 +32,21 @@ export class AgendamentosRepositories
     const pularPagina = (numeroPagina - 1) * itemsPorPagina;
 
     const itemsPagina = await this.prismaService.agendamentos.findMany({
-      // select: {
-      //   id: true,
-      //   nome_completo: true,
-      //   isAtivado: true,
-      //   usuarios: {
-      //     select: { login: true, telefone: true, email: true },
-      //   },
-      // },
+      select: {
+        id: true,
+        dataHoraInicio: true,
+        dataHoraFim: true,
+        colaboradores: {
+          select: {
+            nome_completo: true,
+          },
+        },
+        clientes: {
+          select: {
+            nome_completo: true,
+          },
+        },
+      },
       skip: pularPagina,
       take: itemsPorPagina,
     });
@@ -93,22 +100,24 @@ export class AgendamentosRepositories
   }
 
   async buscarUmPorId(id: string) {
-    // return await this.prismaService.agendamentos.findFirst({
-    //   where: { id },
-    //   select: {
-    //     id: true,
-    //     nome_completo: true,
-    //     isAtivado: true,
-    //     usuarios: {
-    //       select: {
-    //         id: true,
-    //         login: true,
-    //         telefone: true,
-    //         email: true,
-    //       },
-    //     },
-    //   },
-    // });
+    return await this.prismaService.agendamentos.findFirst({
+      where: { id },
+      select: {
+        id: true,
+        dataHoraInicio: true,
+        dataHoraFim: true,
+        colaboradores: {
+          select: {
+            nome_completo: true,
+          },
+        },
+        clientes: {
+          select: {
+            nome_completo: true,
+          },
+        },
+      },
+    });
     return await this.prismaService.agendamentos.findUnique({
       where: { id },
     });

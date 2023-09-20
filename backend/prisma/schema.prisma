@@ -80,14 +80,7 @@ model agendamentos {
   colaboradores      colaboradores? @relation(fields: [colaboradoresId], references: [id])
   colaboradoresId    String?
 
-  {
-	"dataHoraInicio": "",
-	"dataHoraFim": "",
-	"valor": 2,
-	"observacao": "",
-	"clientesId": null,
-	"colaboradoresId": null
-} servicos_estabelecimento_agendamentos[]
+  servicos_estabelecimento_agendamentos servicos_estabelecimento_agendamentos[]
 }
 
 model servicos_estabelecimento_agendamentos {
