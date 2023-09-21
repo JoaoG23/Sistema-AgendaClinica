@@ -12,6 +12,26 @@ export class AgendamentosRepositories
   implements AgendamentosRepositoriesInterface
 {
   constructor(private readonly prismaService: PrismaService) {}
+  retornarCamposClienteEColaborador() {
+    return {
+      id: true,
+      dataHoraInicio: true,
+      dataHoraFim: true,
+      valor: true,
+
+      servicos_estabelecimento_agendamentos: true,
+      colaboradores: {
+        select: {
+          nome_completo: true,
+        },
+      },
+      clientes: {
+        select: {
+          nome_completo: true,
+        },
+      },
+    };
+  }
 
   async contarTodosPorCriterio() {
     return await this.prismaService.agendamentos.count({});
@@ -32,21 +52,7 @@ export class AgendamentosRepositories
     const pularPagina = (numeroPagina - 1) * itemsPorPagina;
 
     const itemsPagina = await this.prismaService.agendamentos.findMany({
-      select: {
-        id: true,
-        dataHoraInicio: true,
-        dataHoraFim: true,
-        colaboradores: {
-          select: {
-            nome_completo: true,
-          },
-        },
-        clientes: {
-          select: {
-            nome_completo: true,
-          },
-        },
-      },
+      select: this.retornarCamposClienteEColaborador(),
       skip: pularPagina,
       take: itemsPorPagina,
     });
@@ -60,43 +66,41 @@ export class AgendamentosRepositories
     const { quantidadeItemsPagina, numeroPagina, ...criteriosPesquisa } =
       criterios;
 
-    // const { nome_cliente, nome_colaborador } = criteriosPesquisa;
+    const { nome_cliente, nome_colaborador, dataHoraInicio } =
+      criteriosPesquisa;
 
-    // const itemsPesquisados = {
-    //   nome_completo: { contains: nome_completo },
-    //   usuarios: {
-    //     email: {
-    //       contains: email,
-    //     },
-    //   },
-    // };
+    const itemsPesquisados = {
+      // colaboradores: {
+      //   nome_completo: {
+      //     contains: nome_colaborador,
+      //   },
+      // },
+      clientes: {
+        nome_completo: {
+          contains: nome_cliente,
+        },
+      },
+    };
 
-    // const quantidadeTotalRegistros =
-    //   await this.prismaService.agendamentos.count({
-    //     where: itemsPesquisados,
-    //   });
-    // const itemsPorPagina = Number(quantidadeItemsPagina);
-    // const totalQuantidadePaginas = await calcularQuantidadePaginas(
-    //   itemsPorPagina,
-    //   quantidadeTotalRegistros,
-    // );
-    // const pularPagina = (numeroPagina - 1) * itemsPorPagina;
+    const quantidadeTotalRegistros =
+      await this.prismaService.agendamentos.count({
+        where: itemsPesquisados,
+      });
+    const itemsPorPagina = Number(quantidadeItemsPagina);
+    const totalQuantidadePaginas = await calcularQuantidadePaginas(
+      itemsPorPagina,
+      quantidadeTotalRegistros,
+    );
+    const pularPagina = (numeroPagina - 1) * itemsPorPagina;
 
-    // const itemsPagina = await this.prismaService.agendamentos.findMany({
-    //   where: itemsPesquisados,
-    //   select: {
-    //     id: true,
-    //     nome_completo: true,
-    //     isAtivado: true,
-    //     usuarios: {
-    //       select: { login: true, telefone: true, email: true },
-    //     },
-    //   },
-    //   skip: pularPagina,
-    //   take: itemsPorPagina,
-    // });
+    const itemsPagina = await this.prismaService.agendamentos.findMany({
+      where: itemsPesquisados,
+      select: this.retornarCamposClienteEColaborador(),
+      skip: pularPagina,
+      take: itemsPorPagina,
+    });
 
-    // return [{ totalQuantidadePaginas, quantidadeTotalRegistros }, itemsPagina];
+    return [{ totalQuantidadePaginas, quantidadeTotalRegistros }, itemsPagina];
   }
 
   async buscarUmPorId(id: string) {
@@ -118,9 +122,9 @@ export class AgendamentosRepositories
         },
       },
     });
-    return await this.prismaService.agendamentos.findUnique({
-      where: { id },
-    });
+    // return await this.prismaService.agendamentos.findUnique({
+    //   where: { id },
+    // });
   }
 
   async editarUmPorId(id: string, agendamento: AgendamentoCriadoDto) {

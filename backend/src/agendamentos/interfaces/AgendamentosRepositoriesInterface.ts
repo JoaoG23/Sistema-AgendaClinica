@@ -13,6 +13,7 @@ export abstract class AgendamentosRepositoriesInterface {
     criteriosBusca: AgendamentoPesquisadoDto,
   );
   abstract contarTodosPorCriterio();
+  abstract retornarCamposClienteEColaborador();
   abstract buscarUmPorId(id: string);
   abstract editarUmPorId(id: string, agendamento: AgendamentoCriadoDto);
   abstract deletarUmPorId(id: string);
