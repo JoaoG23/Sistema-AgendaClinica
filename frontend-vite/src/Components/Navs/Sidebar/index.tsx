@@ -1,21 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import {
-  BsFillCalendarEventFill,
-  BsFillGrid3X2GapFill,
-  BsFillPersonVcardFill,
-} from "react-icons/bs";
+import { Link, useNavigate } from "react-router-dom";
+import { BsFillCalendarEventFill, BsFillGrid3X2GapFill } from "react-icons/bs";
 import { MdOutlineEmojiPeople } from "react-icons/md";
-import { AiFillPlusCircle } from "react-icons/ai";
+import { AiFillCalendar, AiFillPlusCircle } from "react-icons/ai";
+import { ImExit } from "react-icons/im";
+import { FaPeopleCarry } from "react-icons/fa";
 
 import { Container, CabecalhoUsuario, Menu, DropDown } from "./styles";
 
 import { limparSessaoUsuario } from "../../../utils/limparSessaoUsuario";
+
 import { Button } from "../../Buttons/Button";
-import { ImExit } from "react-icons/im";
-import { FaPeopleCarry } from "react-icons/fa";
 
 export const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
   const tamanhoIcons: number = 24;
   return (
     <Container>
@@ -25,7 +23,7 @@ export const Sidebar: React.FC = () => {
           <p>Nome do Usuário</p>
         </CabecalhoUsuario>
         <li>
-          <Button primary>
+          <Button primary onClick={() => navigate("agendamentos/adicionar")}>
             <p>Agende aqui</p>
             <AiFillPlusCircle size={15} />
           </Button>
@@ -42,11 +40,17 @@ export const Sidebar: React.FC = () => {
             <p>Colaboradores</p>
           </Link>
         </li>
+        <li>
+          <AiFillCalendar size={tamanhoIcons} />
+          <Link to={"/agendamentos"}>
+            <p>Agendamentos</p>
+          </Link>
+        </li>
 
         <DropDown>
           <summary>
             <BsFillGrid3X2GapFill size={tamanhoIcons} />
-            <p>Agenda</p>
+            <p>Outros</p>
           </summary>
           <ul>
             {[

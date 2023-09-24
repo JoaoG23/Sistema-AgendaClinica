@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { AgendamentoCriadoDto } from '../agendamentos.dto/AgendamentoCriadoDto';
 import { AgendamentoPesquisadoDto } from '../agendamentos.dto/AgendamentoPesquisadoDto';
+
 import { AgendamentosRepositoriesInterface } from '../interfaces/AgendamentosRepositoriesInterface';
 
 @Injectable()
@@ -34,6 +35,9 @@ export class AgendamentosService {
   async buscarUmPorId(id: string) {
     return await this.agendamentosRepositories.buscarUmPorId(id);
   }
+  async buscarTodos() {
+    return await this.agendamentosRepositories.buscarTodos();
+  }
 
   async buscarTodosPorPagina(
     numeroPagina: number,
@@ -46,8 +50,16 @@ export class AgendamentosService {
   }
 
   async pesquisarTodosPorCriteriosEPagina(criterios: AgendamentoPesquisadoDto) {
+    const { dataHoraPesquisada, ...criteriosSemDataHoraPesquisa } = criterios;
+
+    if (dataHoraPesquisada) {
+      return await this.agendamentosRepositories.pesquisarTodosPorCriteriosComDataEPagincao(
+        criterios,
+      );
+    }
+
     return await this.agendamentosRepositories.pesquisarTodosPorCriteriosEPagincao(
-      criterios,
+      criteriosSemDataHoraPesquisa,
     );
   }
 }

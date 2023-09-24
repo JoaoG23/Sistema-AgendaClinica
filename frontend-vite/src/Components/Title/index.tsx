@@ -1,10 +1,11 @@
-import React from 'react';
-import { StyleTitle }  from './styles';
-type Childrens = {
-    children?: string | JSX.Element | JSX.Element[];
-}
-const Title:React.FC<Childrens> = ({ children }) => {
-    return(<StyleTitle>{children}</StyleTitle>);
-}
+import React from "react";
 
-export default Title;
+import * as Style from "./styles";
+
+type Childrens = {
+  children?: string;
+};
+
+export const Titulo: React.FC<Childrens> = ({ children }) => {
+  return <Style.Titulo>{children}</Style.Titulo>;
+};

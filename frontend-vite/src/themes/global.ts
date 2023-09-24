@@ -82,8 +82,8 @@ details[open] summary ~ * {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #7E62F3;
-  border-radius: 5px;
+  background-color: #43B4DC;
+  border-radius: 1em;
 }
 
 

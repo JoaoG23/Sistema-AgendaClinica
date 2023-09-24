@@ -12,13 +12,15 @@ export class AgendamentosRepositories
   implements AgendamentosRepositoriesInterface
 {
   constructor(private readonly prismaService: PrismaService) {}
+
   retornarCamposClienteEColaborador() {
     return {
       id: true,
       dataHoraInicio: true,
       dataHoraFim: true,
       valor: true,
-
+      isServicoConcluido: true,
+      observacao: true,
       servicos_estabelecimento_agendamentos: true,
       colaboradores: {
         select: {
@@ -60,21 +62,31 @@ export class AgendamentosRepositories
     return [{ totalQuantidadePaginas, quantidadeTotalRegistros }, itemsPagina];
   }
 
+  async buscarTodos() {
+    return await this.prismaService.agendamentos.findMany({
+      select: this.retornarCamposClienteEColaborador(),
+    });
+  }
+
   async pesquisarTodosPorCriteriosEPagincao(
     criterios: AgendamentoPesquisadoDto,
   ) {
     const { quantidadeItemsPagina, numeroPagina, ...criteriosPesquisa } =
       criterios;
 
-    const { nome_cliente, nome_colaborador, dataHoraInicio } =
+    const { nome_cliente, nome_colaborador, dataHoraPesquisada } =
       criteriosPesquisa;
 
     const itemsPesquisados = {
-      // colaboradores: {
-      //   nome_completo: {
-      //     contains: nome_colaborador,
-      //   },
-      // },
+      dataHoraInicio: {
+        gte: dataHoraPesquisada,
+        lt: dataHoraPesquisada,
+      },
+      colaboradores: {
+        nome_completo: {
+          contains: nome_colaborador,
+        },
+      },
       clientes: {
         nome_completo: {
           contains: nome_cliente,
@@ -86,11 +98,66 @@ export class AgendamentosRepositories
       await this.prismaService.agendamentos.count({
         where: itemsPesquisados,
       });
+
     const itemsPorPagina = Number(quantidadeItemsPagina);
+
     const totalQuantidadePaginas = await calcularQuantidadePaginas(
       itemsPorPagina,
       quantidadeTotalRegistros,
     );
+
+    const pularPagina = (numeroPagina - 1) * itemsPorPagina;
+
+    const itemsPagina = await this.prismaService.agendamentos.findMany({
+      where: itemsPesquisados,
+      select: this.retornarCamposClienteEColaborador(),
+      skip: pularPagina,
+      take: itemsPorPagina,
+    });
+
+    return [{ totalQuantidadePaginas, quantidadeTotalRegistros }, itemsPagina];
+  }
+
+  async pesquisarTodosPorCriteriosComDataEPagincao(
+    criteriosComData: AgendamentoPesquisadoDto,
+  ) {
+    const { quantidadeItemsPagina, numeroPagina, ...criteriosPesquisa } =
+      criteriosComData;
+
+    const { nome_cliente, nome_colaborador, dataHoraPesquisada } =
+      criteriosPesquisa;
+
+    const dataHoraInicio = {
+      gte: new Date(dataHoraPesquisada + 'T00:00:00.00Z'),
+      lte: new Date(dataHoraPesquisada + 'T23:59:00.00Z'),
+    };
+
+    const itemsPesquisados = {
+      dataHoraInicio,
+      colaboradores: {
+        nome_completo: {
+          contains: nome_colaborador,
+        },
+      },
+      clientes: {
+        nome_completo: {
+          contains: nome_cliente,
+        },
+      },
+    };
+
+    const quantidadeTotalRegistros =
+      await this.prismaService.agendamentos.count({
+        where: itemsPesquisados,
+      });
+
+    const itemsPorPagina = Number(quantidadeItemsPagina);
+
+    const totalQuantidadePaginas = await calcularQuantidadePaginas(
+      itemsPorPagina,
+      quantidadeTotalRegistros,
+    );
+
     const pularPagina = (numeroPagina - 1) * itemsPorPagina;
 
     const itemsPagina = await this.prismaService.agendamentos.findMany({
@@ -106,25 +173,8 @@ export class AgendamentosRepositories
   async buscarUmPorId(id: string) {
     return await this.prismaService.agendamentos.findFirst({
       where: { id },
-      select: {
-        id: true,
-        dataHoraInicio: true,
-        dataHoraFim: true,
-        colaboradores: {
-          select: {
-            nome_completo: true,
-          },
-        },
-        clientes: {
-          select: {
-            nome_completo: true,
-          },
-        },
-      },
+      select: this.retornarCamposClienteEColaborador(),
     });
-    // return await this.prismaService.agendamentos.findUnique({
-    //   where: { id },
-    // });
   }
 
   async editarUmPorId(id: string, agendamento: AgendamentoCriadoDto) {

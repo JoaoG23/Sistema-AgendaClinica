@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 
 import { AgendamentosService } from '../agendamentos.service/agendamentos.service';
+
 import { AgendamentoPesquisadoDto } from '../agendamentos.dto/AgendamentoPesquisadoDto';
 import { AgendamentoCriadoDto } from '../agendamentos.dto/AgendamentoCriadoDto';
 
@@ -18,6 +19,11 @@ export class AgendamentosController {
   constructor(private readonly agendamentosService: AgendamentosService) {}
 
   @Get()
+  async buscarTodos() {
+    return await this.agendamentosService.buscarTodos();
+  }
+
+  @Get('pagina')
   async buscarTodosPorPagina(
     @Query('numero_pagina') numero_pagina,
     @Query('quantidade_items') quantidade_items,

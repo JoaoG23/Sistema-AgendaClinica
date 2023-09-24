@@ -9,8 +9,12 @@ export abstract class AgendamentosRepositoriesInterface {
     numeroPagina: number,
     quantidadeItemsPagina: number,
   );
+  abstract buscarTodos();
   abstract pesquisarTodosPorCriteriosEPagincao(
-    criteriosBusca: AgendamentoPesquisadoDto,
+    criterios: AgendamentoPesquisadoDto,
+  );
+  abstract pesquisarTodosPorCriteriosComDataEPagincao(
+    criteriosComData: AgendamentoPesquisadoDto,
   );
   abstract contarTodosPorCriterio();
   abstract retornarCamposClienteEColaborador();
