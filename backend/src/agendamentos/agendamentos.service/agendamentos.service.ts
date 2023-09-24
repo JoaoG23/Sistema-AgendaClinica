@@ -4,6 +4,7 @@ import { AgendamentoCriadoDto } from '../agendamentos.dto/AgendamentoCriadoDto';
 import { AgendamentoPesquisadoDto } from '../agendamentos.dto/AgendamentoPesquisadoDto';
 
 import { AgendamentosRepositoriesInterface } from '../interfaces/AgendamentosRepositoriesInterface';
+import { AgendamentoAtualizadoHorariosDto } from '../agendamentos.dto/AgendamentoAtualizadoHorariosDto';
 
 @Injectable()
 export class AgendamentosService {
@@ -17,8 +18,25 @@ export class AgendamentosService {
       throw new NotFoundException('Esse id não existe no sistema');
     }
   }
+  async validarSeDataInicialMenorIgualQueFinal(
+    inicialDatahora: Date,
+    finalDatahora: Date,
+  ) {
+    const isHorarioInicialMaiorQueFinal =
+      new Date(inicialDatahora) >= new Date(finalDatahora);
+
+    if (isHorarioInicialMaiorQueFinal) {
+      throw new NotFoundException('Data de inicio é maior Data final');
+    }
+  }
 
   async criarUm(agendamento: AgendamentoCriadoDto) {
+    const { dataHoraInicio, dataHoraFim } = agendamento;
+
+    await this.validarSeDataInicialMenorIgualQueFinal(
+      dataHoraInicio,
+      dataHoraFim,
+    );
     return await this.agendamentosRepositories.salvar(agendamento);
   }
 
@@ -28,7 +46,29 @@ export class AgendamentosService {
   }
 
   async editarUmPorId(id: string, agendamento: AgendamentoCriadoDto) {
+    const { dataHoraInicio, dataHoraFim } = agendamento;
+
     await this.validarNaoExisteId(id);
+    await this.validarSeDataInicialMenorIgualQueFinal(
+      dataHoraInicio,
+      dataHoraFim,
+    );
+
+    return await this.agendamentosRepositories.editarUmPorId(id, agendamento);
+  }
+
+  async alterarHorariosDeUmPorId(
+    id: string,
+    agendamento: AgendamentoAtualizadoHorariosDto,
+  ) {
+    const { dataHoraInicio, dataHoraFim } = agendamento;
+
+    await this.validarNaoExisteId(id);
+    await this.validarSeDataInicialMenorIgualQueFinal(
+      dataHoraInicio,
+      dataHoraFim,
+    );
+
     return await this.agendamentosRepositories.editarUmPorId(id, agendamento);
   }
 

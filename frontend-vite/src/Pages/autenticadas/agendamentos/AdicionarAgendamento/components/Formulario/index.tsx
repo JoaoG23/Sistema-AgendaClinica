@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
-
 import { adicionarUmAgendamento } from "../../api";
 
 import { navegarAtePaginaDepoisTempo } from "../../../../../../utils/navegarAtePaginaDepoisTempo/navegarAtePaginaDepoisTempo";
@@ -17,6 +16,8 @@ import { ErrorResposta } from "../../../../../../types/Respostas/ErrorResposta/E
 import { ModalSucesso } from "../../../../../../Components/Modais/ModalSucesso";
 import { ModalCarregando } from "../../../../../../Components/Modais/ModalCarregando";
 import { CamposFormulario } from "../../../ComponentesParaTodos/campos/CamposFormularioAdicionarEditar";
+
+import { adicionarSegundosEmDatetime } from "../../../../../../utils/datetime/adicionarSegundosEmDatetime/adicionarSegundosEmDatetime";
 
 export const Formulario: React.FC = () => {
   const navigate = useNavigate();
@@ -41,15 +42,21 @@ export const Formulario: React.FC = () => {
     register,
     handleSubmit,
     control,
-    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm<Agendamento>({});
 
   return (
     <>
       <CamposFormulario
-        onSubmit={handleSubmit((agendamento: any) => {
-          mutate(agendamento as Agendamento);
+        onSubmit={handleSubmit((agendamento: Agendamento) => {
+          const agendamentoComHorariosComSegundos = {
+            ...agendamento,
+            dataHoraInicio: adicionarSegundosEmDatetime(
+              agendamento.dataHoraInicio
+            ),
+            dataHoraFim: adicionarSegundosEmDatetime(agendamento?.dataHoraFim),
+          };
+          mutate(agendamentoComHorariosComSegundos as any);
         })}
         register={register}
         control={control}

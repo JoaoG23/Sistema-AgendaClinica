@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { ClientesRepositoriesInterface } from '../interfaces/ClientesRepositoriesInterface';
-import { ClienteCriadoDto } from '../clientes.dto/ClienteCriadoDto';
-import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
 import { UsuariosRepositoriesInterface } from 'src/usuarios/interfaces/UsuariosRepositoriesInterface';
+import { ClientesRepositoriesInterface } from '../interfaces/ClientesRepositoriesInterface';
+
+import { ClienteCriadoDto } from '../clientes.dto/ClienteCriadoDto';
 import { ClienteUsuarioDto } from '../clientes.dto/ClienteUsuarioDto';
+import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
 
 @Injectable()
 export class ClientesService {
@@ -63,6 +64,10 @@ export class ClientesService {
 
   async buscarUmPorId(id: string) {
     return await this.clientesRepositories.buscarUmPorId(id);
+  }
+
+  async buscarTodos() {
+    return await this.clientesRepositories.buscarTodos();
   }
 
   async buscarTodosPorPagina(

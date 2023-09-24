@@ -13,7 +13,7 @@ export const UmaColuna = styled.section`
 
 export const DuasColuna = styled.section`
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr  1fr ;
   margin: 0.4em;
   gap: 1em;
 

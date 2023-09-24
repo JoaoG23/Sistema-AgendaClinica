@@ -82,6 +82,10 @@ export class ColaboradoresService {
     return await this.colaboradoresRepositories.buscarUmPorId(id);
   }
 
+  async buscarTodos() {
+    return await this.colaboradoresRepositories.buscarTodos();
+  }
+
   async buscarTodosPorPagina(
     numeroPagina: number,
     quantidadeItemsPagina: number,

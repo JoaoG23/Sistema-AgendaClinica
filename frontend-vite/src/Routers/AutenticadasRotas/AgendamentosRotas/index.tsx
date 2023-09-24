@@ -3,8 +3,10 @@ import React from "react";
 
 import PrivateRoute from "../../Auth/PrivateRouter";
 
-import { TodosAgendamentos } from "../../../Pages/autenticadas/agendamentos";
 import { AdicionarAgendamento } from "../../../Pages/autenticadas/agendamentos/AdicionarAgendamento";
+
+import { Agendamentos } from "../../../Pages/autenticadas/agendamentos/Agenda";
+
 export const AgendamentosRotas: React.FC = () => {
   return (
     <Routes>
@@ -12,7 +14,7 @@ export const AgendamentosRotas: React.FC = () => {
         path="/agendamentos"
         element={
           <PrivateRoute redirectTo={"/"}>
-            <TodosAgendamentos />
+            <Agendamentos />
           </PrivateRoute>
         }
       />

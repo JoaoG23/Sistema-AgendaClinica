@@ -12,6 +12,22 @@ import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
 export class ClientesRepositories implements ClientesRepositoriesInterface {
   constructor(private readonly prismaService: PrismaService) {}
 
+  retornarCamposClienteEUsuario() {
+    return {
+      id: true,
+      nome_completo: true,
+      isAtivado: true,
+      usuarios: {
+        select: {
+          id: true,
+          login: true,
+          telefone: true,
+          email: true,
+        },
+      },
+    };
+  }
+
   async contarTodosPorCriterio() {
     return await this.prismaService.clientes.count({});
   }
@@ -31,14 +47,7 @@ export class ClientesRepositories implements ClientesRepositoriesInterface {
     const pularPagina = (numeroPagina - 1) * itemsPorPagina;
 
     const itemsPagina = await this.prismaService.clientes.findMany({
-      select: {
-        id: true,
-        nome_completo: true,
-        isAtivado: true,
-        usuarios: {
-          select: { login: true, telefone: true, email: true },
-        },
-      },
+      select: this.retornarCamposClienteEUsuario(),
       skip: pularPagina,
       take: itemsPorPagina,
     });
@@ -73,14 +82,7 @@ export class ClientesRepositories implements ClientesRepositoriesInterface {
 
     const itemsPagina = await this.prismaService.clientes.findMany({
       where: itemsPesquisados,
-      select: {
-        id: true,
-        nome_completo: true,
-        isAtivado: true,
-        usuarios: {
-          select: { login: true, telefone: true, email: true },
-        },
-      },
+      select: this.retornarCamposClienteEUsuario(),
       skip: pularPagina,
       take: itemsPorPagina,
     });
@@ -88,22 +90,16 @@ export class ClientesRepositories implements ClientesRepositoriesInterface {
     return [{ totalQuantidadePaginas, quantidadeTotalRegistros }, itemsPagina];
   }
 
+  async buscarTodos() {
+    return await this.prismaService.clientes.findMany({
+      select: this.retornarCamposClienteEUsuario(),
+    });
+  }
+
   async buscarUmPorId(id: string) {
     return await this.prismaService.clientes.findFirst({
       where: { id },
-      select: {
-        id: true,
-        nome_completo: true,
-        isAtivado: true,
-        usuarios: {
-          select: {
-            id: true,
-            login: true,
-            telefone: true,
-            email: true,
-          },
-        },
-      },
+      select: this.retornarCamposClienteEUsuario(),
     });
   }
 

@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
 
-import { calcularQuantidadePaginas } from 'src/utils/paginacao/calcularQuantidadePaginas/calcularQuantidadePaginas';
 import { ColaboradoresRepositoriesInterface } from '../interfaces/ColaboradoresRepositoriesInterface';
+
+import { calcularQuantidadePaginas } from 'src/utils/paginacao/calcularQuantidadePaginas/calcularQuantidadePaginas';
+
 import { ColaboradorPesquisadoDto } from '../colaboradores.dto/ColaboradorPesquisadoDto';
 import { ColaboradorCriadoDto } from '../colaboradores.dto/ColaboradorCriadoDto';
 
@@ -12,8 +14,8 @@ export class ColaboradoresRepositories
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async contarTodosPorCriterio() {
-    return await this.prismaService.colaboradores.count({});
+  async buscarTodos() {
+    return await this.prismaService.colaboradores.findMany({});
   }
 
   async buscarTodosPorPagina(
@@ -44,6 +46,10 @@ export class ColaboradoresRepositories
     });
 
     return [{ totalQuantidadePaginas, quantidadeTotalRegistros }, itemsPagina];
+  }
+
+  async contarTodosPorCriterio() {
+    return await this.prismaService.colaboradores.count({});
   }
 
   async pesquisarTodosPorCriteriosEPagincao(

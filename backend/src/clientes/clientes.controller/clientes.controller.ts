@@ -18,6 +18,10 @@ export class ClientesController {
   constructor(private readonly clientesService: ClientesService) {}
 
   @Get()
+  async buscarTodos() {
+    return await this.clientesService.buscarTodos();
+  }
+  @Get('paginas')
   async buscarTodosPorPagina(
     @Query('numero_pagina') numero_pagina,
     @Query('quantidade_items') quantidade_items,

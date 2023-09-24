@@ -2,12 +2,12 @@ import { Control, FieldValues, UseFormRegister } from "react-hook-form";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
 
-import { buscarTodosClientes } from "./api";
+import { buscarTodosColaboradores } from "./api";
 
 import * as Selects from "./styles";
 
 import { SpinnerCarregamento } from "../../spinners/SpinnerCarregamento";
-import { ClienteVisualizado } from "../../../types/cliente/ClienteVisualizado";
+import { ColaboradorVisualizado } from "../../../types/colaborador/colaboradorVisualizado";
 
 type Props<T = unknown> = {
   label?: string;
@@ -19,7 +19,7 @@ type Props<T = unknown> = {
   opcoes?: T[];
 };
 
-export const ClientesSelect: React.FC<Props<ClienteVisualizado>> = ({
+export const ColaboradoresSelect: React.FC<Props<ColaboradorVisualizado>> = ({
   label,
   name,
   register,
@@ -27,25 +27,29 @@ export const ClientesSelect: React.FC<Props<ClienteVisualizado>> = ({
   requirido = true,
   opcoes = [],
 }) => {
-  const { isLoading, data } = useQuery("todos-clientes", buscarTodosClientes, {
-    onError: (error: any) => {
-      toast.error(`${error.response.data}`);
-    },
-  });
+  const { isLoading, data } = useQuery(
+    "todos-colaboradores",
+    buscarTodosColaboradores,
+    {
+      onError: (error: any) => {
+        toast.error(`${error.response.data}`);
+      },
+    }
+  );
 
-  const clientes = data?.data || opcoes;
+  const colaboradores = data?.data || opcoes;
 
   return (
     <Selects.ContainerInput>
       {isLoading && <SpinnerCarregamento />}
       <label>{label}</label>
       <Selects.Container
-        aria-label="clientes"
+        aria-label="colaboradores"
         {...register(name, { required: requirido })}
         disabled={desativar}
       >
-        <option value="">Selecione um cliente</option>
-        {clientes?.map((option: ClienteVisualizado) => (
+        <option value="">Selecione um colaborador </option>
+        {colaboradores?.map((option: ColaboradorVisualizado) => (
           <option key={option?.id} value={option?.id}>
             {option?.nome_completo}
           </option>

@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const Campo = styled.textarea`
-  padding: 8px;
-
-  background-color: transparent;
   border: none;
-  box-shadow: 1px 1px 5px #717f953a;
-  height: 15vh;
-  border-radius: 1em;
+  border-bottom: 2px solid rgb(231, 239, 239);
+  border-left: 2px solid rgb(231, 239, 239);
+  border-right: 2px solid rgb(231, 239, 239);
+  color: gray;
+  height: 8vh;
+  padding: 3px;
 
   :focus {
-    animation-name: toRight;
+    animation-name: abaixarTextareaNoBody;
     animation-duration: 1s;
     animation-iteration-count: 1;
     animation-timing-function: ease;
@@ -18,14 +18,25 @@ export const Campo = styled.textarea`
     animation-fill-mode: both;
   }
 
-  @keyframes toRight {
+  ::placeholder {
+    color: gray;
+  }
+
+  @keyframes abaixarTextareaNoBody {
     0% {
-      transform: translateX(0vw);
+      transform: translateY(0vh);
     }
 
     100% {
-      transform: translateX(0.3vw);
+      border-bottom: 2px solid #31d0d4;
+      border-left: 2px solid #31d0d4;
+      border-right: 2px solid #31d0d4;
+      transform: translateY(0.4vh);
     }
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 0.5em;
   }
 `;
 export const ContainerInput = styled.div`

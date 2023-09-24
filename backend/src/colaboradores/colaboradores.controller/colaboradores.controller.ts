@@ -18,6 +18,10 @@ export class ColaboradoresController {
   constructor(private readonly colaboradoresService: ColaboradoresService) {}
 
   @Get()
+  async buscarTodos() {
+    return await this.colaboradoresService.buscarTodos();
+  }
+  @Get('paginas')
   async buscarTodosPorPagina(
     @Query('numero_pagina') numero_pagina,
     @Query('quantidade_items') quantidade_items,

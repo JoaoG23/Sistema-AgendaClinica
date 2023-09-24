@@ -1,5 +1,5 @@
-import { Agendamento } from "../../../../../types/agendamento/Agendamento";
-import { EventoBigCalendar } from "../../../../../types/agendamento/EventoBigCalendar";
+import { Agendamento } from "../../../../../../types/agendamento/Agendamento";
+import { EventoBigCalendar } from "../../../../../../types/agendamento/EventoBigCalendar";
 
 import { converterDataHoraParaEventoTipoBigCalendar } from "../converterDataHoraParaEventoTipoBigCalendar/converterDataHoraParaEventoTipoBigCalendar";
 

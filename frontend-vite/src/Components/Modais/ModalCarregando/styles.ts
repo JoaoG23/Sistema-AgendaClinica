@@ -26,7 +26,7 @@ export const BackGround = styled.div`
 `;
 
 export const Body = styled.div`
-  width:38vw;
+  width: 38vw;
   height: auto;
 
   text-align: center;
@@ -44,15 +44,25 @@ export const Body = styled.div`
   border-radius: 3px;
   box-shadow: 2px 2px 5px #00000050;
 
-  @media screen and (max-width:769px) {
-    width:90vw;
+  animation: aparecendoModalCarregando 0.2s forwards;
+
+  @keyframes aparecendoModalCarregando {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @media screen and (max-width: 769px) {
+    width: 90vw;
   }
 `;
 
 export const AnimationSucesso = styled.img`
-
-animation: aparecendoSucesso 1s ease-out alternate forwards;
-@keyframes aparecendoSucesso {
+  animation: aparecendoSucesso 1s ease-out alternate forwards;
+  @keyframes aparecendoSucesso {
     0% {
       transform: rotate(0deg) scale(0);
     }

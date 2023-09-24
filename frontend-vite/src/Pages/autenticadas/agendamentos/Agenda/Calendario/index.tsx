@@ -19,9 +19,11 @@ import { eventoStyle } from "../configs/eventoStyle";
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 
 import "moment/dist/locale/pt-br";
-import { SpinnerCarregamento } from "../../../../Components/spinners/SpinnerCarregamento";
-import { ModalCarregando } from "../../../../Components/Modais/ModalCarregando";
-import { EventoBigCalendar } from "../../../../types/agendamento/EventoBigCalendar";
+
+import { ModalCarregando } from "../../../../../Components/Modais/ModalCarregando";
+import { SpinnerCarregamento } from "../../../../../Components/spinners/SpinnerCarregamento";
+
+import { EventoBigCalendar } from "../../../../../types/agendamento/EventoBigCalendar";
 
 const localizer = momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(Calendar);
@@ -45,8 +47,12 @@ export const Calendario = () => {
   );
 
   const { mutate: atualizarDataItemMutate, isLoading } = useMutation(
-    async (horariosAgendamento: any) => await atualizarHorarioEvento(horariosAgendamento),
+    async (horariosAgendamento: any) =>
+      await atualizarHorarioEvento(horariosAgendamento),
     {
+      onSuccess: (data: any) => {
+        toast.success(`Agendamento alterado com sucesso!`);
+      },
       onError: (error: any) => {
         toast.error(`Ops! : ${error.response.data}`);
       },
@@ -104,7 +110,7 @@ export const Calendario = () => {
         onEventResize={aoMovimentarEvento}
         events={agendamentos}
         style={{ height: 600 }}
-        step={5}
+        step={7}
       />
       {isCarregangdoTodosEventos && <ModalCarregando />}
     </div>

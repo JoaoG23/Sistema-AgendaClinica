@@ -10,6 +10,8 @@ import { AlertCampoVazio } from "../../../../../../Components/alerts/AlertCampoV
 import { Button } from "../../../../../../Components/Buttons/Button";
 import { CelularInput } from "../../../../../../Components/Inputs/CelularInput";
 import { ClientesSelect } from "../../../../../../Components/selects/ClienteSelect";
+import { ColaboradoresSelect } from "../../../../../../Components/selects/ColaboradorSelect";
+import { TextAreaDefault } from "../../../../../../Components/Inputs/TextAreaDefault";
 
 type Props = {
   onSubmit?: React.FormEventHandler | any;
@@ -27,7 +29,7 @@ export const CamposFormulario: React.FC<Props> = ({
   const navigate = useNavigate();
   return (
     <Form.Container role="form" onSubmit={onSubmit}>
-      <Form.UmaColuna>
+      <Form.DuasColuna>
         <InputDefault
           type="datetime-local"
           register={register}
@@ -38,9 +40,6 @@ export const CamposFormulario: React.FC<Props> = ({
         {errors?.dataHoraInicio?.type === "required" && (
           <AlertCampoVazio mensagem="Data e Hora de Inicio vazio! Por gentileza preencher-o!" />
         )}
-      </Form.UmaColuna>
-
-      <Form.UmaColuna>
         <InputDefault
           type="datetime-local"
           register={register}
@@ -51,11 +50,12 @@ export const CamposFormulario: React.FC<Props> = ({
         {errors?.dataHoraFim?.type === "required" && (
           <AlertCampoVazio mensagem="Data e Hora de Fim vazio! Por gentileza preencher-o!" />
         )}
-      </Form.UmaColuna>
+      </Form.DuasColuna>
 
       <Form.UmaColuna>
         <InputDefault
           register={register}
+          type="number"
           name="valor"
           label="Valor do Serviço"
           placeholder="Digite o Valor do Serviço"
@@ -65,8 +65,23 @@ export const CamposFormulario: React.FC<Props> = ({
         )}
       </Form.UmaColuna>
 
+      <Form.DuasColuna>
+        <ClientesSelect register={register} name="clientesId" label="Cliente" />
+        {errors?.clientesId?.type === "required" && (
+          <AlertCampoVazio mensagem="Cliente vazio! Por gentileza preencher-o!" />
+        )}
+        <ColaboradoresSelect
+          register={register}
+          name="colaboradoresId"
+          label="Colaboradores"
+        />
+        {errors?.colaboradoresId?.type === "required" && (
+          <AlertCampoVazio mensagem="Colaborador vazio! Por gentileza preencher-o!" />
+        )}
+      </Form.DuasColuna>
+
       <Form.UmaColuna>
-        <InputDefault
+        <TextAreaDefault
           register={register}
           name="observacao"
           label="Observação"
@@ -74,25 +89,6 @@ export const CamposFormulario: React.FC<Props> = ({
         />
         {errors?.observacao?.type === "required" && (
           <AlertCampoVazio mensagem="Observação vazio! Por gentileza preencher-o!" />
-        )}
-      </Form.UmaColuna>
-
-      <Form.UmaColuna>
-        <ClientesSelect register={register} name="clientesId" label="Cliente" />
-        {errors?.clientesId?.type === "required" && (
-          <AlertCampoVazio mensagem="Cliente vazio! Por gentileza preencher-o!" />
-        )}
-      </Form.UmaColuna>
-
-      <Form.UmaColuna>
-        <InputDefault
-          register={register}
-          name="colaboradoresId"
-          label="Colaborador"
-          placeholder="Digite o Colaborador"
-        />
-        {errors?.colaboradoresId?.type === "required" && (
-          <AlertCampoVazio mensagem="Colaborador vazio! Por gentileza preencher-o!" />
         )}
       </Form.UmaColuna>
 

@@ -1,4 +1,4 @@
-import { endpoint } from "../../../../../services/endpoint";
+import { endpoint } from "../../../../../../services/endpoint";
 
 export async function buscarTodosAgendamentos() {
   const resposta = await endpoint.get(`/agendamentos`);
@@ -10,7 +10,7 @@ export async function atualizarHorariosUmAgendamento<T = unknown>(
   dataHorarioInicialEFim: T
 ) {
   const resposta = await endpoint.patch(
-    `/fluxocaixa/${id}`,
+    `/agendamentos/${id}`,
     dataHorarioInicialEFim
   );
   return resposta;

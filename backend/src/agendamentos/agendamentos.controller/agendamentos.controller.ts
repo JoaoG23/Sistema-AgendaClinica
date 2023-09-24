@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  Patch,
   Post,
   Put,
   Query,
@@ -13,6 +14,7 @@ import { AgendamentosService } from '../agendamentos.service/agendamentos.servic
 
 import { AgendamentoPesquisadoDto } from '../agendamentos.dto/AgendamentoPesquisadoDto';
 import { AgendamentoCriadoDto } from '../agendamentos.dto/AgendamentoCriadoDto';
+import { AgendamentoAtualizadoHorariosDto } from '../agendamentos.dto/AgendamentoAtualizadoHorariosDto';
 
 @Controller('agendamentos')
 export class AgendamentosController {
@@ -23,7 +25,7 @@ export class AgendamentosController {
     return await this.agendamentosService.buscarTodos();
   }
 
-  @Get('pagina')
+  @Get('paginas')
   async buscarTodosPorPagina(
     @Query('numero_pagina') numero_pagina,
     @Query('quantidade_items') quantidade_items,
@@ -55,6 +57,17 @@ export class AgendamentosController {
     @Body() agendamento: AgendamentoCriadoDto,
   ) {
     return await this.agendamentosService.editarUmPorId(id, agendamento);
+  }
+
+  @Patch(':id')
+  async alterarHorariosDeUmPorId(
+    @Param('id') id: string,
+    @Body() agendamento: AgendamentoAtualizadoHorariosDto,
+  ) {
+    return await this.agendamentosService.alterarHorariosDeUmPorId(
+      id,
+      agendamento,
+    );
   }
 
   @Post()

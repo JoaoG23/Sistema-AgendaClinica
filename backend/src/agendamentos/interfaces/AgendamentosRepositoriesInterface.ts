@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { AgendamentoCriadoDto } from '../agendamentos.dto/AgendamentoCriadoDto';
 import { AgendamentoPesquisadoDto } from '../agendamentos.dto/AgendamentoPesquisadoDto';
+import { AgendamentoAtualizadoHorariosDto } from '../agendamentos.dto/AgendamentoAtualizadoHorariosDto';
 
 @Injectable()
 export abstract class AgendamentosRepositoriesInterface {
@@ -19,6 +20,9 @@ export abstract class AgendamentosRepositoriesInterface {
   abstract contarTodosPorCriterio();
   abstract retornarCamposClienteEColaborador();
   abstract buscarUmPorId(id: string);
-  abstract editarUmPorId(id: string, agendamento: AgendamentoCriadoDto);
+  abstract editarUmPorId(
+    id: string,
+    agendamento: AgendamentoCriadoDto | AgendamentoAtualizadoHorariosDto,
+  );
   abstract deletarUmPorId(id: string);
 }

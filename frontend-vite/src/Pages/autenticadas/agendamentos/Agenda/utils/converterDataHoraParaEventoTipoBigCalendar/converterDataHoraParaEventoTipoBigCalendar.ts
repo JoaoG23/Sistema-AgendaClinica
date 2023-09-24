@@ -1,6 +1,7 @@
+import { Agendamento } from "../../../../../../types/agendamento/Agendamento";
+
 import { separaDadosDataHora } from "./utils/separaDadosDataHora";
 
-import { Agendamento } from "../../../../../types/agendamento/Agendamento";
 /*
 
 @Autor Joao Guilherme
@@ -41,7 +42,6 @@ export function converterDataHoraParaEventoTipoBigCalendar(
     inicialMinuto,
     0
   );
-  console.log("🚀 ~ file: converterDataHoraParaEventoTipoBigCalendar.ts:44 ~ horarioInicial:", horarioInicial)
   const horarioFinal = new Date(
     finalAno,
     finalMes,
