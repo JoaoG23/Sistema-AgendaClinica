@@ -1,7 +1,5 @@
 import React from "react";
 import { QuestionamentoModal } from "../ModalQuestiomento";
-import ButtonDefault from "../../Buttons/ButtonDefault/ButtonDark";
-import { SecondaryButton } from "../../Buttons/SecondaryButton/ButtonDark";
 import { Button } from "../../Buttons/Button";
 import { SpinnerCarregamento } from "../../spinners/SpinnerCarregamento";
 
@@ -19,9 +17,9 @@ export const DeletarModal: React.FC<Props> = ({
   return (
     <QuestionamentoModal>
       <p>Você deseja deletar este elemento</p>
-      <div className="d-flex gap-1">
+      <div>
         <Button primary onClick={confirmar}>
-          Sim {carregamento && ((<SpinnerCarregamento />) as any)}
+          Sim
         </Button>
         <Button padrao onClick={negar}>
           Não

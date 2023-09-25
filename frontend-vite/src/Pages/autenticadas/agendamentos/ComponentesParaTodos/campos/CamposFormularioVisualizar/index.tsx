@@ -7,7 +7,9 @@ import * as Form from "./styles";
 
 import { InputDefault } from "../../../../../../Components/Inputs/InputDefault";
 import { Button } from "../../../../../../Components/Buttons/Button";
-import { CelularInput } from "../../../../../../Components/Inputs/CelularInput";
+import { TextAreaDefault } from "../../../../../../Components/Inputs/TextAreaDefault";
+import { ClientesSelect } from "../../../../../../Components/selects/ClienteSelect";
+import { ColaboradoresSelect } from "../../../../../../Components/selects/ColaboradorSelect";
 
 type Props = {
   register: any;
@@ -21,39 +23,50 @@ export const CamposFormularioVisualizar: React.FC<Props> = ({
   const navigate = useNavigate();
   return (
     <Form.Container>
+      <Form.DuasColuna>
+        <InputDefault
+          type="datetime-local"
+          register={register}
+          name="dataHoraInicio"
+          label="Data e Hora de Inicio"
+          placeholder="Digite o Data e Hora de Inicio"
+        />
+        <InputDefault
+          type="datetime-local"
+          register={register}
+          name="dataHoraFim"
+          label="Data e Hora de Fim"
+          placeholder="Digite o Data e Hora de Fim"
+        />
+      </Form.DuasColuna>
+
       <Form.UmaColuna>
         <InputDefault
           register={register}
-          name="nome_completo"
-          label="Nome Completo"
-          placeholder="Digite o nome"
+          type="number"
+          name="valor"
+          label="Valor do Serviço"
+          placeholder="Digite o Valor do Serviço"
         />
       </Form.UmaColuna>
-      <Form.DuasColuna>
-        <InputDefault
-          register={register}
-          name="login"
-          label="Login"
-          placeholder="Digite o login"
-        />
 
-        <CelularInput
-          control={control}
+      <Form.DuasColuna>
+        <ClientesSelect register={register} name="clientesId" label="Cliente" />
+        <ColaboradoresSelect
           register={register}
-          name="telefone"
-          label="Celular"
-          placeholder="Digite o Celular"
+          name="colaboradoresId"
+          label="Colaboradores"
         />
       </Form.DuasColuna>
-      <Form.FlexColuna>
-        <InputDefault
-          requirido={false}
+
+      <Form.UmaColuna>
+        <TextAreaDefault
           register={register}
-          name="email"
-          label="E-mail"
-          placeholder="Digite o email"
+          name="observacao"
+          label="Observação"
+          placeholder="Digite o Observação"
         />
-      </Form.FlexColuna>
+      </Form.UmaColuna>
       <footer>
         <Button padrao onClick={() => navigate(-1)}>
           <BsArrowLeftCircleFill size={20} />

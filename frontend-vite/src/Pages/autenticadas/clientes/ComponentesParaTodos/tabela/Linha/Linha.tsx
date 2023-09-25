@@ -1,7 +1,7 @@
 import {
   BsEyeFill,
   BsFillPersonFill,
-  BsFillTrashFill,
+  BsFillTrash2Fill,
   BsPencilFill,
 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import { Button } from "../../../../../../Components/Buttons/Button";
 import { GreenBadge } from "../../../../../../Components/Badges/GreenBadge";
 import { RedBadge } from "../../../../../../Components/Badges/RedBadge";
 import { Badge } from "../../../../../../Components/Badges/Badge";
+import { MdModeEdit } from "react-icons/md";
 
 type Props = {
   cliente?: ClienteVisualizado;
@@ -56,10 +57,10 @@ export const ListaClientes: React.FC<Props> = ({ cliente }) => {
             <BsEyeFill size={18} />
           </Button>
           <Button padrao onClick={() => navigate(`editar/${cliente?.id!}`)}>
-            <BsPencilFill size={18} />
+            <MdModeEdit size={18} />
           </Button>
           <Button padrao onClick={() => navigate(`deletar/${cliente?.id!}`)}>
-            <BsFillTrashFill size={18} />
+            <BsFillTrash2Fill size={18} />
           </Button>
         </Clientes.ContainerButton>
       </Clientes.Container>

@@ -93,7 +93,7 @@ export const CamposFormulario: React.FC<Props> = ({
       </Form.UmaColuna>
 
       <footer>
-        <Button padrao onClick={() => navigate("/clientes")}>
+        <Button padrao onClick={() => navigate("/agendamentos")}>
           <BsArrowLeftCircleFill size={20} />
           <p>Voltar</p>
         </Button>

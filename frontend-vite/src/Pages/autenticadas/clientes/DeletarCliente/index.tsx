@@ -35,7 +35,7 @@ export const DeletarCliente: React.FC = () => {
 
   return (
     <main>
-      {isLoading && <ModalCarregando />}
+      {isSuccess && <ModalSucesso />}
       {modalPrincipal && (
         <DeletarModal
           confirmar={async () => await mutate()}

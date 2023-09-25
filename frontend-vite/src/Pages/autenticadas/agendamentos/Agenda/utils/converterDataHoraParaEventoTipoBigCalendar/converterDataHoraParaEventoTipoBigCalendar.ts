@@ -53,7 +53,7 @@ export function converterDataHoraParaEventoTipoBigCalendar(
 
   const eventoConvetido = {
     id: evento?.id!,
-    title: `${evento?.clientes?.nome_completo || ""} - ${
+    title: `Cliente: ${evento?.clientes?.nome_completo || ""} - Prestador: ${
       evento?.colaboradores?.nome_completo || ""
     }`,
     start: horarioInicial,

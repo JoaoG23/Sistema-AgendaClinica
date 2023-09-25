@@ -6,63 +6,47 @@ import {
 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-import * as Clientes from "./styles";
+import * as Agendamentos from "./styles";
 
-import { ClienteVisualizado } from "../../../../../../types/cliente/ClienteVisualizado";
 import { Card } from "../../../../../../Components/cards/Card";
 import { Button } from "../../../../../../Components/Buttons/Button";
-import { GreenBadge } from "../../../../../../Components/Badges/GreenBadge";
-import { RedBadge } from "../../../../../../Components/Badges/RedBadge";
-import { Badge } from "../../../../../../Components/Badges/Badge";
+
+import { Agendamento } from "../../../../../../types/agendamento/Agendamento";
 
 type Props = {
-  cliente?: ClienteVisualizado;
+  agendamento?: Agendamento;
 };
 
-export const ListaClientes: React.FC<Props> = ({ cliente }) => {
+export const ListaAgendamentos: React.FC<Props> = ({ agendamento }) => {
   const navigate = useNavigate();
   return (
     <Card>
-      <Clientes.Container>
-        <Clientes.ContainerCard>
+      <Agendamentos.Container>
+        <Agendamentos.ContainerCard>
           <BsFillPersonFill size={75} color="#43B4DC" />
-          <Clientes.ListaItems>
-            <li>
-              <strong>Nome: </strong> {cliente?.nome_completo}
-            </li>
-            <li>
+          <Agendamentos.ListaItems>
+            {/* <li>
               <strong>Ativo: </strong>
-              {cliente?.isAtivado ? (
+              {agendamento?.isAtivado ? (
                 <Badge descricao="Sim" />
               ) : (
                 <Badge error descricao="Não" />
               )}
-            </li>
-            <li>
-              <strong>Login: </strong> {cliente?.usuarios?.login}
-            </li>
-            <li>
-              <strong>Telefone: </strong>
-              {cliente?.usuarios?.telefone}
-            </li>
-            <li>
-              <strong>E-mail: </strong>
-              {cliente?.usuarios?.email}
-            </li>
-          </Clientes.ListaItems>
-        </Clientes.ContainerCard>
-        <Clientes.ContainerButton>
-          <Button padrao onClick={() => navigate(`visualizar/${cliente?.id!}`)}>
+            </li> */}
+          </Agendamentos.ListaItems>
+        </Agendamentos.ContainerCard>
+        <Agendamentos.ContainerButton>
+          <Button padrao onClick={() => navigate(`visualizar/${agendamento?.id!}`)}>
             <BsEyeFill size={18} />
           </Button>
-          <Button padrao onClick={() => navigate(`editar/${cliente?.id!}`)}>
+          <Button padrao onClick={() => navigate(`editar/${agendamento?.id!}`)}>
             <BsPencilFill size={18} />
           </Button>
-          <Button padrao onClick={() => navigate(`deletar/${cliente?.id!}`)}>
+          <Button padrao onClick={() => navigate(`deletar/${agendamento?.id!}`)}>
             <BsFillTrashFill size={18} />
           </Button>
-        </Clientes.ContainerButton>
-      </Clientes.Container>
+        </Agendamentos.ContainerButton>
+      </Agendamentos.Container>
     </Card>
   );
 };

@@ -1,55 +1,43 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 import { AgendamentoCriadoDto } from '../agendamentos.dto/AgendamentoCriadoDto';
 import { AgendamentoPesquisadoDto } from '../agendamentos.dto/AgendamentoPesquisadoDto';
+import { AgendamentoAtualizadoHorariosDto } from '../agendamentos.dto/AgendamentoAtualizadoHorariosDto';
 
 import { AgendamentosRepositoriesInterface } from '../interfaces/AgendamentosRepositoriesInterface';
-import { AgendamentoAtualizadoHorariosDto } from '../agendamentos.dto/AgendamentoAtualizadoHorariosDto';
+import { ValidacaoAgendamentosServicesInterface } from '../interfaces/ValidacaoAgendamentosServicesInterface';
 
 @Injectable()
 export class AgendamentosService {
   constructor(
     private readonly agendamentosRepositories: AgendamentosRepositoriesInterface,
+    private readonly validacaoAgendamentosServices: ValidacaoAgendamentosServicesInterface,
   ) {}
-
-  async validarNaoExisteId(id: string) {
-    const existeId = await this.agendamentosRepositories.buscarUmPorId(id);
-    if (!existeId) {
-      throw new NotFoundException('Esse id não existe no sistema');
-    }
-  }
-  async validarSeDataInicialMenorIgualQueFinal(
-    inicialDatahora: Date,
-    finalDatahora: Date,
-  ) {
-    const isHorarioInicialMaiorQueFinal =
-      new Date(inicialDatahora) >= new Date(finalDatahora);
-
-    if (isHorarioInicialMaiorQueFinal) {
-      throw new NotFoundException('Data de inicio é maior Data final');
-    }
-  }
 
   async criarUm(agendamento: AgendamentoCriadoDto) {
     const { dataHoraInicio, dataHoraFim } = agendamento;
 
-    await this.validarSeDataInicialMenorIgualQueFinal(
+    await this.validacaoAgendamentosServices.verificarSeDataInicialMenorIgualQueFinal(
       dataHoraInicio,
       dataHoraFim,
     );
+    await this.validacaoAgendamentosServices.verificarSeExisteAgendamentoNesteHorario(
+      agendamento,
+    );
+
     return await this.agendamentosRepositories.salvar(agendamento);
   }
 
   async deletarUmPorId(id: string) {
-    await this.validarNaoExisteId(id);
+    await this.validacaoAgendamentosServices.verificarNaoExisteId(id);
     return await this.agendamentosRepositories.deletarUmPorId(id);
   }
 
   async editarUmPorId(id: string, agendamento: AgendamentoCriadoDto) {
     const { dataHoraInicio, dataHoraFim } = agendamento;
 
-    await this.validarNaoExisteId(id);
-    await this.validarSeDataInicialMenorIgualQueFinal(
+    await this.validacaoAgendamentosServices.verificarNaoExisteId(id);
+    await this.validacaoAgendamentosServices.verificarSeDataInicialMenorIgualQueFinal(
       dataHoraInicio,
       dataHoraFim,
     );
@@ -63,8 +51,8 @@ export class AgendamentosService {
   ) {
     const { dataHoraInicio, dataHoraFim } = agendamento;
 
-    await this.validarNaoExisteId(id);
-    await this.validarSeDataInicialMenorIgualQueFinal(
+    await this.validacaoAgendamentosServices.verificarNaoExisteId(id);
+    await this.validacaoAgendamentosServices.verificarSeDataInicialMenorIgualQueFinal(
       dataHoraInicio,
       dataHoraFim,
     );

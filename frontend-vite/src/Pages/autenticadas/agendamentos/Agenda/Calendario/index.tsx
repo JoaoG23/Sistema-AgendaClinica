@@ -50,7 +50,7 @@ export const Calendario = () => {
     async (horariosAgendamento: any) =>
       await atualizarHorarioEvento(horariosAgendamento),
     {
-      onSuccess: (data: any) => {
+      onSuccess: () => {
         toast.success(`Agendamento alterado com sucesso!`);
       },
       onError: (error: any) => {
@@ -83,7 +83,7 @@ export const Calendario = () => {
   );
 
   const eventoAoClicarNaTarefaCalendario = useCallback((event: any) => {
-    navigate(`/agendamentos/editar/${event.id}`);
+    navigate(`/agendamentos/visualizar/${event.id}`);
   }, []);
 
   const { messages } = useMemo<any>(
@@ -110,7 +110,7 @@ export const Calendario = () => {
         onEventResize={aoMovimentarEvento}
         events={agendamentos}
         style={{ height: 600 }}
-        step={7}
+        step={6}
       />
       {isCarregangdoTodosEventos && <ModalCarregando />}
     </div>

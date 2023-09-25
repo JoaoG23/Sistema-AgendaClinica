@@ -13,9 +13,9 @@ export const BackGround = styled.div`
   align-items: center;
   justify-content: center;
 
-  animation: entradaSuave 0.5s forwards;
+  animation: entradaModalSucesso 0.25s forwards;
 
-  @keyframes entradaSuave {
+  @keyframes entradaModalSucesso {
     0% {
       transform: translateY(100vh);
       opacity: 0;
@@ -43,7 +43,7 @@ export const Body = styled.div`
   background-color: #fff;
 
   border: none;
-  border-radius: 1.5em;
+  border-radius: .2em;
   box-shadow: 2px 2px 5px #00000050;
 
   @media screen and (max-width:769px) {

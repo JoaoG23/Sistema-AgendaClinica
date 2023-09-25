@@ -1,6 +1,7 @@
 import {
   BsEyeFill,
   BsFillPersonFill,
+  BsFillTrash2Fill,
   BsFillTrashFill,
   BsPencilFill,
 } from "react-icons/bs";
@@ -14,6 +15,7 @@ import { Button } from "../../../../../../Components/Buttons/Button";
 import { Badge } from "../../../../../../Components/Badges/Badge";
 
 import { ColaboradorVisualizado } from "../../../../../../types/colaborador/colaboradorVisualizado";
+import { MdModeEdit } from "react-icons/md";
 
 type Props = {
   colaborador?: ColaboradorVisualizado;
@@ -59,13 +61,13 @@ export const ListaColaboradores: React.FC<Props> = ({ colaborador }) => {
             <BsEyeFill size={18} />
           </Button>
           <Button padrao onClick={() => navigate(`editar/${colaborador?.id!}`)}>
-            <BsPencilFill size={18} />
+            <MdModeEdit size={18} />
           </Button>
           <Button
             padrao
             onClick={() => navigate(`deletar/${colaborador?.id!}`)}
           >
-            <BsFillTrashFill size={18} />
+            <BsFillTrash2Fill size={18} />
           </Button>
         </Colaboradores.ContainerButton>
       </Colaboradores.Container>

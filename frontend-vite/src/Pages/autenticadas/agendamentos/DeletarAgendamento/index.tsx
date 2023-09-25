@@ -3,15 +3,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 
+import { deletarAgendamentoPorId } from "./api";
+
 import { navegarAtePaginaDepoisTempo } from "../../../../utils/navegarAtePaginaDepoisTempo/navegarAtePaginaDepoisTempo";
 
 import { ModalCarregando } from "../../../../Components/Modais/ModalCarregando";
 import { DeletarModal } from "../../../../Components/Modais/DeletarModal";
-
-import { deletarColaboradorPorId } from "./api";
 import { ModalSucesso } from "../../../../Components/Modais/ModalSucesso";
 
-export const DeletarColaborador: React.FC = () => {
+export const DeletarAgendamento: React.FC = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -19,16 +19,16 @@ export const DeletarColaborador: React.FC = () => {
 
   const { id } = useParams();
   const { mutate, isLoading, isSuccess } = useMutation(
-    async () => await deletarColaboradorPorId(id!),
+    async () => await deletarAgendamentoPorId(id!),
     {
       onError: (error: any) => {
-        toast.error(`Ops! Houve um error: ${error.response.data}`);
+        toast.error(`Ops!: ${error.response.data}`);
       },
       onSuccess: () => {
-        queryClient.invalidateQueries("listar-um-colaborador");
-        queryClient.invalidateQueries("listar-colaborador-por-pagina");
+        queryClient.invalidateQueries("listar-um-agendamentos");
+        queryClient.invalidateQueries("listar-agendamentos-por-pagina");
         setModalPrincipal(false);
-        navegarAtePaginaDepoisTempo(navigate, -1);
+        navegarAtePaginaDepoisTempo(navigate, "/agendamentos");
       },
     }
   );
@@ -39,7 +39,7 @@ export const DeletarColaborador: React.FC = () => {
       {modalPrincipal && (
         <DeletarModal
           confirmar={async () => await mutate()}
-          negar={() => navigate(-1)}
+          negar={() => navigate("/agendamentos")}
           carregamento={isLoading}
         />
       )}

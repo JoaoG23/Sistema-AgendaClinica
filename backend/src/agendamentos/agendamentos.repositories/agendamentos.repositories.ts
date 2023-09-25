@@ -6,6 +6,7 @@ import { calcularQuantidadePaginas } from 'src/utils/paginacao/calcularQuantidad
 import { AgendamentosRepositoriesInterface } from '../interfaces/AgendamentosRepositoriesInterface';
 import { AgendamentoCriadoDto } from '../agendamentos.dto/AgendamentoCriadoDto';
 import { AgendamentoPesquisadoDto } from '../agendamentos.dto/AgendamentoPesquisadoDto';
+import { AgendamentoFiltrado } from '../types/AgendamentoFiltrado';
 
 @Injectable()
 export class AgendamentosRepositories
@@ -22,6 +23,8 @@ export class AgendamentosRepositories
       isServicoConcluido: true,
       observacao: true,
       servicos_estabelecimento_agendamentos: true,
+      clientesId: true,
+      colaboradoresId: true,
       colaboradores: {
         select: {
           nome_completo: true,
@@ -66,6 +69,23 @@ export class AgendamentosRepositories
     return await this.prismaService.agendamentos.findMany({
       select: this.retornarCamposClienteEColaborador(),
     });
+  }
+
+  async buscarAgendamentosPorFiltro(filtros: AgendamentoFiltrado) {
+    const { clientesId, colaboradoresId, dataHoraInicio, dataHoraFim } =
+      filtros;
+    const where = {
+      clientesId,
+      colaboradoresId,
+      dataHoraInicio: {
+        gte: new Date(dataHoraInicio),
+      },
+      dataHoraFim: {
+        lte: new Date(dataHoraFim),
+      },
+    };
+
+    return await this.prismaService.agendamentos.findMany({ where });
   }
 
   async pesquisarTodosPorCriteriosEPagincao(
