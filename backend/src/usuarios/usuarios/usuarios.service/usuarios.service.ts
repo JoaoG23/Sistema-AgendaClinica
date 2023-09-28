@@ -47,7 +47,14 @@ export class UsuariosService {
     await this.validarSeExisteLogin(login);
     await this.validarSeExisteEmail(email);
     await this.validarSeExisteTelefone(telefone);
-    return await this.usuariosRepositories.salvar(usuario);
+    return await this.usuariosRepositories.salvar({
+      ...usuario,
+      isAtivado: false,
+    });
+    // 1.Retorna o seu usuário será cadastrado apos email
+    // 2. Criar token
+    // 3. Enviar Token via email para usuário ou whatapp
+    // 4. Abrir tela de validação e ativacao de token
   }
 
   async deletarUmPorId(id: string) {

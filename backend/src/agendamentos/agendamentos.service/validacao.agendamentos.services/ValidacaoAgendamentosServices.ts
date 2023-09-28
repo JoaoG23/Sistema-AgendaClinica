@@ -40,10 +40,6 @@ export class ValidacaoAgendamentosService
       await this.agendamentosRepositories.buscarAgendamentosPorFiltro(
         agendamento,
       );
-    console.log(
-      '🚀 ~ file: ValidacaoAgendamentosServices.ts:40 ~ existeAgendamentos:',
-      agendamentos,
-    );
     const isExisteAgendamentos = agendamentos?.length;
     if (isExisteAgendamentos) {
       throw new NotFoundException(

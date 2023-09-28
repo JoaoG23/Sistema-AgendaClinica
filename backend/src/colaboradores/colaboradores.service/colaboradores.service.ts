@@ -1,11 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { UsuariosRepositoriesInterface } from 'src/usuarios/interfaces/UsuariosRepositoriesInterface';
 import { ColaboradorUsuarioDto } from '../colaboradores.dto/ColaboradorUsuarioDto';
 import { ColaboradorCriadoDto } from '../colaboradores.dto/ColaboradorCriadoDto';
 import { ColaboradorPesquisadoDto } from '../colaboradores.dto/ColaboradorPesquisadoDto';
 
 import { ColaboradoresRepositoriesInterface } from '../interfaces/ColaboradoresRepositoriesInterface';
+import { UsuariosRepositoriesInterface } from 'src/usuarios/usuarios/interfaces/UsuariosRepositoriesInterface';
 
 @Injectable()
 export class ColaboradoresService {
@@ -27,7 +27,31 @@ export class ColaboradoresService {
     }
   }
 
-  async criarUm(colaborador: ColaboradorCriadoDto) {
+  async criarUm(colaboradorUsuario: ColaboradorUsuarioDto) {
+    const {
+      nome_completo,
+      isAtivado,
+      telefone,
+      login,
+      email,
+      especialidade_colaboradorId,
+    } = colaboradorUsuario;
+
+    const usuario = {
+      telefone,
+      login,
+      email,
+      isAtivado,
+    };
+
+    const usuariosCriado = await this.usuariosRepositories.salvar(usuario);
+    const colaborador = {
+      nome_completo,
+      isAtivado,
+      especialidade_colaboradorId,
+      usuariosId: usuario?.id,
+    };
+
     await this.validarNaoExisteUsuariosIdEmUsuario(colaborador?.usuariosId);
     return await this.colaboradoresRepositories.salvar(colaborador);
   }

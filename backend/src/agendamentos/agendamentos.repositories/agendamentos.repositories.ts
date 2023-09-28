@@ -74,15 +74,24 @@ export class AgendamentosRepositories
   async buscarAgendamentosPorFiltro(filtros: AgendamentoFiltrado) {
     const { clientesId, colaboradoresId, dataHoraInicio, dataHoraFim } =
       filtros;
+
     const where = {
       clientesId,
       colaboradoresId,
-      dataHoraInicio: {
-        gte: new Date(dataHoraInicio),
-      },
-      dataHoraFim: {
-        lte: new Date(dataHoraFim),
-      },
+      OR: [
+        {
+          dataHoraInicio: {
+            gte: new Date(dataHoraInicio),
+            lte: new Date(dataHoraFim),
+          },
+        },
+        {
+          dataHoraFim: {
+            gte: new Date(dataHoraInicio),
+            lte: new Date(dataHoraFim),
+          },
+        },
+      ],
     };
 
     return await this.prismaService.agendamentos.findMany({ where });

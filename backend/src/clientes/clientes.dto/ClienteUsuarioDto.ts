@@ -18,11 +18,12 @@ export class ClienteUsuarioDto {
   })
   telefone: string;
 
-  @IsNotEmpty({
-    message: 'O Campo usuariosId não existe',
-  })
+  // @IsNotEmpty({
+  //   message: 'O Campo usuariosId não existe',
+  // })
   usuariosId: string;
 
   email?: string;
+  senha?: string;
   perfil_usuariosId?: string;
 }

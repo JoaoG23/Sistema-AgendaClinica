@@ -8,13 +8,13 @@ import { AutenticadasRotas } from "./Routers/AutenticadasRotas";
 
 import "react-toastify/dist/ReactToastify.css";
 
-import contasPessoas from "./assets/contas.svg";
+// import contasPessoas from "./assets/contas.svg";
 
 import InicialRouters from "./Routers/InicialRouters";
 
 import GlobalStyle from "./themes/global";
 
-import { Body, IconFundo1Flutuante, BotaoPorCima } from "./styles";
+import { Body, BotaoPorCima } from "./styles";
 
 import { Sidebar } from "./Components/Navs/Sidebar";
 import { Header } from "./Components/Navs/Header";

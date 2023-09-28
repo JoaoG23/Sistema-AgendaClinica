@@ -11,17 +11,29 @@ datasource db {
 }
 
 model usuarios {
-  id                String           @id @default(uuid())
-  login             String           @unique @db.VarChar(255)
-  senha             String           @unique @db.Text
-  telefone          String           @unique @db.VarChar(25)
-  email             String?          @unique @db.VarChar(25)
-  perfil_usuarios   perfil_usuarios? @relation(fields: [perfil_usuariosId], references: [id])
-  perfil_usuariosId String?
-  createdAt         DateTime?        @default(now())
-  updatedAt         DateTime?        @updatedAt
-  colaboradores     colaboradores[]
-  clientes          clientes[]
+  id                    String                  @id @default(uuid())
+  login                 String                  @unique @db.VarChar(255)
+  senha                 String                  @unique @db.Text
+  telefone              String                  @unique @db.VarChar(25)
+  email                 String?                 @unique @db.VarChar(25)
+  isAtivado             Boolean                 @default(false) @db.Boolean
+  perfil_usuarios       perfil_usuarios?        @relation(fields: [perfil_usuariosId], references: [id])
+  perfil_usuariosId     String?
+  createdAt             DateTime?               @default(now())
+  updatedAt             DateTime?               @updatedAt
+  colaboradores         colaboradores[]
+  clientes              clientes[]
+  gestao_token_usuarios gestao_token_usuarios[]
+}
+
+model gestao_token_usuarios {
+  id             Int       @id @default(autoincrement())
+  token          String    @db.VarChar(10)
+  validade_token DateTime? @default(now())
+  createdAt      DateTime? @default(now())
+  updatedAt      DateTime? @updatedAt
+  usuarios       usuarios? @relation(fields: [usuariosId], references: [id])
+  usuariosId     String?
 }
 
 model perfil_usuarios {

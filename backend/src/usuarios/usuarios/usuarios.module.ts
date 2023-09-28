@@ -7,6 +7,7 @@ import { PrismaService } from 'src/database/prisma.service';
 
 import { UsuariosRepositories } from './usuarios.repositories/usuarios.repositories';
 import { UsuariosRepositoriesInterface } from './interfaces/UsuariosRepositoriesInterface';
+
 import { CriptografiaBcrypt } from 'src/utils/criptografias/CriptografiaBcrypt/CriptografiaBcrypt';
 import { CriptografiaBcryptInterface } from 'src/utils/criptografias/CriptografiaBcrypt/interfaces/CriptografiaBcryptInterface';
 

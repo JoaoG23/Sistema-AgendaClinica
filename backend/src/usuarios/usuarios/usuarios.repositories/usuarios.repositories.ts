@@ -8,6 +8,7 @@ import { UsuariosRepositoriesInterface } from '../interfaces/UsuariosRepositorie
 
 import { calcularQuantidadePaginas } from 'src/utils/paginacao/calcularQuantidadePaginas/calcularQuantidadePaginas';
 import { CriptografiaBcryptInterface } from 'src/utils/criptografias/CriptografiaBcrypt/interfaces/CriptografiaBcryptInterface';
+
 @Injectable()
 export class UsuariosRepositories implements UsuariosRepositoriesInterface {
   constructor(

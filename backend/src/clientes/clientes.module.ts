@@ -8,10 +8,11 @@ import { PrismaService } from 'src/database/prisma.service';
 import { ClientesRepositories } from './clientes.repositories/clientes.repositories';
 import { ClientesRepositoriesInterface } from './interfaces/ClientesRepositoriesInterface';
 
-import { UsuariosRepositoriesInterface } from 'src/usuarios/interfaces/UsuariosRepositoriesInterface';
-import { UsuariosRepositories } from 'src/usuarios/usuarios.repositories/usuarios.repositories';
 import { CriptografiaBcrypt } from 'src/utils/criptografias/CriptografiaBcrypt/CriptografiaBcrypt';
 import { CriptografiaBcryptInterface } from 'src/utils/criptografias/CriptografiaBcrypt/interfaces/CriptografiaBcryptInterface';
+
+import { UsuariosRepositories } from 'src/usuarios/usuarios/usuarios.repositories/usuarios.repositories';
+import { UsuariosRepositoriesInterface } from 'src/usuarios/usuarios/interfaces/UsuariosRepositoriesInterface';
 
 @Module({
   controllers: [ClientesController],

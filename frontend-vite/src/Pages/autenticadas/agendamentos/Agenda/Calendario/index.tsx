@@ -99,7 +99,7 @@ export const Calendario = () => {
       <DragAndDropCalendar
         defaultDate={moment().toDate()}
         selectable
-        defaultView="month"
+        defaultView="week"
         onSelectEvent={eventoAoClicarNaTarefaCalendario}
         messages={messages}
         localizer={localizer}
@@ -110,7 +110,7 @@ export const Calendario = () => {
         onEventResize={aoMovimentarEvento}
         events={agendamentos}
         style={{ height: 600 }}
-        step={6}
+        step={10}
       />
       {isCarregangdoTodosEventos && <ModalCarregando />}
     </div>

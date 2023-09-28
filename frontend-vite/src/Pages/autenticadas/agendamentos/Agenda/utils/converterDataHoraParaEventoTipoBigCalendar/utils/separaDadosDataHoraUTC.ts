@@ -1,4 +1,5 @@
-export function separaDadosDataHora(dataHora: Date) {
+export function separaDadosDataHoraUTC(dataHora: Date) {
+
   const ano = dataHora.getUTCFullYear();
   const mes = dataHora.getUTCMonth();
   const dia = dataHora.getUTCDate();

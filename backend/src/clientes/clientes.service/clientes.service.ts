@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { UsuariosRepositoriesInterface } from 'src/usuarios/interfaces/UsuariosRepositoriesInterface';
 import { ClientesRepositoriesInterface } from '../interfaces/ClientesRepositoriesInterface';
+import { UsuariosRepositoriesInterface } from 'src/usuarios/usuarios/interfaces/UsuariosRepositoriesInterface';
 
 import { ClienteCriadoDto } from '../clientes.dto/ClienteCriadoDto';
 import { ClienteUsuarioDto } from '../clientes.dto/ClienteUsuarioDto';
@@ -21,8 +21,29 @@ export class ClientesService {
     }
   }
 
-  async criarUm(cliente: ClienteCriadoDto) {
-    return await this.clientesRepositories.salvar(cliente);
+  async criarUm(clienteEUsuario: ClienteUsuarioDto) {
+    const { nome_completo, isAtivado, telefone, login, email, senha } =
+      clienteEUsuario;
+
+    const cliente = {
+      nome_completo,
+      isAtivado,
+    };
+
+    const usuario = {
+      telefone,
+      login,
+      email,
+      senha,
+      isAtivado: false,
+    };
+
+    const usuariosCriado = await this.usuariosRepositories.salvar(usuario);
+    const clienteAcrescidoUsuariosId = {
+      ...cliente,
+      usuariosId: usuariosCriado?.id,
+    };
+    return await this.clientesRepositories.salvar(clienteAcrescidoUsuariosId);
   }
 
   async deletarUmPorId(id: string) {

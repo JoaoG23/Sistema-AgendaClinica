@@ -1,6 +1,6 @@
 import { Agendamento } from "../../../../../../types/agendamento/Agendamento";
 
-import { separaDadosDataHora } from "./utils/separaDadosDataHora";
+import { separaDadosDataHoraUTC } from "./utils/separaDadosDataHoraUTC";
 
 /*
 
@@ -24,7 +24,7 @@ export function converterDataHoraParaEventoTipoBigCalendar(
     ano: inicialAno,
     hora: inicialHora,
     minuto: inicialMinuto,
-  } = separaDadosDataHora(inicio);
+  } = separaDadosDataHoraUTC(inicio);
 
   const {
     dia: finalDia,
@@ -32,7 +32,7 @@ export function converterDataHoraParaEventoTipoBigCalendar(
     ano: finalAno,
     hora: finalHora,
     minuto: finalMinuto,
-  } = separaDadosDataHora(fim);
+  } = separaDadosDataHoraUTC(fim);
 
   const horarioInicial = new Date(
     inicialAno,
@@ -53,9 +53,8 @@ export function converterDataHoraParaEventoTipoBigCalendar(
 
   const eventoConvetido = {
     id: evento?.id!,
-    title: `Cliente: ${evento?.clientes?.nome_completo || ""} - Prestador: ${
-      evento?.colaboradores?.nome_completo || ""
-    }`,
+    title: `Cliente: ${evento?.clientes?.nome_completo || ""} - Prestador: ${evento?.colaboradores?.nome_completo || ""
+      }`,
     start: horarioInicial,
     end: horarioFinal,
   };

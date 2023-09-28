@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class CriarUsuariosDto {
+export class CriarTokenDto {
   @IsNotEmpty({
     message: 'O Campo login não existe',
   })
@@ -17,6 +17,7 @@ export class CriarUsuariosDto {
   telefone: string;
   email?: string;
   clientesId?: string;
+  isAtivado: boolean;
   colaboradoresId?: string;
   perfil_usuariosId?: string;
 }

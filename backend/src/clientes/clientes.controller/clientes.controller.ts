@@ -12,6 +12,7 @@ import { ClientesService } from '../clientes.service/clientes.service';
 import { ClienteCriadoDto } from '../clientes.dto/ClienteCriadoDto';
 import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
 import { ClienteUsuarioDto } from '../clientes.dto/ClienteUsuarioDto';
+import { CriarUsuariosDto } from 'src/usuarios/usuarios/usuarios.dto/CriarUsuarioDto';
 
 @Controller('clientes')
 export class ClientesController {
@@ -66,8 +67,8 @@ export class ClientesController {
   }
 
   @Post()
-  async criarUm(@Body() cliente: ClienteCriadoDto) {
-    return await this.clientesService.criarUm(cliente);
+  async criarUm(@Body() clienteUsuario: ClienteUsuarioDto) {
+    return await this.clientesService.criarUm(clienteUsuario);
   }
 
   @Delete(':id')
