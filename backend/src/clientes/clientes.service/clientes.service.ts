@@ -1,17 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { ClientesRepositoriesInterface } from '../interfaces/ClientesRepositoriesInterface';
-import { UsuariosRepositoriesInterface } from 'src/usuarios/usuarios/interfaces/UsuariosRepositoriesInterface';
 
 import { ClienteCriadoDto } from '../clientes.dto/ClienteCriadoDto';
-import { ClienteUsuarioDto } from '../clientes.dto/ClienteUsuarioDto';
 import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
+import { ClienteUsuarioCriadoDto } from '../clientes.dto/ClienteUsuarioCriadoDto';
+import { ClienteUsuarioEditadoDto } from '../clientes.dto/ClienteUsuarioEditadoDto';
+
+import { UsuariosServiceInterface } from 'src/usuarios/usuarios/interfaces/UsuarioServiceInterface';
 
 @Injectable()
 export class ClientesService {
   constructor(
     private readonly clientesRepositories: ClientesRepositoriesInterface,
-    private readonly usuariosRepositories: UsuariosRepositoriesInterface,
+    private readonly usuariosServices: UsuariosServiceInterface,
   ) {}
 
   async validarNaoExisteId(id: string) {
@@ -21,9 +23,9 @@ export class ClientesService {
     }
   }
 
-  async criarUm(clienteEUsuario: ClienteUsuarioDto) {
+  async criarUm(clienteEUsuarioCriado: ClienteUsuarioCriadoDto) {
     const { nome_completo, isAtivado, telefone, login, email, senha } =
-      clienteEUsuario;
+      clienteEUsuarioCriado;
 
     const cliente = {
       nome_completo,
@@ -38,7 +40,7 @@ export class ClientesService {
       isAtivado: false,
     };
 
-    const usuariosCriado = await this.usuariosRepositories.salvar(usuario);
+    const usuariosCriado = await this.usuariosServices.criarUm(usuario);
     const clienteAcrescidoUsuariosId = {
       ...cliente,
       usuariosId: usuariosCriado?.id,
@@ -50,7 +52,7 @@ export class ClientesService {
     await this.validarNaoExisteId(id);
     const deletado = await this.buscarUmPorId(id);
     await this.clientesRepositories.deletarUmPorId(id);
-    return await this.usuariosRepositories.deletarUmPorId(deletado.usuarios.id);
+    return await this.usuariosServices.deletarUmPorId(deletado.usuarios.id);
   }
 
   async editarUmPorId(id: string, cliente: ClienteCriadoDto) {
@@ -60,10 +62,10 @@ export class ClientesService {
 
   async editarUsuarioEClienteUmPorIdCliente(
     idCliente: string,
-    clienteEUsuario: ClienteUsuarioDto,
+    clienteEUsuarioEditado: ClienteUsuarioEditadoDto,
   ) {
     const { nome_completo, isAtivado, telefone, login, email, usuariosId } =
-      clienteEUsuario;
+      clienteEUsuarioEditado;
 
     const cliente = {
       nome_completo,
@@ -79,7 +81,7 @@ export class ClientesService {
 
     await this.validarNaoExisteId(idCliente);
 
-    await this.usuariosRepositories.editarUmPorId(usuariosId!, usuario);
+    await this.usuariosServices.editarUmPorId(usuariosId!, usuario);
     return await this.clientesRepositories.editarUmPorId(idCliente, cliente);
   }
 

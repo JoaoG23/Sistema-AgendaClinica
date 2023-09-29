@@ -6,7 +6,8 @@ export type Agendamento = {
   isServicoConcluido?: boolean;
   observacao?: string;
   servicos_estabelecimento_agendamentos: string[];
-  
+  clientesId?: string;
+  colaboradoresId?: string;
   colaboradores?: {
     nome_completo?: string;
   };

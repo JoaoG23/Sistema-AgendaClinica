@@ -1,17 +1,19 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { ColaboradorUsuarioDto } from '../colaboradores.dto/ColaboradorUsuarioDto';
+import { ColaboradorUsuarioCriadoDto } from '../colaboradores.dto/ColaboradorUsuarioCriadoDto';
 import { ColaboradorCriadoDto } from '../colaboradores.dto/ColaboradorCriadoDto';
 import { ColaboradorPesquisadoDto } from '../colaboradores.dto/ColaboradorPesquisadoDto';
 
 import { ColaboradoresRepositoriesInterface } from '../interfaces/ColaboradoresRepositoriesInterface';
-import { UsuariosRepositoriesInterface } from 'src/usuarios/usuarios/interfaces/UsuariosRepositoriesInterface';
+import { ColaboradorUsuarioEditadoDto } from '../colaboradores.dto/ColaboradorUsuarioEditadoDto';
+
+import { UsuariosServiceInterface } from 'src/usuarios/usuarios/interfaces/UsuarioServiceInterface';
 
 @Injectable()
 export class ColaboradoresService {
   constructor(
     private readonly colaboradoresRepositories: ColaboradoresRepositoriesInterface,
-    private readonly usuariosRepositories: UsuariosRepositoriesInterface,
+    private readonly usuariosServices: UsuariosServiceInterface,
   ) {}
 
   async validarNaoExisteId(id: string) {
@@ -20,57 +22,54 @@ export class ColaboradoresService {
       throw new NotFoundException('Esse id não existe no sistema');
     }
   }
-  async validarNaoExisteUsuariosIdEmUsuario(usuariosId: string) {
-    const existeId = await this.usuariosRepositories.buscarUmPorId(usuariosId);
-    if (!existeId) {
-      throw new NotFoundException('Esse id usuario não existe no sistema');
-    }
-  }
 
-  async criarUm(colaboradorUsuario: ColaboradorUsuarioDto) {
+  async criarUm(colaboradorUsuarioCriado: ColaboradorUsuarioCriadoDto) {
     const {
       nome_completo,
       isAtivado,
       telefone,
       login,
       email,
+      senha,
       especialidade_colaboradorId,
-    } = colaboradorUsuario;
+    } = colaboradorUsuarioCriado;
 
     const usuario = {
       telefone,
       login,
       email,
-      isAtivado,
+      isAtivado: false,
+      senha,
     };
 
-    const usuariosCriado = await this.usuariosRepositories.salvar(usuario);
-    const colaborador = {
+    const usuariosCriado = await this.usuariosServices.criarUm(usuario);
+    const colaboradorAcrescidoUsuariosId = {
       nome_completo,
       isAtivado,
       especialidade_colaboradorId,
-      usuariosId: usuario?.id,
+      usuariosId: usuariosCriado?.id,
     };
 
-    await this.validarNaoExisteUsuariosIdEmUsuario(colaborador?.usuariosId);
-    return await this.colaboradoresRepositories.salvar(colaborador);
+    return await this.colaboradoresRepositories.salvar(
+      colaboradorAcrescidoUsuariosId,
+    );
   }
 
   async deletarUmPorId(id: string) {
     await this.validarNaoExisteId(id);
     const deletado = await this.buscarUmPorId(id);
     await this.colaboradoresRepositories.deletarUmPorId(id);
-    return await this.usuariosRepositories.deletarUmPorId(deletado.usuarios.id);
+    return await this.usuariosServices.deletarUmPorId(deletado.usuarios.id);
   }
 
-  async editarUmPorId(id: string, Colaborador: ColaboradorCriadoDto) {
+  async editarUmPorId(id: string, colaborador: ColaboradorCriadoDto) {
     await this.validarNaoExisteId(id);
-    return await this.colaboradoresRepositories.editarUmPorId(id, Colaborador);
+    return await this.colaboradoresRepositories.editarUmPorId(id, colaborador);
   }
 
   async editarUsuarioEColaboradorUmPorIdColaborador(
     idColaborador: string,
-    ColaboradorEUsuario: ColaboradorUsuarioDto,
+    ColaboradorEUsuarioEditado: ColaboradorUsuarioEditadoDto,
   ) {
     const {
       nome_completo,
@@ -80,7 +79,7 @@ export class ColaboradoresService {
       email,
       usuariosId,
       especialidade_colaboradorId,
-    } = ColaboradorEUsuario;
+    } = ColaboradorEUsuarioEditado;
 
     const colaborador = {
       nome_completo,
@@ -95,7 +94,7 @@ export class ColaboradoresService {
       email,
     };
 
-    await this.usuariosRepositories.editarUmPorId(usuariosId!, usuario);
+    await this.usuariosServices.editarUmPorId(usuariosId!, usuario);
     return await this.colaboradoresRepositories.editarUmPorId(
       idColaborador,
       colaborador,

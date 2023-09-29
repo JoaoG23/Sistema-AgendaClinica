@@ -10,4 +10,6 @@ export class AgendamentoAtualizadoHorariosDto {
     message: 'O Campo dataHoraFim não existe',
   })
   dataHoraFim: Date;
+  colaboradoresId: string;
+  clientesId: string;
 }

@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
+
 import { AgendamentoCriadoDto } from '../agendamentos.dto/AgendamentoCriadoDto';
 import { AgendamentoPesquisadoDto } from '../agendamentos.dto/AgendamentoPesquisadoDto';
+
 import { AgendamentoAtualizadoHorariosDto } from '../agendamentos.dto/AgendamentoAtualizadoHorariosDto';
+
 import { AgendamentoFiltrado } from '../types/AgendamentoFiltrado';
 
 @Injectable()

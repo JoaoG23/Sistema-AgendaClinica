@@ -94,7 +94,11 @@ export class AgendamentosRepositories
       ],
     };
 
-    return await this.prismaService.agendamentos.findMany({ where });
+    const agendamento = await this.prismaService.agendamentos.findMany({
+      where,
+    });
+
+    return agendamento;
   }
 
   async pesquisarTodosPorCriteriosEPagincao(

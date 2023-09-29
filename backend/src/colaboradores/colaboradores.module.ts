@@ -13,6 +13,8 @@ import { CriptografiaBcryptInterface } from 'src/utils/criptografias/Criptografi
 
 import { UsuariosRepositoriesInterface } from 'src/usuarios/usuarios/interfaces/UsuariosRepositoriesInterface';
 import { UsuariosRepositories } from 'src/usuarios/usuarios/usuarios.repositories/usuarios.repositories';
+import { UsuariosServiceInterface } from 'src/usuarios/usuarios/interfaces/UsuarioServiceInterface';
+import { UsuariosService } from 'src/usuarios/usuarios/usuarios.service/usuarios.service';
 
 @Module({
   controllers: [ColaboradoresController],
@@ -26,6 +28,10 @@ import { UsuariosRepositories } from 'src/usuarios/usuarios/usuarios.repositorie
     {
       provide: UsuariosRepositoriesInterface,
       useClass: UsuariosRepositories,
+    },
+    {
+      provide: UsuariosServiceInterface,
+      useClass: UsuariosService,
     },
     {
       provide: CriptografiaBcryptInterface,

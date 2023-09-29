@@ -8,10 +8,13 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+
 import { ColaboradorCriadoDto } from '../colaboradores.dto/ColaboradorCriadoDto';
-import { ColaboradorUsuarioDto } from '../colaboradores.dto/ColaboradorUsuarioDto';
+import { ColaboradorUsuarioCriadoDto } from '../colaboradores.dto/ColaboradorUsuarioCriadoDto';
 import { ColaboradorPesquisadoDto } from '../colaboradores.dto/ColaboradorPesquisadoDto';
+
 import { ColaboradoresService } from '../colaboradores.service/colaboradores.service';
+import { ColaboradorUsuarioEditadoDto } from '../colaboradores.dto/ColaboradorUsuarioEditadoDto';
 
 @Controller('colaboradores')
 export class ColaboradoresController {
@@ -57,17 +60,17 @@ export class ColaboradoresController {
   @Put('usuario/:id')
   async editarUsuarioEColaboradorUmPorIdColaborador(
     @Param('id') id: string,
-    @Body() usuarioColaborador: ColaboradorUsuarioDto,
+    @Body() usuarioColaboradorEditado: ColaboradorUsuarioEditadoDto,
   ) {
     return await this.colaboradoresService.editarUsuarioEColaboradorUmPorIdColaborador(
       id,
-      usuarioColaborador,
+      usuarioColaboradorEditado,
     );
   }
 
   @Post()
-  async criarUm(@Body() Colaborador: ColaboradorCriadoDto) {
-    return await this.colaboradoresService.criarUm(Colaborador);
+  async criarUm(@Body() colaboradorUsuarioCriado: ColaboradorUsuarioCriadoDto) {
+    return await this.colaboradoresService.criarUm(colaboradorUsuarioCriado);
   }
 
   @Delete(':id')

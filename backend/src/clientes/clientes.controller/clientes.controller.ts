@@ -8,11 +8,14 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+
 import { ClientesService } from '../clientes.service/clientes.service';
+
 import { ClienteCriadoDto } from '../clientes.dto/ClienteCriadoDto';
 import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
 import { ClienteUsuarioDto } from '../clientes.dto/ClienteUsuarioDto';
-import { CriarUsuariosDto } from 'src/usuarios/usuarios/usuarios.dto/CriarUsuarioDto';
+import { ClienteUsuarioCriadoDto } from '../clientes.dto/ClienteUsuarioCriadoDto';
+import { ClienteUsuarioEditadoDto } from '../clientes.dto/ClienteUsuarioEditadoDto';
 
 @Controller('clientes')
 export class ClientesController {
@@ -58,7 +61,7 @@ export class ClientesController {
   @Put('usuario/:id')
   async editarUsuarioEClienteUmPorIdCliente(
     @Param('id') id: string,
-    @Body() usuarioCliente: ClienteUsuarioDto,
+    @Body() usuarioCliente: ClienteUsuarioEditadoDto,
   ) {
     return await this.clientesService.editarUsuarioEClienteUmPorIdCliente(
       id,
@@ -67,7 +70,7 @@ export class ClientesController {
   }
 
   @Post()
-  async criarUm(@Body() clienteUsuario: ClienteUsuarioDto) {
+  async criarUm(@Body() clienteUsuario: ClienteUsuarioCriadoDto) {
     return await this.clientesService.criarUm(clienteUsuario);
   }
 

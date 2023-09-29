@@ -8,8 +8,11 @@ import { CriarUsuariosDto } from '../usuarios.dto/CriarUsuarioDto';
 
 import { UsuariosRepositoriesInterface } from '../interfaces/UsuariosRepositoriesInterface';
 
+import { UsuariosServiceInterface } from '../interfaces/UsuarioServiceInterface';
+import { EditarUsuariosDto } from '../usuarios.dto/EditarUsuarioDto';
+
 @Injectable()
-export class UsuariosService {
+export class UsuariosService implements UsuariosServiceInterface {
   constructor(
     private readonly usuariosRepositories: UsuariosRepositoriesInterface,
   ) {}
@@ -55,6 +58,14 @@ export class UsuariosService {
     // 2. Criar token
     // 3. Enviar Token via email para usuário ou whatapp
     // 4. Abrir tela de validação e ativacao de token
+  }
+  async editarUmPorId(id: string, usuario: EditarUsuariosDto) {
+    const { login, email, telefone } = usuario;
+
+    // await this.validarSeExisteLogin(login);
+    // await this.validarSeExisteEmail(email);
+    // await this.validarSeExisteTelefone(telefone);
+    return await this.usuariosRepositories.editarUmPorId(id, usuario);
   }
 
   async deletarUmPorId(id: string) {

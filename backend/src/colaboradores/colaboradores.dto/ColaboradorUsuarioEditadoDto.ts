@@ -1,6 +1,6 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class ColaboradorUsuarioDto {
+export class ColaboradorUsuarioEditadoDto {
   @IsNotEmpty({
     message: 'O Campo nome_completo não existe',
   })
@@ -23,6 +23,8 @@ export class ColaboradorUsuarioDto {
     message: 'O Campo usuariosId não existe',
   })
   usuariosId: string;
+
+  senha?: string;
 
   email?: string;
   perfil_usuariosId?: string;

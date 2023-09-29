@@ -11,8 +11,10 @@ import { ClientesRepositoriesInterface } from './interfaces/ClientesRepositories
 import { CriptografiaBcrypt } from 'src/utils/criptografias/CriptografiaBcrypt/CriptografiaBcrypt';
 import { CriptografiaBcryptInterface } from 'src/utils/criptografias/CriptografiaBcrypt/interfaces/CriptografiaBcryptInterface';
 
-import { UsuariosRepositories } from 'src/usuarios/usuarios/usuarios.repositories/usuarios.repositories';
+import { UsuariosServiceInterface } from 'src/usuarios/usuarios/interfaces/UsuarioServiceInterface';
+import { UsuariosService } from 'src/usuarios/usuarios/usuarios.service/usuarios.service';
 import { UsuariosRepositoriesInterface } from 'src/usuarios/usuarios/interfaces/UsuariosRepositoriesInterface';
+import { UsuariosRepositories } from 'src/usuarios/usuarios/usuarios.repositories/usuarios.repositories';
 
 @Module({
   controllers: [ClientesController],
@@ -22,6 +24,10 @@ import { UsuariosRepositoriesInterface } from 'src/usuarios/usuarios/interfaces/
     {
       provide: ClientesRepositoriesInterface,
       useClass: ClientesRepositories,
+    },
+    {
+      provide: UsuariosServiceInterface,
+      useClass: UsuariosService,
     },
     {
       provide: UsuariosRepositoriesInterface,

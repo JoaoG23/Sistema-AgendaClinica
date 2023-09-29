@@ -41,6 +41,9 @@ export class AgendamentosService {
       dataHoraInicio,
       dataHoraFim,
     );
+    await this.validacaoAgendamentosServices.verificarSeExisteAgendamentoNesteHorario(
+      agendamento,
+    );
 
     return await this.agendamentosRepositories.editarUmPorId(id, agendamento);
   }

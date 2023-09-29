@@ -24,6 +24,7 @@ import { ModalCarregando } from "../../../../../Components/Modais/ModalCarregand
 import { SpinnerCarregamento } from "../../../../../Components/spinners/SpinnerCarregamento";
 
 import { EventoBigCalendar } from "../../../../../types/agendamento/EventoBigCalendar";
+import { ErrorResposta } from "../../../../../types/Respostas/ErrorResposta/ErroResposta";
 
 const localizer = momentLocalizer(moment);
 const DragAndDropCalendar = withDragAndDrop(Calendar);
@@ -53,8 +54,8 @@ export const Calendario = () => {
       onSuccess: () => {
         toast.success(`Agendamento alterado com sucesso!`);
       },
-      onError: (error: any) => {
-        toast.error(`Ops! : ${error.response.data}`);
+      onError: (error: ErrorResposta) => {
+        toast.error(`Ops! : ${error.response?.data?.message}`);
       },
     }
   );
