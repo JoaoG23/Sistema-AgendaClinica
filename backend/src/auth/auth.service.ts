@@ -31,6 +31,11 @@ export class AuthService {
     if (!isHashBancoESenhaDigitadaCorreta) {
       throw new UnauthorizedException('Usuário ou senha estão incorretas');
     }
+    if (!usuario?.isAtivado) {
+      throw new UnauthorizedException(
+        'Usuário ainda não foi ativado! Tente ativar-lo via token enviado no e-mail',
+      );
+    }
     const payload = { sub: usuario.id, nome: usuario.nome };
     return {
       access_token: await this.jwtService.signAsync(payload),

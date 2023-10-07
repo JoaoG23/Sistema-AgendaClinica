@@ -7,6 +7,11 @@ import { TokenUsuariosService } from './token.usuarios.service/token.usuarios.se
 
 import { TokenUsuariosRepositoriesInterface } from './interfaces/TokenUsuariosRepositoriesInterface';
 import { TokenUsuariosRepositories } from './token.usuarios.repositories/token.usuarios.repositories';
+import { UsuariosRepositoriesInterface } from '../usuarios/interfaces/UsuariosRepositoriesInterface';
+import { UsuariosRepositories } from '../usuarios/usuarios.repositories/usuarios.repositories';
+
+import { CriptografiaBcryptInterface } from 'src/utils/criptografias/CriptografiaBcrypt/interfaces/CriptografiaBcryptInterface';
+import { CriptografiaBcrypt } from 'src/utils/criptografias/CriptografiaBcrypt/CriptografiaBcrypt';
 
 @Module({
   imports: [],
@@ -17,6 +22,14 @@ import { TokenUsuariosRepositories } from './token.usuarios.repositories/token.u
     {
       provide: TokenUsuariosRepositoriesInterface,
       useClass: TokenUsuariosRepositories,
+    },
+    {
+      provide: UsuariosRepositoriesInterface,
+      useClass: UsuariosRepositories,
+    },
+    {
+      provide: CriptografiaBcryptInterface,
+      useClass: CriptografiaBcrypt,
     },
   ],
 })

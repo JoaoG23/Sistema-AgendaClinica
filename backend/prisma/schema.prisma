@@ -29,6 +29,7 @@ model usuarios {
 model gestao_token_usuarios {
   id             Int       @id @default(autoincrement())
   token          String    @db.VarChar(10)
+  isAtivado      Boolean?  @default(true) @db.Boolean
   validade_token DateTime? @default(now())
   createdAt      DateTime? @default(now())
   updatedAt      DateTime? @updatedAt
@@ -37,13 +38,11 @@ model gestao_token_usuarios {
 }
 
 model perfil_usuarios {
-  id          String @id @default(uuid())
-  nome_perfil String @db.VarChar(60)
-
-  visualizar_clientes      Boolean @default(false) @db.Boolean
-  visualizar_colaboradores Boolean @default(false) @db.Boolean
-
-  usuarios usuarios[]
+  id                       String     @id @default(uuid())
+  nome_perfil              String     @db.VarChar(60)
+  visualizar_clientes      Boolean    @default(false) @db.Boolean
+  visualizar_colaboradores Boolean    @default(false) @db.Boolean
+  usuarios                 usuarios[]
 }
 
 model clientes {

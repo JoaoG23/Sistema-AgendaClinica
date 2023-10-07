@@ -13,7 +13,6 @@ import { ClientesService } from '../clientes.service/clientes.service';
 
 import { ClienteCriadoDto } from '../clientes.dto/ClienteCriadoDto';
 import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
-import { ClienteUsuarioDto } from '../clientes.dto/ClienteUsuarioDto';
 import { ClienteUsuarioCriadoDto } from '../clientes.dto/ClienteUsuarioCriadoDto';
 import { ClienteUsuarioEditadoDto } from '../clientes.dto/ClienteUsuarioEditadoDto';
 

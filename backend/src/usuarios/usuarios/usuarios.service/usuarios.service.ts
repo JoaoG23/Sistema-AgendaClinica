@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+import { uid } from 'rand-token';
 import {
   Injectable,
   ConflictException,
@@ -10,11 +12,14 @@ import { UsuariosRepositoriesInterface } from '../interfaces/UsuariosRepositorie
 
 import { UsuariosServiceInterface } from '../interfaces/UsuarioServiceInterface';
 import { EditarUsuariosDto } from '../usuarios.dto/EditarUsuarioDto';
+import { TokenUsuariosRepositoriesInterface } from 'src/usuarios/token.usuarios/interfaces/TokenUsuariosRepositoriesInterface';
+import { gerarToken } from 'src/utils/tokens/gerarToken/gerarToken';
 
 @Injectable()
 export class UsuariosService implements UsuariosServiceInterface {
   constructor(
     private readonly usuariosRepositories: UsuariosRepositoriesInterface,
+    private readonly tokenUsuarioRepositories: TokenUsuariosRepositoriesInterface,
   ) {}
 
   async validarSeExisteLogin(login: string) {
@@ -47,16 +52,30 @@ export class UsuariosService implements UsuariosServiceInterface {
   async criarUm(usuario: CriarUsuariosDto) {
     const { login, email, telefone } = usuario;
 
-    await this.validarSeExisteLogin(login);
-    await this.validarSeExisteEmail(email);
-    await this.validarSeExisteTelefone(telefone);
-    return await this.usuariosRepositories.salvar({
+    // await this.validarSeExisteLogin(login);
+    // await this.validarSeExisteEmail(email);
+    // await this.validarSeExisteTelefone(telefone);
+
+    const usuarioCriado = await this.usuariosRepositories.salvar({
       ...usuario,
       isAtivado: false,
     });
+
     // 1.Retorna o seu usuário será cadastrado apos email
+
     // 2. Criar token
+
+    const { token, validadeToken } = gerarToken();
     // 3. Enviar Token via email para usuário ou whatapp
+
+    await this.tokenUsuarioRepositories.salvar({
+      token: token,
+      validade_token: new Date(validadeToken as any),
+      usuariosId: usuarioCriado.id,
+    });
+
+    return usuarioCriado;
+
     // 4. Abrir tela de validação e ativacao de token
   }
   async editarUmPorId(id: string, usuario: EditarUsuariosDto) {

@@ -1,15 +1,8 @@
-import { IsNotEmpty } from 'class-validator';
-
 export class EditarUsuariosDto {
-  @IsNotEmpty({
-    message: 'O Campo login não existe',
-  })
-  login: string;
+  login?: string;
 
-  @IsNotEmpty({
-    message: 'O Campo telefone não existe',
-  })
-  telefone: string;
+  telefone?: string;
+  isAtivado?: boolean;
   email?: string;
   perfil_usuariosId?: string;
 }

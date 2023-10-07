@@ -5,18 +5,24 @@ import { UsuariosService } from './usuarios.service/usuarios.service';
 
 import { PrismaService } from 'src/database/prisma.service';
 
-import { UsuariosRepositories } from './usuarios.repositories/usuarios.repositories';
-import { UsuariosRepositoriesInterface } from './interfaces/UsuariosRepositoriesInterface';
-
 import { CriptografiaBcrypt } from 'src/utils/criptografias/CriptografiaBcrypt/CriptografiaBcrypt';
 import { CriptografiaBcryptInterface } from 'src/utils/criptografias/CriptografiaBcrypt/interfaces/CriptografiaBcryptInterface';
 
+import { TokenUsuariosRepositoriesInterface } from '../token.usuarios/interfaces/TokenUsuariosRepositoriesInterface';
+import { TokenUsuariosRepositories } from '../token.usuarios/token.usuarios.repositories/token.usuarios.repositories';
+
+import { UsuariosRepositories } from './usuarios.repositories/usuarios.repositories';
+import { UsuariosRepositoriesInterface } from './interfaces/UsuariosRepositoriesInterface';
 @Module({
   imports: [],
   controllers: [UsuariosController],
   providers: [
     PrismaService,
     UsuariosService,
+    {
+      provide: TokenUsuariosRepositoriesInterface,
+      useClass: TokenUsuariosRepositories,
+    },
     {
       provide: UsuariosRepositoriesInterface,
       useClass: UsuariosRepositories,
