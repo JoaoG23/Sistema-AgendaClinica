@@ -1,15 +1,14 @@
+import { useNavigate } from "react-router-dom";
+import { BsFillPersonPlusFill } from "react-icons/bs";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FiLogIn } from "react-icons/fi";
 
-import { RedFont } from "../../../../Components/FontColor/RedFont";
 import { InputDefault } from "../../../../Components/Inputs/InputDefault";
 
 import { CamposStyle } from "./styles";
-import { SecondaryButton } from "../../../../Components/Buttons/SecondaryButton/ButtonDark";
+
 import { AlertCampoVazio } from "../../../../Components/alerts/AlertCampoVazio";
-import ButtonDefault from "../../../../Components/Buttons/ButtonDefault/ButtonDark";
-import { BsFillPersonPlusFill } from "react-icons/bs";
 import { Button } from "../../../../Components/Buttons/Button";
 
 type Props = {
@@ -23,6 +22,7 @@ export const CamposFormulario: React.FC<Props> = ({ funcaoSubmit }) => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate()
   return (
     <CamposStyle onSubmit={handleSubmit(funcaoSubmit)}>
       <InputDefault
@@ -44,14 +44,16 @@ export const CamposFormulario: React.FC<Props> = ({ funcaoSubmit }) => {
         <AlertCampoVazio mensagem={"Senha vazia"} />
       )}
 
-      <Button primary>
+      <Button tipo="primary">
         <p>Logar</p>
         <FiLogIn />
       </Button>
-      <Button padrao>
-        <p>Registrar</p>
-        <BsFillPersonPlusFill />
-      </Button>
+      <div>
+        <Button tipo="secondary" onClick={navigate('registrar_cliente')}>
+          <p>Registrar Cliente</p>
+          <BsFillPersonPlusFill />
+        </Button>
+      </div>
     </CamposStyle>
   );
 };

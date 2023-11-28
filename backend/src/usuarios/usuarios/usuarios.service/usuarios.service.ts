@@ -1,5 +1,3 @@
-import * as moment from 'moment';
-import { uid } from 'rand-token';
 import {
   Injectable,
   ConflictException,
@@ -15,6 +13,10 @@ import { EditarUsuariosDto } from '../usuarios.dto/EditarUsuarioDto';
 import { TokenUsuariosRepositoriesInterface } from 'src/usuarios/token.usuarios/interfaces/TokenUsuariosRepositoriesInterface';
 import { gerarToken } from 'src/utils/tokens/gerarToken/gerarToken';
 
+import { EnvioDeEmail } from 'src/utils/email/EnvioDeEmail';
+import { gerarCorpoTokenEmail } from 'src/utils/email/templates/gerarCorpoTokenEmail/gerarCorpoTokenEmail';
+
+const envioDeEmail = new EnvioDeEmail();
 @Injectable()
 export class UsuariosService implements UsuariosServiceInterface {
   constructor(
@@ -48,35 +50,44 @@ export class UsuariosService implements UsuariosServiceInterface {
       throw new NotFoundException('Esse id não existe no sistema');
     }
   }
+  enviarEmail(emailDestino: string, nome: string, conteudo: string) {
+    envioDeEmail.enviarEmail({
+      destinatarioConfigs: {
+        emailDestino,
+        assunto: `TOKEN - ${nome}`,
+        conteudo,
+      },
+      remetenteConfigs: {
+        usuarioRemente: process.env.EMAIL_REMETENTE,
+        senha: process.env.EMAIL_SENHA,
+        host: 'smtp.office365.com',
+        porta: 587,
+      },
+    });
+  }
 
   async criarUm(usuario: CriarUsuariosDto) {
     const { login, email, telefone } = usuario;
 
-    // await this.validarSeExisteLogin(login);
-    // await this.validarSeExisteEmail(email);
-    // await this.validarSeExisteTelefone(telefone);
+    await this.validarSeExisteLogin(login);
+    await this.validarSeExisteEmail(email);
+    await this.validarSeExisteTelefone(telefone);
 
     const usuarioCriado = await this.usuariosRepositories.salvar({
       ...usuario,
       isAtivado: false,
     });
 
-    // 1.Retorna o seu usuário será cadastrado apos email
-
-    // 2. Criar token
-
     const { token, validadeToken } = gerarToken();
-    // 3. Enviar Token via email para usuário ou whatapp
-
     await this.tokenUsuarioRepositories.salvar({
       token: token,
       validade_token: new Date(validadeToken as any),
       usuariosId: usuarioCriado.id,
     });
 
+    const templateEnvio = gerarCorpoTokenEmail(token, usuario.login);
+    await this.enviarEmail(email, usuario.login, templateEnvio);
     return usuarioCriado;
-
-    // 4. Abrir tela de validação e ativacao de token
   }
   async editarUmPorId(id: string, usuario: EditarUsuariosDto) {
     const { login, email, telefone } = usuario;

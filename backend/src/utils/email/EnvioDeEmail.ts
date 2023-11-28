@@ -1,20 +1,18 @@
-import nodeMailer from 'nodemailer';
+import * as nodemailer from 'nodemailer';
 import { ConfiguracaoEmail } from './types/ConfiguracaoEmail';
-
 export class EnvioDeEmail {
   public converterNullOuVazioEmEmail(email) {
     return email === null || email === '' ? 'email@email.com' : email;
   }
 
-  public enviarEmail({
+  public async enviarEmail({
     destinatarioConfigs,
     remetenteConfigs,
   }: ConfiguracaoEmail) {
     const { emailDestino, assunto, conteudo } = destinatarioConfigs;
     const { usuarioRemente, senha, host, porta, servico } = remetenteConfigs;
 
-    const transporter = nodeMailer.createTransport({
-      service: servico || '',
+    const transporter = nodemailer.createTransport({
       host,
       port: porta,
       auth: { user: usuarioRemente, pass: senha },
@@ -34,18 +32,10 @@ export class EnvioDeEmail {
       //   ],
     };
 
-    transporter
-      .sendMail(correioConfiguracao)
-      .then((data) => {
-        const isEmaisEnviados = data.accepted;
-
-        const emailsDestinos = data.accepted;
-        const remente = data.envelope.from;
-        const messageId = data.messageId;
-        console.log('🚀 ~ messageId:', messageId);
-      })
-      .catch((erro) => {
-        console.error(erro);
-      });
+    try {
+      const data = await transporter.sendMail(correioConfiguracao);
+    } catch (error) {
+      console.error(error);
+    }
   }
 }

@@ -8,11 +8,11 @@ export const Color = styled.span<TipoBotao>`
   ${(props) =>
     props.error
       ? `
-        background-color: #E55356;
+        background-color: #E8701E;
         color: white;
       `
       : `
-        background-color: #1FCD6C;
+        background-color: #BBE81E;
         color: white;
       `};
 

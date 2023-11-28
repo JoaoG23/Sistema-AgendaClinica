@@ -10,13 +10,13 @@ import { listarTodosUsuarioPorPagina } from "./api";
 
 import { SpinnerCarregamento } from "../../../Components/spinners/SpinnerCarregamento";
 import { PaginacaoComum } from "../../../Components/paginacoes/Paginacao";
-import { ListaUsuario } from "../ComponentesParaTodos/tabela/Linha/Linha";
-import ButtonDefault from "../../../Components/Buttons/ButtonDefault/ButtonDark";
+import { ListaUsuarios } from "../ComponentesParaTodos/tabela/Linha/Linha";
 import { FormularioPesquisa } from "../ComponentesParaTodos/campos/FormularioPesquisa";
 import { CardList } from "../../../Components/cards/CardList";
 
 import { ErrorResposta } from "../../../types/Respostas/ErrorResposta/ErroResposta";
 import { UsuarioVisualizado } from "../../../types/usuario/Usuario";
+import { Button } from "../../../Components/Buttons/Button";
 
 export const TodosUsuarios: React.FC = () => {
   const navigate = useNavigate();
@@ -46,10 +46,10 @@ export const TodosUsuarios: React.FC = () => {
       <Fluxo.Header>
         <h2>Seus Usuários</h2>
         <Fluxo.ContainerButtons>
-          <ButtonDefault onClick={() => navigate("adicionar")}>
+          <Button onClick={() => navigate("adicionar")}>
             <p>Adicionar</p>
             <IoMdAddCircle size={20} />
-          </ButtonDefault>
+          </Button>
         </Fluxo.ContainerButtons>
       </Fluxo.Header>
 

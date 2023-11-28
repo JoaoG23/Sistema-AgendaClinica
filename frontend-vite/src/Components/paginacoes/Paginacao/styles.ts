@@ -13,12 +13,12 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     border: none;
-    background-color: #41b5dc;
+    background-color: #794493;
     border-radius: 2em;
     color: #fff;
     padding: 0.6em;
 
-    box-shadow: 0 0 2px #41b5dc;
+    box-shadow: 0 0 2px #794493;
 
     :hover {
       animation: mudarCorBotaoPaginacao 0.5s ease alternate both;
@@ -30,9 +30,9 @@ export const Container = styled.div`
       }
 
       to {
-        border: 0.6px solid #41b5dc;
+        border: 0.6px solid #794493;
         background-color: #ffff;
-        color: #41b5dc;
+        color: #794493;
         transform: translateY(-5px);
       }
     }

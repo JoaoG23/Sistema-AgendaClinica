@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const corPadrao: string = "#31D0D4";
+const corPadrao: string = "#a41de7";
 const corTerceira: string = "#fff";
 const sombra: string = "#8d8d8d2d";
-const corQuarternaria: string = "#5A89E5";
+const corQuarternaria: string = "#E8701E";
 
 export const Container = styled.header`
   width: 86vw;

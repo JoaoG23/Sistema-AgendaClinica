@@ -27,7 +27,7 @@ export const ListaColaboradores: React.FC<Props> = ({ colaborador }) => {
     <Card>
       <Colaboradores.Container>
         <Colaboradores.ContainerCard>
-          <BsFillPersonFill size={75} color="#43B4DC" />
+          <BsFillPersonFill size={75} color="#A41DE7" />
           <Colaboradores.ListaItems>
             <li>
               <strong>Nome: </strong> {colaborador?.nome_completo}
@@ -55,16 +55,19 @@ export const ListaColaboradores: React.FC<Props> = ({ colaborador }) => {
         </Colaboradores.ContainerCard>
         <Colaboradores.ContainerButton>
           <Button
-            padrao
+            tipo="primary"
             onClick={() => navigate(`visualizar/${colaborador?.id!}`)}
           >
             <BsEyeFill size={18} />
           </Button>
-          <Button padrao onClick={() => navigate(`editar/${colaborador?.id!}`)}>
+          <Button
+            tipo="tertiary"
+            onClick={() => navigate(`editar/${colaborador?.id!}`)}
+          >
             <MdModeEdit size={18} />
           </Button>
           <Button
-            padrao
+            tipo="secondary"
             onClick={() => navigate(`deletar/${colaborador?.id!}`)}
           >
             <BsFillTrash2Fill size={18} />

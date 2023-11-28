@@ -6,22 +6,11 @@ type Propriedades = Styles.TipoBotao & {
   onClick?: any;
 };
 
-export const Button: React.FC<Propriedades> = ({
-  onClick,
-  children,
-  padrao,
-  primary,
-  secondary,
-  tertiary,
-}) => {
+
+
+export const Button: React.FC<Propriedades> = ({ onClick, children, tipo }) => {
   return (
-    <Styles.Button
-      primary={primary}
-      padrao={padrao}
-      secondary={secondary}
-      tertiary={tertiary}
-      onClick={onClick}
-    >
+    <Styles.Button tipo={tipo} onClick={onClick}>
       {children}
     </Styles.Button>
   );

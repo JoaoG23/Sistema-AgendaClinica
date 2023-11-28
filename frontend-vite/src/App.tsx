@@ -20,7 +20,7 @@ import { Sidebar } from "./Components/Navs/Sidebar";
 import { Header } from "./Components/Navs/Header";
 
 import { MobileSidebar } from "./Components/Navs/MobileSidebar";
-import ButtonDefault from "./Components/Buttons/ButtonDefault/ButtonDark";
+import { Button } from "./Components/Buttons/Button";
 
 const queryClient = new QueryClient();
 
@@ -37,9 +37,9 @@ function App() {
             <Header />
             <Sidebar />
             <BotaoPorCima>
-              <ButtonDefault onClick={() => setMostrarSidebar(true)}>
+              <Button onClick={() => setMostrarSidebar(true)}>
                 <BsList size={27} />
-              </ButtonDefault>
+              </Button>
             </BotaoPorCima>
             <MobileSidebar
               setMostrarSidebar={setMostrarSidebar}

@@ -2,7 +2,6 @@ import {
   BsEyeFill,
   BsFillPersonFill,
   BsFillTrash2Fill,
-  BsPencilFill,
 } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
@@ -11,8 +10,6 @@ import * as Clientes from "./styles";
 import { ClienteVisualizado } from "../../../../../../types/cliente/ClienteVisualizado";
 import { Card } from "../../../../../../Components/cards/Card";
 import { Button } from "../../../../../../Components/Buttons/Button";
-import { GreenBadge } from "../../../../../../Components/Badges/GreenBadge";
-import { RedBadge } from "../../../../../../Components/Badges/RedBadge";
 import { Badge } from "../../../../../../Components/Badges/Badge";
 import { MdModeEdit } from "react-icons/md";
 
@@ -26,7 +23,7 @@ export const ListaClientes: React.FC<Props> = ({ cliente }) => {
     <Card>
       <Clientes.Container>
         <Clientes.ContainerCard>
-          <BsFillPersonFill size={75} color="#43B4DC" />
+          <BsFillPersonFill size={75} color="#A41DE7" />
           <Clientes.ListaItems>
             <li>
               <strong>Nome: </strong> {cliente?.nome_completo}
@@ -53,13 +50,13 @@ export const ListaClientes: React.FC<Props> = ({ cliente }) => {
           </Clientes.ListaItems>
         </Clientes.ContainerCard>
         <Clientes.ContainerButton>
-          <Button padrao onClick={() => navigate(`visualizar/${cliente?.id!}`)}>
+          <Button tipo="primary" onClick={() => navigate(`visualizar/${cliente?.id!}`)}>
             <BsEyeFill size={18} />
           </Button>
-          <Button padrao onClick={() => navigate(`editar/${cliente?.id!}`)}>
+          <Button tipo="tertiary" onClick={() => navigate(`editar/${cliente?.id!}`)}>
             <MdModeEdit size={18} />
           </Button>
-          <Button padrao onClick={() => navigate(`deletar/${cliente?.id!}`)}>
+          <Button tipo="secondary" onClick={() => navigate(`deletar/${cliente?.id!}`)}>
             <BsFillTrash2Fill size={18} />
           </Button>
         </Clientes.ContainerButton>

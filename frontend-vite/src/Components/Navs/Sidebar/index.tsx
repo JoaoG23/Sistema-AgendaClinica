@@ -9,8 +9,8 @@ import { FaPeopleCarry } from "react-icons/fa";
 import { Container, CabecalhoUsuario, Menu, DropDown } from "./styles";
 
 import { limparSessaoUsuario } from "../../../utils/limparSessaoUsuario";
-
 import { Button } from "../../Buttons/Button";
+
 
 export const Sidebar: React.FC = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export const Sidebar: React.FC = () => {
           <p>Nome do Usuário</p>
         </CabecalhoUsuario>
         <li>
-          <Button primary onClick={() => navigate("agendamentos/adicionar")}>
+          <Button tipo="primary" onClick={() => navigate("agendamentos/adicionar")}>
             <p>Agende aqui</p>
             <AiFillPlusCircle size={15} />
           </Button>

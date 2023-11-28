@@ -1,10 +1,22 @@
 import styled from "styled-components";
 
+type Tipo = "primary" | "secondary" | "tertiary" | "padrao";
 export type TipoBotao = {
-  primary?: boolean;
-  secondary?: boolean;
-  tertiary?: boolean;
-  padrao?: boolean;
+  tipo?: Tipo;
+};
+
+interface TipoBotaoStrategy {
+  primary: () => string;
+  secondary: () => string;
+  tertiary: () => string;
+  padrao: () => string;
+}
+
+const selecionarBotaoStrategyConcrect: TipoBotaoStrategy = {
+  primary: () => `background-color: #BBE81E; color: white;`,
+  secondary: () => `background-color: #E8701E; color: white;`,
+  tertiary: () => `background-color: #A41DE7; color: white;`,
+  padrao: () => `background-color: #1EDBE8; color: white;`,
 };
 
 export const Button = styled.button<TipoBotao>`
@@ -20,30 +32,8 @@ export const Button = styled.button<TipoBotao>`
   box-shadow: 1px 1px 3px #717f953a;
 
   ${(props) =>
-    props.primary
-      ? `
-        background-color: #1FCD6C;
-        color: white;
-      `
-      : props.secondary
-      ? `
-        background-color: #F0A738;
-        color: white;
-      `
-      : props.tertiary
-      ? `
-        background-color: #E55356;
-        color: white;
-      `
-      : props.padrao
-      ? `
-        background-color: #41B5DC;
-        color: white;
-      `
-      : `
-        background-color: #F2F9FA;
-        color: #41B5DC;
-      `}
+    selecionarBotaoStrategyConcrect[props?.tipo!] ||
+    `background-color: #F2F9FA; color: #794493;`}
 
   :hover {
     animation: mudarCorEReduzTamanhoButton 0.5s ease alternate both;
@@ -56,7 +46,7 @@ export const Button = styled.button<TipoBotao>`
 
     to {
       transform: scale(0.9);
-      box-shadow: 0px 0px 11px #66666670;
+      box-shadow: 0px 0px 11px #A41DE7;
     }
   }
 

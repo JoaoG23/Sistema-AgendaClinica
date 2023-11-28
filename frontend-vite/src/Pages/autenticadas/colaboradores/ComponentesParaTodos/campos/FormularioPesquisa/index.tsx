@@ -29,7 +29,7 @@ export const FormularioPesquisa: React.FC<Props> = ({ onSubmit, register }) => {
           name="email"
         />
 
-        <Button primary>
+        <Button tipo="secondary">
           <p>Pesquisar</p>
           <ImSearch color="#fff" size={20} />
         </Button>

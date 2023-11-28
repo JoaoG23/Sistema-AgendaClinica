@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { IoMdAddCircle } from "react-icons/io";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 

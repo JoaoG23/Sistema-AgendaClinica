@@ -20,35 +20,35 @@ export const Formulario = styled.main`
   box-shadow: 2px 2px 10px ${sombra};
 
   @media only screen and (max-width: 768px) {
-    justify-items: stretch;
+    justify-items:stretch;
 
     text-align: center;
     width: 90%;
-    padding: 0.7em;
+    padding: .7em;
   }
 `;
 export const LoginContainer = styled.main`
-  padding: 2em;
-  height: 100vh;
-  width: 17vw;
+   padding: 2em;
+   height: 100vh;
   background-color: #f8f8f9;
   animation: entradaSuave 1s ease alternate both;
 
   display: grid;
   align-content: center;
-  justify-items: center;
-
+  
   @media only screen and (max-width: 768px) {
-    justify-items: stretch;
+    justify-items:stretch;
 
     text-align: center;
     width: 90%;
-    padding: 0.7em;
+    padding: .7em;
   }
 `;
 export const ImageLateral = styled.img`
-  width: 70vw;
+
+    width: 70vw;
 `;
+
 
 export const ContainerMain = styled.main`
   height: 100vh;
@@ -59,6 +59,7 @@ export const ContainerMain = styled.main`
   justify-content: end;
   flex-wrap: wrap;
 
+
   background-image: linear-gradient(
     to right,
     ${corPadrao} 0%,
@@ -67,7 +68,7 @@ export const ContainerMain = styled.main`
   );
   background-size: 200% 200%;
   animation: changeColor 5s ease infinite alternate forwards;
-
+  
   position: fixed;
   top: 0;
   z-index: 2;
@@ -76,6 +77,6 @@ export const ContainerMain = styled.main`
   @media only screen and (max-width: 768px) {
     background-image: none;
     display: flex;
-    background-color: #7e62f3;
+    background-color:#7E62F3;
   }
 `;

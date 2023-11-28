@@ -4,7 +4,7 @@ export const NoBorders = styled.input`
   border: none;
   border-bottom: 2px solid rgb(239, 239, 239);
   color: gray;
-  padding: 3px;
+  padding: 5px;
 
   :focus {
     animation-name: abaixarInputNoBody;
@@ -25,7 +25,7 @@ export const NoBorders = styled.input`
     }
 
     100% {
-      border-bottom: 2px solid #31d0d4;
+      border-bottom: 2px solid #A41DE7;
       transform: translateY(0.4vh);
     }
   }

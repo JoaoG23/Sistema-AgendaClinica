@@ -36,9 +36,9 @@ export const FormularioPesquisa: React.FC<Props> = ({
           name="email"
         />
 
-        <Button primary>
+        <Button tipo="secondary" >
           <p>Pesquisar</p>
-          <ImSearch color="#fff" size={20} />
+          <ImSearch  size={20} />
         </Button>
       </Form.ContainerPesquisa>
     </Form.Container>

@@ -8,7 +8,10 @@ import { TokenValidadoDto } from '../token.usuarios.dto/TokenValidadoDto';
 
 import { UsuariosRepositoriesInterface } from 'src/usuarios/usuarios/interfaces/UsuariosRepositoriesInterface';
 import { gerarToken } from 'src/utils/tokens/gerarToken/gerarToken';
+import { EnvioDeEmail } from 'src/utils/email/EnvioDeEmail';
+import { gerarCorpoTokenEmail } from 'src/utils/email/templates/gerarCorpoTokenEmail/gerarCorpoTokenEmail';
 
+const envioDeEmail = new EnvioDeEmail();
 @Injectable()
 export class TokenUsuariosService {
   constructor(
@@ -73,19 +76,37 @@ export class TokenUsuariosService {
     return 'Token validado com sucesso! Por gentileza, vá a página de login e efetue o seu primeiro login';
   }
 
+  async enviarEmail(emailDestino: string, nome: string, conteudo: string) {
+    await envioDeEmail.enviarEmail({
+      destinatarioConfigs: {
+        emailDestino,
+        assunto: `TOKEN - ${nome}`,
+        conteudo,
+      },
+      remetenteConfigs: {
+        usuarioRemente: process.env.EMAIL_REMETENTE,
+        senha: process.env.EMAIL_SENHA,
+        host: 'smtp.office365.com',
+        porta: 587,
+      },
+    });
+  }
+
   async reenviarToken(email: string) {
     await this.verificarSeEmailExiste(email);
     const usuario = await this.tokenUsuariosRepositories.buscarUmPorEmail(
       email,
     );
-    const { token, validadeToken } = gerarToken();
 
+    const { token, validadeToken } = gerarToken();
     await this.tokenUsuariosRepositories.salvar({
       token: token,
       validade_token: new Date(validadeToken as any),
       usuariosId: usuario?.usuarios?.id,
     });
 
+    const templateEnvio = gerarCorpoTokenEmail(token, usuario?.usuarios?.login);
+    this.enviarEmail(email, usuario?.usuarios?.login, templateEnvio);
     return 'Token reenviado com sucesso! Check seu email por favor';
   }
 }

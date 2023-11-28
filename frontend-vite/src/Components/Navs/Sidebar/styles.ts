@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-const corPadrao: string = "#43B4DC";
-const corSegundaria: string = "gray";
-const corPrimarias: string = "#3a3a3a";
+const corPadrao: string = "#A41DE7";
+const corSegundaria: string = "#794493";
+const corPrimarias: string = "#E8701E";
 const corTerceira: string = "#fff";
+const corQuartenaria: string = "#BBE81E";
 const sombra: string = "#9c9c9c25";
 
 export const Container = styled.div`
@@ -46,6 +47,10 @@ export const Menu = styled.ul`
     gap: 2em;
 
     padding: 0.3em;
+
+    a{
+      color: ${corSegundaria};
+    }
     :hover {
       animation: aparecer 0.5s ease-in-out forwards;
       a {
@@ -60,7 +65,7 @@ export const Menu = styled.ul`
     }
     100% {
       opacity: 1;
-      color: ${corPadrao};
+      color: ${corQuartenaria};
     }
   }
 `;
