@@ -1,5 +1,4 @@
 import React from "react";
-import { ContainerInput, NoBorders } from "../styles";
 
 import { FieldValues, UseFormRegister } from "react-hook-form";
 
@@ -9,34 +8,37 @@ type Props = {
   type?: string;
   placeholder?: string;
   register: UseFormRegister<FieldValues> | any;
-  tamanhoMaximo?: number;
-  valorPadrao?: string;
-  desativar?: boolean;
-  requirido?: boolean;
+  maxSize?: number;
+  defaultValue?: string;
+  disabled?: boolean;
+  required?: boolean;
 };
 
 export const InputDefault: React.FC<Props> = ({
-  valorPadrao,
+  defaultValue,
   label,
   name,
   type,
   placeholder,
   register,
-  tamanhoMaximo,
-  desativar = false,
-  requirido = true,
+  maxSize,
+  disabled = false,
+  required = true,
 }) => {
   return (
-    <ContainerInput>
-      <label>{label}</label>
-      <NoBorders
-        readOnly={desativar}
+    <div className="grid gap-1">
+      <label className="text-gray-500 font-medium text-base lg:text-base md:text-xl sm:text-xl md:grid-cols-1 sm:grid-cols-1 lg:grid-cols-2">
+        {label}
+      </label>
+      <input
+        className="w-full h-8 border-b-2 py-4 px-1 lg:h-0 md:h-12 sm:h-12 border-purple-700 hover:border-yellow-500 duration-500 text-gray-600"
+        readOnly={disabled}
         placeholder={placeholder}
-        maxLength={tamanhoMaximo}
-        defaultValue={valorPadrao}
-        {...register(name, { required: requirido })}
+        maxLength={maxSize}
+        defaultValue={defaultValue}
+        {...register(name, { required: required })}
         type={type}
-      ></NoBorders>
-    </ContainerInput>
+      ></input>
+    </div>
   );
 };

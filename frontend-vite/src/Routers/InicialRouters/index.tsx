@@ -1,14 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "../../Pages/Login/Login";
-import { RegistrarCliente } from "../../Pages/RegistrarCliente";
+import { Login } from "../../Pages/Login/Login";
 
-const InicialRouters = () => {
+export const InicialRouters = () => {
   return (
     <Routes>
       <Route path="/" element={<Login />}></Route>
-      <Route path="/registrar_cliente" element={<RegistrarCliente />}></Route>
+      <Route path="/nova" element={<Login />}></Route>
     </Routes>
   );
 };
 
-export default InicialRouters;

@@ -9,7 +9,6 @@ import { pegarUsuarioSessao } from "../../../utils/pegarUsuarioSessao";
 
 import { logarUsuario } from "../api";
 
-import { FormularioStyle } from "./styles";
 
 import { CamposFormulario } from "./CamposFormulario/CamposFormulario";
 import { SpinnerCarregamento } from "../../../Components/spinners/SpinnerCarregamento";
@@ -36,14 +35,13 @@ export const Formulario: React.FC = () => {
     }
   );
   return (
-    <FormularioStyle>
+    <>
       <CamposFormulario
         funcaoSubmit={(usuario: LoginUsuario) => {
           mutate(usuario);
         }}
       />
       {isLoading && <SpinnerCarregamento />}
-
-    </FormularioStyle>
+    </>
   );
 };

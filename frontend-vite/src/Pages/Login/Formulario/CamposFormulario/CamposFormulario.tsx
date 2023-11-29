@@ -6,7 +6,6 @@ import { FiLogIn } from "react-icons/fi";
 
 import { InputDefault } from "../../../../Components/Inputs/InputDefault";
 
-import { CamposStyle } from "./styles";
 
 import { AlertCampoVazio } from "../../../../Components/alerts/AlertCampoVazio";
 import { Button } from "../../../../Components/Buttons/Button";
@@ -22,14 +21,10 @@ export const CamposFormulario: React.FC<Props> = ({ funcaoSubmit }) => {
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
-    <CamposStyle onSubmit={handleSubmit(funcaoSubmit)}>
-      <InputDefault
-        name={"login"}
-        register={register}
-        placeholder={"Usuário"}
-      />
+    <form className="grid gap-2" onSubmit={handleSubmit(funcaoSubmit)}>
+      <InputDefault name={"login"} register={register} label="Usuário" />
       {errors.login?.type === "required" && (
         <AlertCampoVazio mensagem={"Usuário vazio"} />
       )}
@@ -38,22 +33,22 @@ export const CamposFormulario: React.FC<Props> = ({ funcaoSubmit }) => {
         name={"senha"}
         type="password"
         register={register}
-        placeholder={"Senha"}
+        label="Senha"
       />
       {errors.senha?.type === "required" && (
         <AlertCampoVazio mensagem={"Senha vazia"} />
       )}
 
-      <Button tipo="primary">
-        <p>Logar</p>
-        <FiLogIn />
-      </Button>
-      <div>
-        <Button tipo="secondary" onClick={navigate('registrar_cliente')}>
+      <div className="grid gap-2 md:grid-cols-1 sm:grid-cols-1 lg:grid-cols-2">
+        <Button color="primary">
+          <p>Logar</p>
+          <FiLogIn />
+        </Button>
+        <Button color="secondary" onClick={() => navigate('/')}>
           <p>Registrar Cliente</p>
           <BsFillPersonPlusFill />
         </Button>
       </div>
-    </CamposStyle>
+    </form>
   );
 };

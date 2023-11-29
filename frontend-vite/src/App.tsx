@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // import contasPessoas from "./assets/contas.svg";
 
-import InicialRouters from "./Routers/InicialRouters";
+import { InicialRouters } from "./Routers/InicialRouters";
 
 import GlobalStyle from "./themes/global";
 
@@ -31,23 +31,22 @@ function App() {
       <>
         <ToastContainer></ToastContainer>
         <>
-          {/* <IconFundo1Flutuante src={contasPessoas} alt="fundo" /> */}
-          <GlobalStyle />
+          {/* <GlobalStyle /> */}
           <Router>
-            <Header />
-            <Sidebar />
-            <BotaoPorCima>
+            {/* <Header />
+            <Sidebar /> */}
+            {/* <BotaoPorCima>
               <Button onClick={() => setMostrarSidebar(true)}>
                 <BsList size={27} />
               </Button>
-            </BotaoPorCima>
-            <MobileSidebar
+            </BotaoPorCima> */}
+            {/* <MobileSidebar
               setMostrarSidebar={setMostrarSidebar}
               mostrarSidebar={mostrarSidebar}
-            />
-            <Body>
+            /> */}
+            {/* <div>
               <AutenticadasRotas />
-            </Body>
+            </div> */}
             <InicialRouters />
           </Router>
         </>
