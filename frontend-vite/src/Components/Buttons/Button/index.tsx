@@ -6,6 +6,7 @@ type Propriedades = {
   children?: string | JSX.Element | JSX.Element[];
   onClick?: any;
   color?: ColorButton;
+  type?: "submit" | "reset" | "button";
 };
 
 interface ColorButtonsStrategy {
@@ -30,19 +31,20 @@ export const Button: React.FC<Propriedades> = ({
   onClick,
   children,
   color,
+  type,
 }) => {
   const selectColorContext = (colorButton: ColorButton): string => {
     return (
-      selectButtonStrategyConcrect[colorButton!]() ||
+      selectButtonStrategyConcrect[colorButton]() ||
       "text-gray-50 bg-yellow-400"
     );
   };
 
   const colorSelected = selectColorContext(color!);
-  const mainClass: string = `p-1 flex justify-center items-center gap-2 rounded-lg shadow-lg ${colorSelected}`;
+  const mainClass: string = `text-sm  p-2 flex justify-center items-center gap-2 rounded-lg shadow-md ${colorSelected}`;
 
   return (
-    <button className={mainClass} onClick={onClick}>
+    <button type={type} className={mainClass} onClick={onClick}>
       {children}
     </button>
   );

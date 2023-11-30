@@ -16,6 +16,7 @@ export default defineConfig({
     },
   },
   plugins: [react(), viteTsconfigPaths(), svgrPlugin()],
+
   test: {
     globals: true,
     environment: "jsdom",

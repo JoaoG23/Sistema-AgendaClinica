@@ -1,4 +1,4 @@
-import { Formulario } from "./Formulario/Formulario";
+import { Formulario } from "./Formulario";
 
 export const Login: React.FC = () => {
   return (
