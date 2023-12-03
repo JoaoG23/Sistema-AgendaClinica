@@ -4,10 +4,10 @@ import React from "react";
 import { FieldValues, useForm, UseFormHandleSubmit } from "react-hook-form";
 import { FiLogIn } from "react-icons/fi";
 
-import { InputDefault } from "../../../../Components/Inputs/InputDefault";
+import { Button } from "../../../../../Components/Buttons/Button";
+import { InputDefault } from "../../../../../Components/Inputs/InputDefault";
 
-import { AlertCampoVazio } from "../../../../Components/alerts/AlertCampoVazio";
-import { Button } from "../../../../Components/Buttons/Button";
+import { AlertCampoVazio } from "../../../../../Components/alerts/AlertCampoVazio";
 
 type Props = {
   funcaoSubmit: UseFormHandleSubmit<FieldValues> | any;
@@ -22,11 +22,7 @@ export const CamposFormulario: React.FC<Props> = ({ funcaoSubmit }) => {
   const navigate = useNavigate();
   return (
     <form className="grid gap-2" onSubmit={handleSubmit(funcaoSubmit)}>
-      <InputDefault
-        name={"login"}
-        register={register}
-        label="Usuário"
-      />
+      <InputDefault name={"login"} register={register} label="Usuário" />
       {errors.login?.type === "required" && (
         <AlertCampoVazio mensagem={"Usuário vazio"} />
       )}
@@ -42,13 +38,11 @@ export const CamposFormulario: React.FC<Props> = ({ funcaoSubmit }) => {
       )}
 
       <div className="grid gap-2 md:grid-cols-1 sm:grid-cols-1 lg:grid-cols-2">
-        <Button type="submit" color="primary">
-          <p>Logar</p>
-          <FiLogIn />
+        <Button color="tertiary" onClick={() => navigate("/")}>
+          <p>Voltar</p>
         </Button>
-        <Button color="tertiary" onClick={() => navigate("/registrar_cliente")}>
-          <p>Registrar Cliente</p>
-          <BsFillPersonPlusFill />
+        <Button type="submit" color="primary">
+          <p>Registrar</p>
         </Button>
       </div>
     </form>
