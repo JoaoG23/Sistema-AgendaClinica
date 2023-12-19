@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render } from "@testing-library/react";
 
-import { describe, test, vi } from "vitest";
+import { describe, test } from "vitest";
 import { Formulario } from "./";
 
 import { BrowserRouter as Router } from "react-router-dom";
