@@ -13,10 +13,13 @@
   },
   "dependencies": {
     "apexcharts": "^3.41.0",
+    "autoprefixer": "^10.4.16",
     "axios": "^0.27.2",
     "chart.js": "^3.6.0",
+    "flowbite-react": "^0.7.2",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
+    "postcss": "^8.4.32",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.0",
     "react-big-calendar": "^1.8.1",
@@ -30,7 +33,6 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.7.2",
     "react-toastify": "^9.1.1",
-    "recharts": "^2.1.16",
     "styled-components": "^5.3.5",
     "zustand": "^4.3.7"
   },

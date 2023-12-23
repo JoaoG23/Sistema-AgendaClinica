@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
-import { Login } from "../../Pages/Login";
-import { Registrar } from "../../Pages/iniciais/RegistrarCliente";
+import { Login } from "../../Pages/initial/Login";
+import { Registrar } from "../../Pages/initial/RegisterClient";
 
 export const InicialRouters = () => {
   return (

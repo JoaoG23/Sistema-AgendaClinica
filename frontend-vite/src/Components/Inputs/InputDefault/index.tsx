@@ -1,3 +1,4 @@
+import { Label, TextInput } from "flowbite-react";
 import React from "react";
 
 import { FieldValues, UseFormRegister } from "react-hook-form";
@@ -26,19 +27,19 @@ export const InputDefault: React.FC<Props> = ({
   required = true,
 }) => {
   return (
-    <div className="grid gap-1">
-      <label className="text-gray-500 font-medium text-base lg:text-base md:text-xl sm:text-xl md:grid-cols-1 sm:grid-cols-1 lg:grid-cols-2">
-        {label}
-        <input
-          className="w-full h-8 border-b-2 py-4 px-1 lg:h-0 md:h-12 sm:h-12 border-purple-700 hover:border-yellow-500 duration-500 text-gray-600"
-          disabled={disabled}
-          placeholder={placeholder}
-          maxLength={maxSize}
-          defaultValue={defaultValue}
-          {...register(name, { required: required })}
-          type={type}
-        />
-      </label>
+    <div>
+      <div className="mb-2 block">
+        <Label htmlFor="email1" value={label} />
+      </div>
+      <TextInput
+      sizing={"md"}
+        disabled={disabled}
+        placeholder={placeholder}
+        maxLength={maxSize}
+        defaultValue={defaultValue}
+        {...register(name, { required: required })}
+        type={type}
+      />
     </div>
   );
 };
