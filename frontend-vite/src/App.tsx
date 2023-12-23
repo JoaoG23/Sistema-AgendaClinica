@@ -3,15 +3,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useState } from "react";
 
-
 import "react-toastify/dist/ReactToastify.css";
-
-// import contasPessoas from "./assets/contas.svg";
-
-import { InicialRouters } from "./Routers/InicialRouters";
-
-
-
+import { InitialRoutes } from "./Routers/InitialRoutes";
 
 const queryClient = new QueryClient();
 
@@ -21,13 +14,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <>
         <ToastContainer></ToastContainer>
-        <>
-          {/* <GlobalStyle /> */}
-          <Router>
-      
-            <InicialRouters />
-          </Router>
-        </>
+        <Router>
+          <InitialRoutes />
+        </Router>
       </>
     </QueryClientProvider>
   );

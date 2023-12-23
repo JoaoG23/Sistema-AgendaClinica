@@ -13,6 +13,7 @@ type Props = {
   defaultValue?: string;
   disabled?: boolean;
   required?: boolean;
+  color?: 'failure'
 };
 
 export const InputDefault: React.FC<Props> = ({
@@ -25,20 +26,23 @@ export const InputDefault: React.FC<Props> = ({
   maxSize,
   disabled = false,
   required = true,
+  color,
 }) => {
   return (
     <div>
       <div className="mb-2 block">
-        <Label htmlFor="email1" value={label} />
+        <Label htmlFor={label} value={label} />
       </div>
       <TextInput
-      sizing={"md"}
+        id={label}
+        sizing={"md"}
         disabled={disabled}
         placeholder={placeholder}
         maxLength={maxSize}
         defaultValue={defaultValue}
         {...register(name, { required: required })}
         type={type}
+        color={color}
       />
     </div>
   );
