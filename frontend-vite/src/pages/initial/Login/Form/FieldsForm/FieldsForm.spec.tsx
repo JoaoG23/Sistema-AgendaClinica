@@ -33,6 +33,22 @@ describe("<FieldsForm />", () => {
     expect(buttonLogar).toBeInTheDocument();
   });
 
+  test("check if field (Senha) is type password", () => {
+    const queryClient = new QueryClient();
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <FieldsForm onSubmit={() => {}} />
+        </Router>
+      </QueryClientProvider>
+    );
+
+ 
+    const senhaInput = screen.getByLabelText("Senha");
+    expect(senhaInput).toHaveAttribute('type', 'password');
+
+  });
+
   test("should to send data in the (onSubmit) on submit", () => {
     const queryClient = new QueryClient();
     render(

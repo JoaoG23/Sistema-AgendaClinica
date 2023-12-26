@@ -4,7 +4,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { useState } from "react";
 
 import "react-toastify/dist/ReactToastify.css";
-import { InitialRoutes } from "./Routers/InitialRoutes";
+
+import { InitialRoutes } from "./routes/InitialRoutes";
 
 const queryClient = new QueryClient();
 

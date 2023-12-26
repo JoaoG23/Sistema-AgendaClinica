@@ -11,7 +11,9 @@ import { UsuariosService } from '../usuarios.service/usuarios.service';
 
 import { CriarUsuariosDto } from '../usuarios.dto/CriarUsuarioDto';
 import { Public } from 'src/auth/constants/SetMetadata';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Usuários')
 @Controller('usuarios')
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}

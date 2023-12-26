@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import { describe, test, vi } from "vitest";
 import { Form } from "./";
@@ -26,6 +26,30 @@ describe("<Form />", () => {
         </Router>
       </QueryClientProvider>
     );
-  });
 
+    const titulo = screen.getByText("Login");
+    expect(titulo).toBeInTheDocument();
+
+    const registrarClienteLink = screen.getByText("Você ainda não tem conta?");
+    expect(registrarClienteLink).toBeInTheDocument();
+  });
+  test("to s in the all links of page", () => {
+    const queryClient = new QueryClient();
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Form />
+        </Router>
+      </QueryClientProvider>
+    );
+
+    const registrarClienteLink = screen.getByText("Você ainda não tem conta?");
+    fireEvent.click(registrarClienteLink);
+    const esqueciSenhaLink = screen.getByText("Esqueci minha senha?");
+    fireEvent.click(esqueciSenhaLink);
+
+
+
+    
+  });
 });
