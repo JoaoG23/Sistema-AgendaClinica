@@ -11,7 +11,13 @@ import { UsuariosService } from '../usuarios.service/usuarios.service';
 
 import { CriarUsuariosDto } from '../usuarios.dto/CriarUsuarioDto';
 import { Public } from 'src/auth/constants/SetMetadata';
-import { ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('Usuários')
 @Controller('usuarios')
@@ -24,6 +30,9 @@ export class UsuariosController {
     return await this.usuariosService.criarUm(usuario);
   }
 
+  @ApiOperation({ summary: 'Buscar todos os usuários' })
+  @ApiResponse({ status: 200, description: 'Sucesso' })
+  @ApiBearerAuth('access-token')
   @Get()
   async buscarTodosPorPagina(
     @Query('numero_pagina') numero_pagina,

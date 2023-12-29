@@ -1,4 +1,3 @@
-import { ApiBearerAuth } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -17,12 +16,10 @@ import { ClientePesquisadoDto } from '../clientes.dto/ClientePesquisadoDto';
 import { ClienteUsuarioCriadoDto } from '../clientes.dto/ClienteUsuarioCriadoDto';
 import { ClienteUsuarioEditadoDto } from '../clientes.dto/ClienteUsuarioEditadoDto';
 
-@ApiBearerAuth()
 @Controller('clientes')
 export class ClientesController {
   constructor(private readonly clientesService: ClientesService) {}
 
-  @ApiBearerAuth()
   @Get()
   async buscarTodos() {
     return await this.clientesService.buscarTodos();
