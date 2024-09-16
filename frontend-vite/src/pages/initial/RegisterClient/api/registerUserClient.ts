@@ -1,5 +1,4 @@
-import { endpoint } from "../../../../services/endpoint";
-
+import { endpoint } from "../../../../services/api";
 import { UserClientRegister } from "../../../../types/user/UserClientRegister";
 
 export async function registerUserClient(userClient: UserClientRegister) {

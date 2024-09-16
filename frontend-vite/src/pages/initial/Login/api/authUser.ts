@@ -1,5 +1,4 @@
-import { endpoint } from "../../../../services/endpoint";
-
+import { endpoint } from "../../../../services/api";
 import { UserLogin } from "../../../../types/authentication/UserLogin";
 
 export async function authUser(userLogin: UserLogin) {
