@@ -26,7 +26,8 @@ export const Form: React.FC = () => {
       },
       onSuccess: (success: AxiosResponse) => {
         toast.success("Login Realizado com sucesso");
-        navigateToPageAfterSelectedTime(navigate, "/logged/contas");
+        
+        navigateToPageAfterSelectedTime(navigate, "/logged/agendamentos");
       },
     }
   );
