@@ -1,16 +1,15 @@
 import axios from "axios";
-import { buscaDadoUsuarioNaSessao } from "../utils/buscaDadoUsuarioNaSessao";
+import { getTokenUserSession } from "../utils/user-session/getTokenUserSession";
 
 const rotaPrincipal = import.meta.env.VITE_SOME_KEY;
-const sessionData: string | null = buscaDadoUsuarioNaSessao();
+const token: string | null = getTokenUserSession();
 
-const session = JSON.parse(sessionData as string);
 
 export const endpoint = axios.create({
   baseURL: rotaPrincipal,
   headers: {
     "Content-type": "application/json",
-    Authorization: `Bearer ${session?.token}`,
+    Authorization: `Bearer ${token}`,
   },
 });
 

@@ -14,6 +14,7 @@ import { navigateToPageAfterSelectedTime } from "../../../../utils/navigation-pa
 
 import { ErroResponse } from "../../../../types/authentication/ErroResponse";
 import { UserLogin } from "../../../../types/authentication/UserLogin";
+import { insertUserInSession } from "../../../../utils/user-session/insertUserInSession/insertUserInSession";
 
 export const Form: React.FC = () => {
   const navigate = useNavigate();
@@ -26,8 +27,12 @@ export const Form: React.FC = () => {
       },
       onSuccess: (success: AxiosResponse) => {
         toast.success("Login Realizado com sucesso");
-        
-        navigateToPageAfterSelectedTime(navigate, "/logged/agendamentos");
+        insertUserInSession(
+          success.data.id,
+          success.data.name,
+          success.data.token
+        );
+        navigateToPageAfterSelectedTime(navigate, "/logged/appointments");
       },
     }
   );

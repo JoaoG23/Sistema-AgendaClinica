@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { InitialRoutes } from "./routes/InitialRoutes";
 import PrivateRoute from "./routes/Authenticator/PrivateRouter";
+import { AuthenticatedRoutes } from "./routes/Authenticated";
 
 const queryClient = new QueryClient();
 
@@ -18,16 +19,7 @@ function App() {
         <ToastContainer></ToastContainer>
         <Router>
           <InitialRoutes />
-          <Routes>
-            <Route
-              path="/logged/agendamentos"
-              element={
-                <PrivateRoute redirectTo="/">
-                  <h2> OLA</h2>
-                </PrivateRoute>
-              }
-            />
-          </Routes>
+          <AuthenticatedRoutes />
         </Router>
       </>
     </QueryClientProvider>
