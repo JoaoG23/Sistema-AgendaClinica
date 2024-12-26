@@ -26,7 +26,7 @@ export class EnvioDeEmail {
       //   attachments: [
       //     {
       //       filename: 'xc_logo.png',
-      //       path: __dirname + '/assets/xc_logo.png',
+      //       path: __dirname + '/assets/.png',
       //       cid: 'logo',
       //     },
       //   ],

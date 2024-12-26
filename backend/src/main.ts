@@ -2,7 +2,6 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as fs from 'node:fs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -20,7 +19,6 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth(
       {
-        // I was also testing it without prefix 'Bearer ' before the JWT
         description: `[just text field] Please enter token in following format: Bearer <JWT>`,
         name: 'Authorization',
         bearerFormat: 'Bearer', // I`ve tested not to use this field, but the result was the same
