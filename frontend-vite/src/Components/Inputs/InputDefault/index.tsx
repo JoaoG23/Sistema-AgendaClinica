@@ -13,7 +13,6 @@ type Props = {
   defaultValue?: string;
   disabled?: boolean;
   required?: boolean;
-  color?: 'failure'
 };
 
 export const InputDefault: React.FC<Props> = ({
@@ -26,7 +25,6 @@ export const InputDefault: React.FC<Props> = ({
   maxSize,
   disabled = false,
   required = true,
-  color,
 }) => {
   return (
     <div>
@@ -42,7 +40,6 @@ export const InputDefault: React.FC<Props> = ({
         defaultValue={defaultValue}
         {...register(name, { required: required })}
         type={type}
-        color={color}
       />
     </div>
   );

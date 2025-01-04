@@ -1,7 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "../Authenticator/PrivateRouter";
-import { Appointments } from "../../pages/Appointments";
+import { ListAppointments } from "../../pages/appointments/ListAppointments";
 import { Layout } from "../../layout";
+import { AddAppointment } from "../../pages/appointments/AddAppointment";
 
 export const AuthenticatedRoutes = () => {
   return (
@@ -12,7 +13,7 @@ export const AuthenticatedRoutes = () => {
             path="appointments"
             element={
               <PrivateRoute redirectTo={"/"}>
-                <Appointments />
+                <ListAppointments />
               </PrivateRoute>
             }
           />

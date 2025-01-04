@@ -29,10 +29,13 @@ export const Form: React.FC = () => {
         toast.success("Login Realizado com sucesso");
         insertUserInSession(
           success.data.id,
-          success.data.name,
-          success.data.token
+          success.data.access_token
         );
-        navigateToPageAfterSelectedTime(navigate, "/logged/appointments");
+        setTimeout(() => {
+      
+          window.location.replace('/logged/appointments');
+        }, 3000);
+        // navigateToPageAfterSelectedTime(navigate, "/logged/appointments");
       },
     }
   );

@@ -9,11 +9,11 @@ export const Layout = () => {
       <Header />
       <section>
         <Leftbar />
-        <aside>
+        <aside className="p-10 sm:ml-64 lg:pt-16 lg:pl-16 lg:pr-16 h-[calc(100vh-64px)] ">
           <Outlet />
         </aside>
-        <FooterCustom />
       </section>
+      <FooterCustom />
     </div>
   );
 };
