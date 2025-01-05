@@ -1,6 +1,6 @@
 export type AppointmentSaved = {
-  dataHoraInicio: string | Date;
-  dataHoraFim: string | Date;
+  dataHoraInicio: string ;
+  dataHoraFim: string ;
   valor: number;
   observacao?: string;
   clientesId: string;

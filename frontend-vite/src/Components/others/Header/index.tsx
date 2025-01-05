@@ -34,8 +34,8 @@ export const Header: React.FC = () => {
                   className="h-8 me-3"
                   alt="FlowBite Logo"
                 />
-                <span className="self-center text-lg font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
-                  Clinica Agendamentos
+                <span className="self-center text-md font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                  C Agends
                 </span>
               </Link>
             </div>

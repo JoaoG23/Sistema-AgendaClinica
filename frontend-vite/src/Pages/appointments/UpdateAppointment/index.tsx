@@ -1,12 +1,7 @@
-import { Button, Modal } from "flowbite-react";
-import { IoAddCircle } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
-import { AxiosResponse } from "axios";
-import React, { SetStateAction, useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { toast } from "react-toastify";
 
-import { updateAppointment } from "./api/updateAppointment";
+import { updateAppointmentById } from "./api/updateAppointmentById";
 
 import { FieldsForm } from "./FieldsForm";
 
@@ -14,52 +9,45 @@ import { ErroResponse } from "../../../types/authentication/ErroResponse";
 import { AppointmentSaved } from "../types/AppointmentSaved";
 import { addSecondsInDatetime } from "../../../utils/datetime/addSecondsInDatetime/addSecondsInDatetime";
 import { navigateToPageAfterSelectedTime } from "../../../utils/navigation-page/navigateToPageAfterSelectedTime/navigateToPageAfterSelectedTime";
-import { useForm } from "react-hook-form";
 import { getAppointmentById } from "./api/getAppointmentById";
 import { Appointment } from "../types/Appointment";
+import { useNavigate } from "react-router-dom";
+import { Modal } from "flowbite-react";
+import { convertDatetimeToInputDate } from "../../../utils/datetime/convertDatetimeToInputDate/convertDatetimeToInputDate";
 
 type Props = {
-  id: string;
+  idAppointment: string;
   openModal: boolean;
   setOpenModal: (value: boolean) => void;
 };
 
-function convertDatetimeToInputDate(datetime: string | undefined) {
-  if (!datetime) return "";
-  return datetime.slice(0, 16);
-}
 export const UpdateAppointment: React.FC<Props> = ({
-  id,
+  idAppointment,
   openModal,
   setOpenModal,
 }) => {
-  // const [openModal, setOpenModal] = useState<boolean>(false);
-
-  // // const closeModalHandler = () => setOpenModal(false);
-  // // const openModalHandler = () => setOpenModal(true);
-  // useEffect(() => {
-  //   showModalSetter(false);
-  // }, [openModal]);
-
   const navigate = useNavigate();
 
   const { isLoading: isLoadingAppointment, data: previousAppointmentData } =
-    useQuery(["appointment-by-id", id], () => getAppointmentById(id), {
-      onError: (error: any) => {
-        toast.error(`Houve um error: ${error.response.data}`);
-      },
-    });
+    useQuery(
+      ["appointment-by-id", idAppointment],
+      () => getAppointmentById(idAppointment),
+      {
+        onError: (error: any) => {
+          toast.error(`Houve um error: ${error.response.data}`);
+        },
+      }
+    );
 
   const { mutate, isLoading: isLoadingUpdate } = useMutation(
     async (appointment: AppointmentSaved) =>
-      await updateAppointment(appointment),
+      await updateAppointmentById(idAppointment, appointment),
     {
       onError: (error: ErroResponse) => {
         toast.error(`Ops! Houve um error: ${error.response?.data?.message}`);
       },
       onSuccess: () => {
         toast.success("Agendamento atualizado com sucesso!");
-        // closeModalHandler();
         navigateToPageAfterSelectedTime(navigate, 0);
       },
     }
@@ -70,7 +58,6 @@ export const UpdateAppointment: React.FC<Props> = ({
   const dateStart = convertDatetimeToInputDate(
     previousAppointment.dataHoraInicio
   );
-  // const dateStart = previousAppointment.dataHoraInicio;
   const dateEnd = convertDatetimeToInputDate(previousAppointment.dataHoraFim);
 
   const {
@@ -95,7 +82,11 @@ export const UpdateAppointment: React.FC<Props> = ({
         </Modal.Header>
         <Modal.Body>
           <FieldsForm
-            onSubmit={(appointment: AppointmentSaved) => {
+            onSubmit={(data: AppointmentSaved) => {
+              const appointment = {
+                ...data,
+                valor: Number(data.valor ?? 0),
+              } as AppointmentSaved;
               appointment.dataHoraFim = addSecondsInDatetime(
                 appointment.dataHoraFim
               );

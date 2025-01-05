@@ -8,8 +8,8 @@ type Props = {
 };
 export const PaginationCustom: React.FC<Props> = ({
   currentPage,
-  totalPages, 
-  onPageChange
+  totalPages,
+  onPageChange,
 }) => {
   // const [currentPage, setCurrentPage] = useState(1);
 
@@ -19,7 +19,7 @@ export const PaginationCustom: React.FC<Props> = ({
     <div className="flex overflow-x-auto sm:justify-center ">
       <Pagination
         currentPage={currentPage}
-        totalPages={10}
+        totalPages={totalPages}
         onPageChange={onPageChange}
         showIcons
       />

@@ -1,3 +1,6 @@
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
@@ -38,7 +41,12 @@ export const AddAppointment: React.FC = () => {
 
   return (
     <>
-      <Button className="bg-fuchsia-700 hover:bg-fuchsia-100" color="purple" pill onClick={() => openModalHandler()}>
+      <Button
+        className="bg-fuchsia-700 hover:bg-fuchsia-100"
+        color="purple"
+        pill
+        onClick={() => openModalHandler()}
+      >
         <IoAddCircle size={18} />
         Adicionar
       </Button>
@@ -48,17 +56,19 @@ export const AddAppointment: React.FC = () => {
         </Modal.Header>
         <Modal.Body>
           <FieldsForm
-            onSubmit={(appointment: AppointmentSaved) => {
+            onSubmit={(data: AppointmentSaved) => {
+              const appointment = {
+                ...data,
+                valor: Number(data.valor ?? 0),
+              } as AppointmentSaved;
               appointment.dataHoraFim = addSecondsInDatetime(
                 appointment.dataHoraFim
               );
               appointment.dataHoraInicio = addSecondsInDatetime(
                 appointment.dataHoraInicio
               );
-              appointment.valor = Number(appointment.valor ?? 0);
 
               mutate(appointment);
-              closeModalHandler();
             }}
             isLoading={isLoading}
           />

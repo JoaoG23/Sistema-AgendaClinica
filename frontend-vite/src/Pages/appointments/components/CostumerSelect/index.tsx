@@ -5,7 +5,6 @@ import { useQuery } from "react-query";
 import { getCostumers } from "./api/getCostumers";
 import { toast } from "react-toastify";
 import { ErroResponse } from "../../../../types/authentication/ErroResponse";
-import { AxiosResponse } from "axios";
 
 type Props = {
   label?: string;
@@ -62,7 +61,7 @@ export const CostumerSelect: React.FC<Props> = ({
         type={type}
       >
         {costumers.map((costumer) => (
-          <option value={costumer.id}>{costumer?.nome_completo}</option>
+          <option key={costumer.id} value={costumer.id}>{costumer?.nome_completo}</option>
         ))}
       </Select>
     </div>

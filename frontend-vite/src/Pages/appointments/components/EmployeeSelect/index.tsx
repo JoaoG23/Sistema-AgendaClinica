@@ -55,7 +55,7 @@ export const EmployeeSelect: React.FC<Props> = ({
         type={type}
       >
         {employees.map((employee) => (
-          <option value={employee?.id}>{employee?.nome_completo}</option>
+          <option key={employee.id} value={employee?.id}>{employee?.nome_completo}</option>
         ))}
       </Select>
     </div>

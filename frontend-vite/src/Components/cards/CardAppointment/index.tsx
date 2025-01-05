@@ -3,6 +3,8 @@ import { MdEdit } from "react-icons/md";
 import { BsFillTrash2Fill } from "react-icons/bs";
 import { UpdateAppointment } from "../../../pages/appointments/UpdateAppointment";
 import { useState } from "react";
+import { DeleteAppointment } from "../../../pages/appointments/DeleteAppointment";
+import { s } from "vitest/dist/types-e3c9754d";
 
 type Props = {
   id: string;
@@ -24,13 +26,19 @@ export const CardAppointment: React.FC<Props> = ({
   procedure,
   professional,
 }) => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openModalUpdate, setOpenModalUpdate] = useState<boolean>(false);
+  const [openModalDelete, setOpenModalDelete] = useState<boolean>(false);
   return (
     <>
       <UpdateAppointment
-        id={id}
-        openModal={openModal}
-        setOpenModal={setOpenModal}
+        idAppointment={id}
+        openModal={openModalUpdate}
+        setOpenModal={setOpenModalUpdate}
+      />
+      <DeleteAppointment
+        idAppointment={id}
+        openModal={openModalDelete}
+        setOpenModal={setOpenModalDelete}
       />
       <Card className="max-w-sm rounded-3xl">
         <section className="flex justify-around gap-1">
@@ -50,11 +58,19 @@ export const CardAppointment: React.FC<Props> = ({
             </p>
           </aside>
           <aside className="grid lg:gap-2 w-10 ">
-            <Button color="purple" pill onClick={() => setOpenModal(true)}>
+            <Button
+              color="purple"
+              pill
+              onClick={() => setOpenModalUpdate(true)}
+            >
               <MdEdit size={18} className="h-4" />
             </Button>
             <Button color="purple" pill>
-              <BsFillTrash2Fill size={18} className="h-4" />
+              <BsFillTrash2Fill
+                size={18}
+                className="h-4"
+                onClick={() => setOpenModalDelete(true)}
+              />
             </Button>
           </aside>
         </section>

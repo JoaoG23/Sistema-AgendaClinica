@@ -1,4 +1,5 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Spinner } from "flowbite-react";
+import { useSearchParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { PaginationCustom } from "../../../components/paginations/PaginationCustom";
 import { useQuery } from "react-query";
@@ -7,7 +8,6 @@ import { toast } from "react-toastify";
 import { PageCriteria } from "../../../types/PageCriteria";
 import { Appointment } from "../types/Appointment";
 import { CardAppointment } from "../../../components/cards/CardAppointment";
-import { Button, Spinner } from "flowbite-react";
 import { formatarDataHoraPadraoBR } from "../../../utils/formatadoresDatahora/formatarDataHoraPadraoBR/formatarDataHoraBR";
 import { AddAppointment } from "../AddAppointment";
 
@@ -36,11 +36,11 @@ export const ListAppointments: React.FC = () => {
       },
     }
   );
-  const appointments: Array<Appointments> = appointmentsData?.data[1];
+  const appointments: Array<Appointment> = appointmentsData?.data[1];
   return (
     <section>
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold py-4 text-zinc-600">
+      <div className="flex justify-between items-center ">
+        <h1 className="text-xl font-semibold py-4 text-zinc-600">
           Agendamentos{" "}
           {isLoadingAppointments && (
             <Spinner color="purple" aria-label="loading appointments" />
@@ -49,7 +49,7 @@ export const ListAppointments: React.FC = () => {
 
         <AddAppointment />
       </div>
-      <div className="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-3  h-[calc(100vh-300px)]">
         {appointments?.map((appointment: Appointment) => (
           <CardAppointment
             id={appointment.id}
