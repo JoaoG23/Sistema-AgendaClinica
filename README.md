@@ -24,6 +24,7 @@ Ainda Desenvolvimento🤰🏽! Com nosso Portal de Agendamento para Clínicas, a
 - []  Sistema deve permitir o cliente remover a si proprio.
 - []  Sistema deve permitir o cliente editar a si proprio.
 - []  Sistema deve permitir o cliente somente a si proprio.
+- []  Sistema deve permitir o cliente ver somente seus agendamentos.
     
 ### Colaborador
 

@@ -1,8 +1,11 @@
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "../Authenticator/PrivateRouter";
-import { ListAppointments } from "../../pages/appointments/ListAppointments";
 import { Layout } from "../../layout";
+
 import { CalendarAppointments } from "../../pages/appointments/CalendarAppointments";
+
+import { ListAppointments } from "../../pages/appointments/ListAppointments";
+import { ListEmployees } from "../../pages/employee/ListEmployees";
 
 export const AuthenticatedRoutes = () => {
   return (
@@ -14,6 +17,14 @@ export const AuthenticatedRoutes = () => {
             element={
               <PrivateRoute redirectTo={"/"}>
                 <ListAppointments />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="employees"
+            element={
+              <PrivateRoute redirectTo={"/"}>
+                <ListEmployees />
               </PrivateRoute>
             }
           />
