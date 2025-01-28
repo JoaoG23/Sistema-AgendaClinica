@@ -15,7 +15,7 @@ export const Leftbar: React.FC = () => {
           <ul className="space-y-2 font-medium">
             <li>
               <Link
-                to="#"
+                to="appointments"
                 className="flex items-center p-2  rounded-lg  hover:bg-gray-200 hover:text-purple-900 group"
               >
                 <CgTime />
@@ -24,7 +24,7 @@ export const Leftbar: React.FC = () => {
             </li>
             <li>
               <Link
-                to="#"
+                to="calendar"
                 className="flex items-center p-2  rounded-lg  hover:bg-gray-100 hover:text-purple-900 group"
               >
                 <CgCalendar />

@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "../Authenticator/PrivateRouter";
 import { ListAppointments } from "../../pages/appointments/ListAppointments";
 import { Layout } from "../../layout";
-import { AddAppointment } from "../../pages/appointments/AddAppointment";
+import { CalendarAppointments } from "../../pages/appointments/CalendarAppointments";
 
 export const AuthenticatedRoutes = () => {
   return (
@@ -14,6 +14,14 @@ export const AuthenticatedRoutes = () => {
             element={
               <PrivateRoute redirectTo={"/"}>
                 <ListAppointments />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="calendar"
+            element={
+              <PrivateRoute redirectTo={"/"}>
+                <CalendarAppointments />
               </PrivateRoute>
             }
           />
