@@ -29,7 +29,7 @@ Ainda Desenvolvimento🤰🏽! Com nosso Portal de Agendamento para Clínicas, a
 ### Colaborador
 
 - []  Sistema deve permitir o profissional cadastrar um novo profissional e a si proprio.
-- []  Sistema deve permitir o profissional remover um profissional e a si proprio.
+- [x]  Sistema deve permitir o profissional remover um profissional e a si proprio.
 - []  Sistema deve permitir o profissional editar um profissional e a si proprio.
 - []  Sistema deve permitir o profissional listar todos e a si proprio.
 - []  Sistema deve permitir o profissional listar a si proprio.

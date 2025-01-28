@@ -7,8 +7,6 @@ import { toast } from "react-toastify";
 
 import { getEmployeesByPage } from "./api";
 import { PageCriteria } from "../../../types/PageCriteria";
-import { CardAppointment } from "../../../components/cards/CardAppointment";
-import { formatarDataHoraPadraoBR } from "../../../utils/formatadoresDatahora/formatarDataHoraPadraoBR/formatarDataHoraBR";
 import { Employee } from "../types/Employee";
 
 export const ListEmployees: React.FC = () => {
